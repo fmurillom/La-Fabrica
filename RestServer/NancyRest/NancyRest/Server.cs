@@ -127,22 +127,25 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                string nombreC = data["nombreC"].ToString();
+                string nombreC = data["nombre"].ToString();
                 int cedula = int.Parse(data["cedula"].ToString());
-                string apellidoC = data["apellidoC"].ToString();
+                string apellidoC = data["apellido"].ToString();
                 string provincia = data["provincia"].ToString();
-                string email1 = data["email1"].ToString();
-                string email2 = data["email2"].ToString();
-                string telefonoM = data["telefonoM"].ToString();
+                string email1 = data["correo1"].ToString();
+                string email2 = data["correo2"].ToString();
+                int telefonoM = int.Parse(data["telefono"].ToString());
                 string foto = data["foto"].ToString();
                 string pais = data["pais"].ToString();
                 string universidad = data["universidad"].ToString();
                 string password = data["password"].ToString();
                 string deporte = data["deporte"].ToString();
+                string fechaNacimiento = data["fechaNacimiento"].ToString();
+                int posicion = int.Parse(data["posicion"].ToString());
+                int posicionSecundaria = int.Parse(data["posicionSecundaria"].ToString());
                 float altura = float.Parse(data["altura"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 float peso = float.Parse(data["peso"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
-                string response = SQLManager.insertAtleta(nombreC, cedula, apellidoC, provincia, email1, email2, telefonoM, foto, pais, universidad, password, deporte, altura, peso).ToString();
+                string response = SQLManager.insertAtleta(nombreC, cedula, apellidoC, provincia, email1, email2, telefonoM, foto, pais, universidad, password, deporte, altura, peso, fechaNacimiento, posicion, posicionSecundaria).ToString();
                 Console.WriteLine("Response:\n" + response);
 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -161,9 +164,9 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                string nombreC = data["nombreC"].ToString();
-                string apellidoC = data["apellidoC"].ToString();
-                string email = data["email"].ToString();
+                string nombreC = data["nombre"].ToString();
+                string apellidoC = data["apellido"].ToString();
+                string email = data["correo"].ToString();
                 string pais = data["pais"].ToString();
                 string universidad = data["universidad"].ToString();
                 string password = data["password"].ToString();

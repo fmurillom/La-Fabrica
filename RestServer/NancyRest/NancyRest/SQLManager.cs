@@ -19,6 +19,10 @@ namespace NancyRest
             try
             {
                 connection.Open();
+                command = new SqlCommand("SET DATEFORMAT dmy;", connection);
+                sqlReader = command.ExecuteReader();
+                sqlReader.Close();
+
                 command = new SqlCommand(injection, connection);
                 sqlReader = command.ExecuteReader();
 
@@ -35,18 +39,19 @@ namespace NancyRest
         }
 
 
-        public static bool insertAtleta(string nombreC, int cedula, string apellidoC, string provincia, string email1, string email2, string telefonoM, string foto, string pais,
-                                        string universidad, string password, string deporte, float altura, float peso)
+        public static bool insertAtleta(string nombreC, int cedula, string apellidoC, string provincia, string email1, string email2, int telefonoM, string foto, string pais,
+                                        string universidad, string password, string deporte, float altura, float peso, string fechaNacimiento, int posicion, int posicionSecundaria)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             SqlDataReader sqlReader;
             bool ok = false;
+            Console.WriteLine("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '" + email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
             try
             {
-                sqlInjection("exec crearReservacion @userName = '");
+                sqlInjection("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '"+ email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Reservaciones where usuario = '", connection);
+                command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + email1 + "'", connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
@@ -80,9 +85,9 @@ namespace NancyRest
             bool ok = false;
             try
             {
-                sqlInjection("exec crearReservacion @userName = '");
+                sqlInjection("EXEC proc_registrarEntrenador @nombre = '" + nombreC + "', @apellido = '" + apellidoC + "', @correo = '" + email + "', @password = '"+ password + "', @pais = '" + pais + "', @universidad = '" + universidad + "'");
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Reservaciones where usuario = '" , connection);
+                command = new SqlCommand("select count(*) as exist from Entrenadores where correo = '" + email + "'" , connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
@@ -344,6 +349,7 @@ namespace NancyRest
             string res = null;
             JObject posiciones = new JObject();
             JArray posicion = new JArray();
+            JObject pos;
 
             try
             {
@@ -354,7 +360,10 @@ namespace NancyRest
                 {
                     while (sqlReader.Read())
                     {
-                        posicion.Add(sqlReader["nombrePosicion"].ToString());
+                        pos = new JObject();
+                        pos["nombrePosicion"] = sqlReader["nombrePosicion"].ToString();
+                        pos["idPosicion"] = int.Parse(sqlReader["idPosicion"].ToString());
+                        posicion.Add(pos);
                     }
                     sqlReader.Close();
                     command.Dispose();
@@ -376,7 +385,7 @@ namespace NancyRest
         public static JObject getEquipos(string idEntrenador)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select id,aeropuertoIni as iataSal,nombre as sal,aeropuertoFin as iataDes,(select nombre from Aeropuertos where codigoIATA = aeropuertoFin) as des, fecha from Vuelos join Aeropuertos on Vuelos.aeropuertoIni = Aeropuertos.codigoIATA where abierto = 1 and id = ";
+            string query = "select * from Equipos where correoEntrenador = '" + idEntrenador + "'";
             SqlCommand command;
             SqlDataReader sqlReader;
 
@@ -393,7 +402,7 @@ namespace NancyRest
                 {
                     while (sqlReader.Read())
                     {
-                        equip.Add(sqlReader["nombre"]);
+                        equip.Add(sqlReader["nombreEquipo"]);
                     }
                     sqlReader.Close();
                     command.Dispose();
@@ -452,7 +461,7 @@ namespace NancyRest
         public static JObject getUniversidades(string nombrepais)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select id,aeropuertoIni as iataSal,nombre as sal,aeropuertoFin as iataDes,(select nombre from Aeropuertos where codigoIATA = aeropuertoFin) as des, fecha from Vuelos join Aeropuertos on Vuelos.aeropuertoIni = Aeropuertos.codigoIATA where abierto = 1 and id = ";
+            string query = "select * from Universidades where nombrePais = '" + nombrepais + "'";
             SqlCommand command;
             SqlDataReader sqlReader;
 
