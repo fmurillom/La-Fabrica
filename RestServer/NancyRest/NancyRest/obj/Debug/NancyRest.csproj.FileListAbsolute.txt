@@ -1,0 +1,346 @@
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\NancyRest.dll.config
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\NancyRest.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\NancyRest.pdb
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\csc.exe
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\csc.exe.config
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\csc.rsp
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\csi.exe
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\csi.exe.config
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\csi.rsp
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.Managed.Core.targets
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.AppContext.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Console.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Diagnostics.StackTrace.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.IO.Compression.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.IO.Pipes.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Security.AccessControl.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Security.Claims.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.Encoding.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Security.Principal.Windows.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Text.Encoding.CodePages.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.ValueTuple.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Xml.ReaderWriter.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Xml.XmlDocument.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Xml.XPath.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\System.Xml.XPath.XDocument.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\vbc.exe
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\vbc.exe.config
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\vbc.rsp
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\VBCSCompiler.exe
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\EASendMail.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Nancy.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Nancy.Hosting.Aspnet.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Newtonsoft.Json.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Nancy.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Nancy.Hosting.Aspnet.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Newtonsoft.Json.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\obj\Debug\NancyRest.csprojAssemblyReference.cache
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\obj\Debug\NancyRest.csproj.CoreCompileInputs.cache
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\obj\Debug\NancyRest.csproj.CopyComplete
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\obj\Debug\NancyRest.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\obj\Debug\NancyRest.pdb
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Microsoft.Win32.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\netstandard.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.AppContext.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Collections.Concurrent.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Collections.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Collections.NonGeneric.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Collections.Specialized.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.ComponentModel.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.ComponentModel.EventBasedAsync.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.ComponentModel.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.ComponentModel.TypeConverter.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Console.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Data.Common.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.Contracts.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.Debug.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.FileVersionInfo.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.Process.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.StackTrace.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.Tools.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.TraceSource.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Diagnostics.Tracing.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Drawing.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Dynamic.Runtime.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Globalization.Calendars.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Globalization.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Globalization.Extensions.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.Compression.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.Compression.ZipFile.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.FileSystem.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.FileSystem.DriveInfo.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.FileSystem.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.FileSystem.Watcher.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.IsolatedStorage.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.MemoryMappedFiles.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.Pipes.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.IO.UnmanagedMemoryStream.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Linq.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Linq.Expressions.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Linq.Parallel.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Linq.Queryable.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.Http.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.NameResolution.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.NetworkInformation.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.Ping.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.Requests.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.Security.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.Sockets.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.WebHeaderCollection.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.WebSockets.Client.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Net.WebSockets.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.ObjectModel.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Reflection.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Reflection.Extensions.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Reflection.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Resources.Reader.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Resources.ResourceManager.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Resources.Writer.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.Extensions.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.Handles.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.InteropServices.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.Numerics.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.Serialization.Formatters.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.Serialization.Json.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.Serialization.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.Serialization.Xml.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.Claims.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.Cryptography.Algorithms.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.Cryptography.Csp.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.Cryptography.Encoding.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.Cryptography.Primitives.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.Cryptography.X509Certificates.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.Principal.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Security.SecureString.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Text.Encoding.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Text.Encoding.Extensions.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Text.RegularExpressions.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.Overlapped.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.Tasks.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.Tasks.Parallel.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.Thread.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.ThreadPool.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.Timer.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Xml.ReaderWriter.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Xml.XDocument.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Xml.XmlDocument.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Xml.XmlSerializer.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Xml.XPath.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Xml.XPath.XDocument.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Npgsql.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Buffers.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Memory.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Numerics.Vectors.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.Tasks.Extensions.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.ValueTuple.dll
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Npgsql.pdb
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\Npgsql.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Buffers.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Memory.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Numerics.Vectors.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.Threading.Tasks.Extensions.xml
+C:\Users\fmuri\source\repos\NancyRest\NancyRest\bin\System.ValueTuple.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\NancyRest.dll.config
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\NancyRest.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\NancyRest.pdb
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\csc.exe
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\csc.exe.config
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\csc.rsp
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\csi.exe
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\csi.exe.config
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\csi.rsp
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.Managed.Core.targets
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.AppContext.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Collections.Immutable.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Console.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.IO.Compression.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.IO.FileSystem.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.IO.Pipes.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Reflection.Metadata.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Security.AccessControl.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Security.Claims.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Security.Principal.Windows.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.ValueTuple.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Xml.XmlDocument.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Xml.XPath.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\vbc.exe
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\vbc.exe.config
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\vbc.rsp
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\VBCSCompiler.exe
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\roslyn\VBCSCompiler.exe.config
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Microsoft.Win32.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\netstandard.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.AppContext.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Collections.Concurrent.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Collections.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Collections.NonGeneric.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Collections.Specialized.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.ComponentModel.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.ComponentModel.EventBasedAsync.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.ComponentModel.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.ComponentModel.TypeConverter.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Console.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Data.Common.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.Contracts.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.Debug.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.FileVersionInfo.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.Process.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.StackTrace.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.TextWriterTraceListener.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.Tools.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.TraceSource.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Diagnostics.Tracing.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Drawing.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Dynamic.Runtime.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Globalization.Calendars.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Globalization.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Globalization.Extensions.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.Compression.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.Compression.ZipFile.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.FileSystem.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.FileSystem.DriveInfo.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.FileSystem.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.FileSystem.Watcher.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.IsolatedStorage.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.MemoryMappedFiles.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.Pipes.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.IO.UnmanagedMemoryStream.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Linq.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Linq.Expressions.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Linq.Parallel.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Linq.Queryable.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.Http.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.NameResolution.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.NetworkInformation.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.Ping.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.Requests.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.Security.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.Sockets.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.WebHeaderCollection.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.WebSockets.Client.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Net.WebSockets.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.ObjectModel.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Reflection.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Reflection.Extensions.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Reflection.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Resources.Reader.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Resources.ResourceManager.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Resources.Writer.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.CompilerServices.VisualC.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.Extensions.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.Handles.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.InteropServices.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.Numerics.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.Serialization.Formatters.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.Serialization.Json.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.Serialization.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.Serialization.Xml.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.Claims.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.Cryptography.Algorithms.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.Cryptography.Csp.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.Cryptography.Encoding.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.Cryptography.Primitives.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.Cryptography.X509Certificates.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.Principal.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Security.SecureString.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Text.Encoding.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Text.Encoding.Extensions.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Text.RegularExpressions.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.Overlapped.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.Tasks.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.Tasks.Parallel.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.Thread.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.ThreadPool.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.Timer.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Xml.ReaderWriter.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Xml.XDocument.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Xml.XmlDocument.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Xml.XmlSerializer.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Xml.XPath.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Xml.XPath.XDocument.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\EASendMail.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Nancy.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Nancy.Hosting.Aspnet.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Newtonsoft.Json.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Npgsql.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Buffers.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Memory.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Numerics.Vectors.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.Tasks.Extensions.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.ValueTuple.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Nancy.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Nancy.Hosting.Aspnet.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Newtonsoft.Json.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Npgsql.pdb
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Npgsql.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Buffers.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Memory.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Numerics.Vectors.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.Threading.Tasks.Extensions.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\System.ValueTuple.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.csprojAssemblyReference.cache
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.csproj.CoreCompileInputs.cache
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.csproj.CopyComplete
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.pdb
