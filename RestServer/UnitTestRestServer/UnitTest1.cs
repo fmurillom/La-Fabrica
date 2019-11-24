@@ -122,11 +122,27 @@ namespace UnitTestRestServer
             var response = browser.Post("/crearScout", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"nombre\": \"TestScout\", \"apellido\": \"TestScout\",\"correo\": \"TestScout@algo.com\",\"password\": \"456\",\"pais\": \"Costa Rica\",\"universidad\": \"Instituto Tecnologico de Costa Rica\"}");
+                with.Body("{\"nombre\": \"TestScout\", \"apellido\": \"TestScout\",\"correo\": \"TestScout@algo.com\",\"password\": \"456\"}");
             });
 
             Assert.Equal("True", response.Result.Body.AsString());
         }
+
+        [Fact]
+        public void postCrearAdminTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/crearAdmin", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombre\": \"TestAdmin\", \"apellido\": \"TestAdmin\",\"correo\": \"TestAdmin@algo.com\",\"password\": \"456\"}");
+            });
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+
 
     }
 }

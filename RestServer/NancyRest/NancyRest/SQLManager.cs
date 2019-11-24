@@ -159,9 +159,9 @@ namespace NancyRest
             bool ok = false;
             try
             {
-                sqlInjection("exec crearReservacion @userName = '");
+                sqlInjection("update Atletas set nombreEquipo = '" + nombreEquip + "' where correo1 = '" + jugador + "'");
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Reservaciones where usuario = '", connection);
+                command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + jugador + "' and nombreEquipo = '" + nombreEquip + "'", connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
