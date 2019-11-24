@@ -423,7 +423,7 @@ namespace NancyRest
         public static JObject getTemporadasEquipo(string nombreEquipo)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select nombreTemporada from Equipos where nombreEquipo = '" + nombreEquipo + "'";
+            string query = "select nombreTemporada from EquiposTemporadas where nombreEquipo = '" + nombreEquipo + "'";
             SqlCommand command;
             SqlDataReader sqlReader;
 
@@ -960,7 +960,7 @@ namespace NancyRest
             {
                 try
                 {
-                    sqlInjection("insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(" + semana + ",'" + idAtleta + "'," + int.Parse(ejecicios[i]["idEjercicio"].ToString()) + "," + int.Parse(ejecicios[i]["cantidad"].ToString()) + ")");
+                    sqlInjection("insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(" + semana + ",'" + idAtleta + "'," + int.Parse(ejecicios[i]["dia"].ToString()) + "," + int.Parse(ejecicios[i]["idEjercicio"].ToString()) + "," + int.Parse(ejecicios[i]["cantidad"].ToString()) + ")");
                     ok = true;
                 }
                 catch (SqlException ex)
@@ -1164,6 +1164,7 @@ namespace NancyRest
                         ejercicio["semana"] = int.Parse(sqlReader["semana"].ToString());
                         ejercicio["nombreEjercicio"] = sqlReader["nombreEjercicio"].ToString();
                         ejercicio["cantidad"] = int.Parse(sqlReader["cantidad"].ToString());
+                        ejercicio["dia"] = int.Parse(sqlReader["dia"].ToString());
                         ejercicios.Add(ejercicio);
                     }
 

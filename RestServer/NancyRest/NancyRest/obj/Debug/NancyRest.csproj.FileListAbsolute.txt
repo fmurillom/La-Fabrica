@@ -513,7 +513,6 @@ D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabri
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\NancyRest\NancyRest\bin\System.ValueTuple.xml
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\NancyRest\NancyRest\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.csprojAssemblyReference.cache
-D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.csproj.CoreCompileInputs.cache
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.csproj.CopyComplete
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.dll
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\NancyRest\NancyRest\obj\Debug\NancyRest.pdb
