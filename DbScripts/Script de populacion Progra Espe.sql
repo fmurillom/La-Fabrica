@@ -268,6 +268,7 @@ insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(4,
 insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(5,'correo1@algo.com',4,1000)
 
 
+
 --insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(0,'correo1@algo.com')
 /*
 delete PlanesEjercicios
@@ -294,6 +295,9 @@ select * from PlanesEjercicios
 
 delete Atletas
 delete Universidades
+
+{"nombre":'Yo',"apellido":'Soy yo',"cedula":123456789,"provincia":'Cartago',"fechaNacimiento":'02/01/2000',"correo1":'yosoyyo@algo.com',"correo2":"null","telefono":22223333,"foto":'FotoYo',"pais":'Costa Rica',"universidad":'Instituto Tecnologico de Costa Rica',"password":'password2',"deporte":'Futbol',"altura":1.7,"peso":60,"posicion":1,"posicionSecundaria":2}
+
 */
 
 
