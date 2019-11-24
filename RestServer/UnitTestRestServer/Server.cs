@@ -302,7 +302,7 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                string nombreEquip = data["nombreEquip"].ToString();
+                string nombreEquip = data["nombreEquipo"].ToString();
                 string jugador = data["jugador"].ToString();
 
                 string response = SQLManager.insertEquip(nombreEquip, jugador).ToString();
