@@ -159,9 +159,9 @@ namespace NancyRest
             bool ok = false;
             try
             {
-                sqlInjection("exec crearReservacion @userName = '");
+                sqlInjection("update Atletas set nombreEquipo = '" + nombreEquip + "' where correo1 = '" + jugador + "'");
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Reservaciones where usuario = '", connection);
+                command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + jugador + "' and nombreEquipo = '" + nombreEquip + "'", connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
@@ -197,7 +197,7 @@ namespace NancyRest
             bool ok = false;
             try
             {
-                sqlInjection("insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('"+ nombreEquip + "', '" + idEnrenador + "', '" + temporada + "')");
+                sqlInjection("insert into Equipos(nombreEquipo,correoEntrenador) values('"+ nombreEquip + "', '" + idEnrenador + "')");
                 connection.Open();
                 command = new SqlCommand("select count(*) as exist from Equipos where nombreEquipo = '" + nombreEquip + "'" , connection);
                 sqlReader = command.ExecuteReader();
@@ -215,6 +215,29 @@ namespace NancyRest
                 sqlReader.Close();
                 command.Dispose();
                 connection.Close();
+
+                if (ok)
+                {
+                    sqlInjection("insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('" + nombreEquip + "', '" + temporada + "')");
+                    connection.Open();
+                    command = new SqlCommand("select count(*) as exist from EquiposTemporadas where nombreEquipo = '" + nombreEquip + "' and nombreTemporada = '" + temporada + "'", connection);
+                    sqlReader = command.ExecuteReader();
+                    try
+                    {
+                        while (sqlReader.Read())
+                        {
+                            if (sqlReader["exist"].ToString().Equals("1"))
+                            {
+                                ok = true;
+                            }
+                        }
+                    }
+                    catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                    sqlReader.Close();
+                    command.Dispose();
+                    connection.Close();
+                }
+
             }
             catch (SqlException ex)
             {
@@ -423,7 +446,7 @@ namespace NancyRest
         public static JObject getTemporadasEquipo(string nombreEquipo)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select nombreTemporada from Equipos where nombreEquipo = '" + nombreEquipo + "'";
+            string query = "select nombreTemporada from EquiposTemporadas where nombreEquipo = '" + nombreEquipo + "'";
             SqlCommand command;
             SqlDataReader sqlReader;
 
@@ -589,7 +612,23 @@ namespace NancyRest
             try
             {
                 sqlInjection("update Atletas set activo = 0 where correo1 = '" + emailCuenta + "'");
-                ok = true;
+                connection.Open();
+                command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + emailCuenta + "' and activo = 0", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        if (sqlReader["exist"].ToString().Equals("1"))
+                        {
+                            ok = true;
+                        }
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
             }
             catch (SqlException ex)
             {
@@ -609,7 +648,23 @@ namespace NancyRest
             try
             {
                 sqlInjection("update Atletas set activo = 1 where correo1 = '" + emailCuenta + "'");
-                ok = true;
+                connection.Open();
+                command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + emailCuenta + "' and activo = 1", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        if (sqlReader["exist"].ToString().Equals("1"))
+                        {
+                            ok = true;
+                        }
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
             }
             catch (SqlException ex)
             {
@@ -960,7 +1015,7 @@ namespace NancyRest
             {
                 try
                 {
-                    sqlInjection("insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(" + semana + ",'" + idAtleta + "'," + int.Parse(ejecicios[i]["idEjercicio"].ToString()) + "," + int.Parse(ejecicios[i]["cantidad"].ToString()) + ")");
+                    sqlInjection("insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(" + semana + ",'" + idAtleta + "'," + int.Parse(ejecicios[i]["dia"].ToString()) + "," + int.Parse(ejecicios[i]["idEjercicio"].ToString()) + "," + int.Parse(ejecicios[i]["cantidad"].ToString()) + ")");
                     ok = true;
                 }
                 catch (SqlException ex)
@@ -1164,6 +1219,7 @@ namespace NancyRest
                         ejercicio["semana"] = int.Parse(sqlReader["semana"].ToString());
                         ejercicio["nombreEjercicio"] = sqlReader["nombreEjercicio"].ToString();
                         ejercicio["cantidad"] = int.Parse(sqlReader["cantidad"].ToString());
+                        ejercicio["dia"] = int.Parse(sqlReader["dia"].ToString());
                         ejercicios.Add(ejercicio);
                     }
 

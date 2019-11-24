@@ -85,7 +85,6 @@ D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabri
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\obj\Debug\netcoreapp3.0\UnitTestRestServer.csprojAssemblyReference.cache
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\obj\Debug\netcoreapp3.0\UnitTestRestServer.AssemblyInfoInputs.cache
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\obj\Debug\netcoreapp3.0\UnitTestRestServer.AssemblyInfo.cs
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\obj\Debug\netcoreapp3.0\UnitTestRestServer.csproj.CopyComplete

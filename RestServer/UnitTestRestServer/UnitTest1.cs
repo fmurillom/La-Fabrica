@@ -142,6 +142,242 @@ namespace UnitTestRestServer
             Assert.Equal("True", response.Result.Body.AsString());
         }
 
+        [Fact]
+        public void postCrearTemporadaTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/crearTemporada", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreTemporada\": \"TestTemporada\"}");
+            });
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+
+        [Fact]
+        public void postCrearEquipoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/crearEquip", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"correoEntrenador\": \"TestEntrenador@algo.com\", \"nombreTemporada\": \"TestTemporada\"}");
+            });
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postInsertarEnEquipoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/insertEquip", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"jugador\": \"TestInser@algo.com\"}");
+            });
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postJugadoresenEquipoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/jugadoresEquip", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postBuscarJugadorNombreTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/buscarJugadorNombre", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombre\": \"TestInser\", \"apellido\": \"TestInser\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postBuscarJugadorIdTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/buscarJugadorID", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"cedula\": 123456789}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postDesactivarCuentaTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/desactivarCuenta", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postActivarCuentaTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/activarCuenta", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postGetAtletaCorreoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/atletacorreo", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postGetPlanesCorreoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/planesEmail", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        //TODO Unit Test Reporte Rango
+
+        [Fact]
+        public void postGetTemporadasEquipoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/temporadaXequipo", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postAgregarEjercicioTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/nuevoEjercicio", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreEjercicio\": \"TestEjercicio\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postAgregarUniversidadTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/nuevaUniversidad", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreUniversidad\": \"TestUniversidad\", \"nombrePais\": \"Costa Rica\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postAgregarPosicionTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/nuevaPosicion", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombrePosicion\": \"TestPosicion\", \"deporte\": \"Futbol\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postAsignarPPTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/asignarPP", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"idAtleta\": \"TestInser@algo.com\", \"semana\": 1, \"ejercicios\": [{\"dia\": 1, \"idEjercicio\": 0, \"cantidad\": 10}, {\"dia\": 2, \"idEjercicio\": 1, \"cantidad\": 2}, {\"dia\": 3, \"idEjercicio\": 2, \"cantidad\": 3}]}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
 
 
     }
