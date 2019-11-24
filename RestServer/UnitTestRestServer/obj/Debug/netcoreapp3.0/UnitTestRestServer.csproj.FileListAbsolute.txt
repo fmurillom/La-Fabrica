@@ -96,3 +96,12 @@ D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabri
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\Nancy.dll
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\Nancy.Authentication.Forms.dll
 D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\Nancy.Testing.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\UnitTestRestServer.pdb
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\System.Data.SqlClient.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\runtimes\win-arm64\native\sni.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\runtimes\win-x64\native\sni.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\runtimes\win-x86\native\sni.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\obj\Debug\netcoreapp3.0\UnitTestRestServer.dll
+D:\fmuri\Documents\TEC\X\Especifiación y Diseño\Proyecto 2\La Fabrica\La-Fabrica\RestServer\UnitTestRestServer\obj\Debug\netcoreapp3.0\UnitTestRestServer.pdb
