@@ -99,13 +99,23 @@ insert into Temporadas(nombreTemporada) values('Temporada 7')
 insert into Temporadas(nombreTemporada) values('Temporada 8')
 insert into Temporadas(nombreTemporada) values('Temporada 9')
 
-insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('Red Line', 'aaaa', 'Temporada 2')
-insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('Equipo 2', 'aaaa', 'Temporada 1')
-insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('Equipo 3', 'bbbb', 'Temporada 4')
-insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('Equipo 4', 'bbbb', 'Temporada 6')
-insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('Equipo 5', 'cccc', 'Temporada 8')
-insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('Equipo 6', 'cccc', 'Temporada 3')
-insert into Equipos(nombreEquipo,correoEntrenador,nombreTemporada) values('Equipo 7', 'aaaa', 'Temporada 5')
+insert into Equipos(nombreEquipo,correoEntrenador) values('Equipo 1', 'aaaa')
+insert into Equipos(nombreEquipo,correoEntrenador) values('Equipo 2', 'aaaa')
+insert into Equipos(nombreEquipo,correoEntrenador) values('Equipo 3', 'aaaa')
+insert into Equipos(nombreEquipo,correoEntrenador) values('Equipo 4', 'bbbb')
+insert into Equipos(nombreEquipo,correoEntrenador) values('Equipo 5', 'bbbb')
+insert into Equipos(nombreEquipo,correoEntrenador) values('Equipo 6', 'cccc')
+insert into Equipos(nombreEquipo,correoEntrenador) values('Equipo 7', 'cccc')
+
+
+insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 1','Temporada 1')
+insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 1','Temporada 2')
+insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 1','Temporada 3')
+insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 2','Temporada 2')
+insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 3','Temporada 1')
+insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 3','Temporada 2')
+insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 3','Temporada 3')
+
 
 
 EXEC proc_registrarAtleta
@@ -204,11 +214,14 @@ insert into EstadosDePartido(idEstado,estado) values(2,'Ganado')
 insert into EstadosDePartido(idEstado,estado) values(3,'EZ')
 
 
-insert into Partidos(idPartido,correoAtleta,temporada,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPases,cantidadPasesExitosos,cantidadCentros,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(0,'correo1@algo.com','Temporada 1',0,2,3,4,5,2,6,1,1,1,7,6,5)
-insert into Partidos(idPartido,correoAtleta,temporada,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPases,cantidadPasesExitosos,cantidadCentros,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(1,'correo1@algo.com','Temporada 4',1,3,4,5,6,3,7,0,1,0,8,7,6)
-insert into Partidos(idPartido,correoAtleta,temporada,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPases,cantidadPasesExitosos,cantidadCentros,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(2,'correo2@algo.com','Temporada 5',2,4,5,6,7,4,8,1,0,1,9,8,7)
-insert into Partidos(idPartido,correoAtleta,temporada,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPases,cantidadPasesExitosos,cantidadCentros,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(3,'correo2@algo.com','Temporada 6',3,5,6,7,8,5,9,0,1,0,10,9,8)
-insert into Partidos(idPartido,correoAtleta,temporada,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPases,cantidadPasesExitosos,cantidadCentros,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(4,'correo3@algo.com','Temporada 7',0,6,7,8,9,6,10,0,1,0,11,10,9)
+insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(0,'correo1@algo.com','Temporada 1',60,2, 3,4,1,	10,7,6,5,	0,1,	0,0,0)
+insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(1,'correo1@algo.com','Temporada 4',50,1, 1,5,2,	11,6,11,8,	1,0,	0,0,0)
+insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(2,'correo2@algo.com','Temporada 5',40,2, 2,6,1,	12,5,12,3,	0,1,	0,0,0)
+insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(3,'correo2@algo.com','Temporada 6',30,0, 0,5,2,	13,4,7,1,	1,0,	0,0,0)
+insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(4,'correo3@algo.com','Temporada 7',20,2, 2,4,3,	14,3,45,9,	0,1,	0,0,0)
+
+insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(5,'correo1@algo.com','Temporada 1',13,0, 1,5,3,	15,2,13,12,	1,1,	0,0,0)
+insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(6,'correo1@algo.com','Temporada 2',13,2, 2,6,4,	16,1,90,45,	0,0,	0,0,0)
 
 
 insert into Roles(idRol,nombreRol) values(0,'Administrador')
@@ -259,17 +272,37 @@ insert into Planes(semana,correoAtleta) values(3,'correo2@algo.com')
 insert into Planes(semana,correoAtleta) values(4,'correo2@algo.com')
 
 
-insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(1,'correo1@algo.com',0,1000)
-insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(1,'correo1@algo.com',1,100)
-insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(2,'correo2@algo.com',2,10)
-insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(3,'correo2@algo.com',1,1)
-insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(3,'correo2@algo.com',2,10)
-insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(4,'correo2@algo.com',3,100)
-insert into PlanesEjercicios(semana,correoAtleta,idEjercicio,cantidad) values(5,'correo1@algo.com',4,1000)
+insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(1,'correo1@algo.com',1,0,1000)
+insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(1,'correo1@algo.com',2,1,100)
+insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(2,'correo2@algo.com',3,2,10)
+insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(3,'correo2@algo.com',4,1,1)
+insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(3,'correo2@algo.com',5,2,10)
+insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(4,'correo2@algo.com',6,3,100)
+insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(5,'correo1@algo.com',7,4,1000)
+
+
+insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(0,'correo1@algo.com',50,90,91,2,8,15,23)
+insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(1,'correo4@algo.com',89,45,90,6,9,89,90)
+insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(2,'correo3@algo.com',50,90,91,2,8,15,23)
+insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(3,'correo4@algo.com',50,90,91,2,8,15,23)
+insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(4,'correo4@algo.com',50,90,91,2,8,15,23)
+insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(5,'correo3@algo.com',50,90,91,2,8,15,23)
+
+insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(6,'correo4@algo.com',50,12,91,2,8,15,23)
 
 
 
---insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(0,'correo1@algo.com')
+
+
+/*
+exec proc_AVGcalificacionEntrenamientos @correoAtleta = 'correo4@algo.com'
+
+
+*/
+
+
+
+
 /*
 delete PlanesEjercicios
 
@@ -292,6 +325,8 @@ select * from Trabajadores
 select * from Ejercicios
 select * from Planes
 select * from PlanesEjercicios
+select * from Entrenamientos
+
 
 delete Atletas
 delete Universidades

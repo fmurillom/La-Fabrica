@@ -65,7 +65,7 @@ select * from Deportes
 create table Posiciones
 (
 	 nombreDeporte varchar(40)
-	,idPosicion int
+	,idPosicion int --identity(0,1)
 	,nombrePosicion varchar(40)
 
 	,primary key(nombreDeporte, idPosicion)
@@ -110,17 +110,30 @@ select * from Temporadas
 
 create table Equipos
 (
-	 nombreEquipo varchar(40) unique--PK
-	,correoEntrenador varchar(30)--PK,FK
-	,nombreTemporada varchar(40) not null
+	 nombreEquipo varchar(40)--PK
+	,correoEntrenador varchar(30) not null--FK
 
-	,primary key(nombreEquipo, correoEntrenador)
+	,primary key(nombreEquipo)
 
 	,foreign key(correoEntrenador) references Entrenadores(correo)
+)
+/*
+drop table Equipos
+select * from Equipos
+*/
+
+
+create table EquiposTemporadas
+(
+	 nombreEquipo varchar(40)--PK
+	,nombreTemporada varchar(40)--PK,FK
+
+	,primary key(nombreEquipo, nombreTemporada)
+
 	,foreign key(nombreTemporada) references Temporadas(nombreTemporada)
 )
 /*
-drop tanle Equipos
+drop table Equipos
 select * from Equipos
 */
 
@@ -129,7 +142,7 @@ create table Atletas
 (
 	 nombre varchar(30) not null
 	,apellido varchar(30) not null
-	,cedula int not null
+	,cedula int unique not null
 	,provincia varchar(40) not null--FK
 	,fechaNacimiento date not null
 	,activo bit not null
@@ -152,7 +165,6 @@ create table Atletas
 
 	,notaXSport decimal(4,2) not null
 	,nombreEquipo varchar(40)--FK
-	,correoEntrenador varchar(30)--FK
 
 	-- juegosTotal int not null
 	-- juegosTotalGanados int not null
@@ -179,8 +191,7 @@ create table Atletas
 	,foreign key(pais) references Paises(nombre)
 	,foreign key(deporte, posicion) references Posiciones(nombreDeporte, idPosicion)
 	,foreign key(deporte, posicionSecundaria) references Posiciones(nombreDeporte, idPosicion)
-	,foreign key(nombreEquipo, correoEntrenador) references Equipos(nombreEquipo, correoEntrenador)
-	,foreign key(correoEntrenador) references Entrenadores(correo)
+	,foreign key(nombreEquipo) references Equipos(nombreEquipo)
 )
 /*
 select * from Atletas
@@ -239,14 +250,14 @@ create table Partidos
 	 idPartido int--PK
 	,correoAtleta varchar(30)--PK,FK
 	,temporada varchar(40) not null--FK
-
+	,calificacionPartido numeric(5,2) not null
 	,idEstado int not null
 	,cantidadGoles int not null
 	,cantidadAsistencias int not null
 	,balonesRecuperados int not null
-	,cantidadPases int not null
+	,cantidadPasesFallidos int not null
 	,cantidadPasesExitosos int not null
-	,cantidadCentros int not null
+	,cantidadCentrosFallidos int not null
 	,cantidadCentrosExitosos int not null
 	,cantidadTarjetasAmarillas int not null
 	,cantidadTarjetasRojas int not null
@@ -336,6 +347,8 @@ create table PlanesEjercicios
 (
 	 semana int--PK,FK	
 	,correoAtleta varchar(30)--PK,FK
+	,dia int not null
+		,check(dia > 0 and dia < 8)
 	,idEjercicio int--PK,FK
 	,cantidad int not null
 
@@ -422,7 +435,7 @@ create procedure proc_registrarAtleta
 	,@posicionSecundaria int
 AS
 BEGIN
-	insert into Atletas(nombre,apellido,cedula,provincia,fechaNacimiento,activo,correo1,correo2,telefono,foto,fechaInscripcion,pais,universidad,password,deporte,altura,peso,posicion,posicionSecundaria,notaXSport,nombreEquipo,correoEntrenador)
+	insert into Atletas(nombre,apellido,cedula,provincia,fechaNacimiento,activo,correo1,correo2,telefono,foto,fechaInscripcion,pais,universidad,password,deporte,altura,peso,posicion,posicionSecundaria,notaXSport,nombreEquipo)
 		values
 		(
 			 @nombre
@@ -445,7 +458,6 @@ BEGIN
 			,@posicion
 			,@posicionSecundaria
 			,0
-			,null
 			,null
 		)
 END
@@ -506,290 +518,418 @@ END
 --drop procedure proc_registrarTrabajador
 
 
+go
 
 
-/*
-create procedure actualizarDatosTarjeta
-	 @userName varchar(60)
-	,@nombreTitular varchar(60)
-	,@tarjeta varchar(60)
-	,@fechaExp date
+create procedure proc_getCantEntrenamientos
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-	if @tarjeta is not null	
-	begin
-		if dbo.RegexMatch(@tarjeta, N'(?>^3[47][0-9]{13}$|^(6541|6556)[0-9]{12}$|^389[0-9]{11}$|^3(?:0[0-5]|[68][0-9])[0-9]{11}$|^65[4-9][0-9]{13}|64[4-9][0-9]{13}|6011[0-9]{12}|(622(?:12[6-9]|1[3-9][0-9]|[2-8][0-9][0-9]|9[01][0-9]|92[0-5])[0-9]{10})$|^63[7-9][0-9]{13}$|^(?:2131|1800|35\d{3})\d{11}$|^9[0-9]{15}$|^(6304|6706|6709|6771)[0-9]{12,15}$|^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$|^(5[1-5][0-9]{14}|2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12}))$|^(6334|6767)[0-9]{12}|(6334|6767)[0-9]{14}|(6334|6767)[0-9]{15}$|^(4903|4905|4911|4936|6333|6759)[0-9]{12}|(4903|4905|4911|4936|6333|6759)[0-9]{14}|(4903|4905|4911|4936|6333|6759)[0-9]{15}|564182[0-9]{10}|564182[0-9]{12}|564182[0-9]{13}|633110[0-9]{10}|633110[0-9]{12}|633110[0-9]{13}$|^(62[0-9]{14,17})$|^4[0-9]{12}(?:[0-9]{3})?$|^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14})$)') = 1
-		begin
-			update Usuarios
-				set
-					 nombreTitular = @nombreTitular
-					,tarjeta = ENCRYPTBYPASSPHRASE('smas', @tarjeta)
-					,fechaExp = @fechaExp
-				where userName = @userName
-		end
-		else
-			RAISERROR(N'Tarjeta no valida!', 15, 254)
-	end
-	else
-	begin
-		update Usuarios
-			set
-				 nombreTitular = @nombreTitular
-				,tarjeta = @tarjeta
-				,fechaExp = @fechaExp
-			where userName = @userName
-	end
+	select count(*) from Entrenamientos where correoAtleta = @correoAtleta
+	--select count(*) from Entrenamientos where correoAtleta = 'correo4@algo.com'
 END
---drop procedure actualizarDatosTarjeta
+--drop procedure proc_getAVGcalificacionEntrenamientos
+
 
 go
 
-create procedure getPassword
-	 @userName varchar(60)
+
+create procedure proc_AVGcalificacionEntrenamientos
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-    select CONVERT(VARCHAR(60), DECRYPTBYPASSPHRASE('smas',password)) as password from Usuarios where userName = @userName
+	select convert(numeric(5,2), (select avg(calificacionEntrenamiento) from Entrenamientos where correoAtleta = @correoAtleta))
 END
+--drop procedure proc_getAVGcalificacionEntrenamientos
+
 
 go
 
-create procedure getUser
-	 @userName varchar(60)
+
+create procedure proc_getCantPartidos
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-    select
-		 userName
-		,CONVERT(VARCHAR(60), DECRYPTBYPASSPHRASE('smas',password)) as password
-		,nombre,apellido1,apellido2,telefono,correo,nombreTitular
-		,CONVERT(VARCHAR(60), DECRYPTBYPASSPHRASE('smas',tarjeta)) as tarjeta
-		,fechaExp
-	from Usuarios where userName = @userName
+	select count(*) from Partidos where correoAtleta = @correoAtleta
+	--select count(*) from Partidos where correoAtleta = 'correo3@algo.com'
 END
---
+--drop procedure proc_getCantPartidos
+
 
 go
 
-create procedure deleteUsuario
-	 @userName varchar(60)
+
+create procedure proc_AVGcalificacionPartidos
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-    delete Estudiantes where userName = @userName
-	delete Reservaciones where usuario = @userName
-	delete Usuarios where userName = @userName
+	select convert(numeric(5,2), (select avg(calificacionPartido) from Partidos where correoAtleta = @correoAtleta))
+	--select convert(numeric(5,2), (select avg(calificacionPartido) from Partidos where correoAtleta = 'correo1@algo.com'))
 END
---drop procedure deleteUsuario
+--drop procedure proc_AVGcalificacionPartidos
+
+
 go
 
-create procedure deleteUsuarios
+
+create procedure proc_AVGtiempoPruebaDistanciaCorta
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-    delete Estudiantes
-	delete Reservaciones
-	delete Usuarios
+	select convert(numeric(4,2), (select avg(tiempoPruebaDistanciaCorta) from Entrenamientos where correoAtleta = @correoAtleta))
+	--select convert(numeric(5,2), (select avg(tiempoPruebaDistanciaCorta) from Entrenamientos where correoAtleta = 'correo4@algo.com'))
+	
 END
---drop procedure deleteUsuarios
+--drop procedure proc_AVGcalificacionPartidos
+
 
 go
 
-create procedure deleteVuelo
-	 @id int
+
+create procedure proc_AVGtiempoPruebaDistanciaLarga
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-    delete Escalas where id_vuelo = @id
-	delete Vuelos where id = @id
+	select convert(numeric(4,2), (select avg(tiempoPruebaDistanciaLarga) from Entrenamientos where correoAtleta = @correoAtleta))
+	--select convert(numeric(5,2), (select avg(tiempoPruebaDistanciaLarga) from Entrenamientos where correoAtleta = 'correo4@algo.com'))
+	
 END
+--drop procedure proc_AVGcalificacionPartidos
 
 
 go
 
 
-create procedure deleteVuelos
-as
-BEGIN
-    delete Escalas
-	delete Vuelos
+create procedure proc_bestoTiempoPruebaDistanciaCorta
+	 @correoAtleta varchar(30)
+AS
+BEGIN	
+	select min(tiempoPruebaDistanciaCorta) from Entrenamientos where correoAtleta = @correoAtleta
+	--select min(tiempoPruebaDistanciaCorta) from Entrenamientos where correoAtleta = 'correo4@algo.com'
 END
---drop procedure deleteVuelos
-
---select * from Aviones
---create trigger revisar
+--drop procedure proc_AVGcalificacionPartidos
 
 
 go
 
 
-create procedure crearReservacion
-	 @userName varchar(60)
-	,@idVuelo int
+create procedure proc_bestoTiempoPruebaDistanciaLarga
+	 @correoAtleta varchar(30)
+AS
+BEGIN	
+	select min(tiempoPruebaDistanciaLarga) from Entrenamientos where correoAtleta = @correoAtleta
+	--select min(tiempoPruebaDistanciaCorta) from Entrenamientos where correoAtleta = 'correo4@algo.com'
+END
+--drop procedure proc_AVGcalificacionPartidos
+
+
+go
+
+
+create procedure proc_AVGsalto
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-    insert into Reservaciones(usuario,idVuelo,fecha) values(@userName,@idVuelo,getDate())
+	select convert(numeric(4,2), (select avg(salto) from Entrenamientos where correoAtleta = @correoAtleta))
+	--select convert(numeric(5,2), (select avg(salto) from Entrenamientos where correoAtleta = 'correo4@algo.com'))
+	
 END
---drop procedure crearReservacion
+--drop procedure proc_AVGcalificacionPartidos
+
 
 
 go
 
 
-create procedure actualizarPeso
-	 @userName varchar(60)
-	,@idVuelo int
-	,@peso int
+create procedure proc_bestoSalto
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-	if(@peso <= (select (select pesoMaximo from Vuelos join Aviones on Vuelos.avion = Aviones.id where Vuelos.id = @idVuelo)/(select count(asiento) as cantidadAsientos from Aviones join Asientos on Aviones.id = Asientos.idAvion join Vuelos on Vuelos.avion = Aviones.id where Vuelos.id = @idVuelo) as pesoMaximoPorPasajero))
-	begin
-		update Reservaciones
-			set peso = @peso
-		where usuario = @userName and idVuelo = @idVuelo
-	end
-	else
-	begin
-		RAISERROR(N'No se permite tanto peso!', 15, 253)
-	end
+	select max(salto) from Entrenamientos where correoAtleta = @correoAtleta
+	--select max(salto) from Entrenamientos where correoAtleta = 'correo4@algo.com'
+	
+	
 END
---drop procedure actualizarPeso
+--drop procedure proc_AVGcalificacionPartidos
 
 
 go
 
 
-create procedure actualizarAsiento
-	 @userName varchar(60)
-	,@idVuelo int
-	,@asiento varchar(4)
+create procedure proc_AVGtiempoPruebaHabilidad
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-	if(@asiento in (select asiento from Asientos join Vuelos on Asientos.idAvion = Vuelos.avion where Vuelos.id = @idVuelo and asiento not in (select asiento from Reservaciones where asiento is not null)))
-	begin
-		update Reservaciones
-			set asiento = @asiento
-		where
-			usuario = @userName
-			and idVuelo = @idVuelo
-	end
-	else
-	begin
-		RAISERROR(N'El asiento ya esta ocupado!', 15, 252)
-	end
+	select convert(numeric(4,2), (select avg(tiempoPruebaHabilidad) from Entrenamientos where correoAtleta = @correoAtleta))
+	--select convert(numeric(5,2), (select avg(tiempoPruebaHabilidad) from Entrenamientos where correoAtleta = 'correo4@algo.com'))
+	
 END
---drop procedure actualizarAsiento
+--drop procedure proc_AVGcalificacionPartidos
 
 
 go
 
 
-create procedure getAsientosOcupados
-	@idVuelo int	
-AS
-BEGIN		
-select
-	asiento
-from Asientos join Vuelos on Asientos.idAvion = Vuelos.avion
-where
-	Vuelos.id = @idVuelo
-	and asiento in (select asiento from Reservaciones where asiento is not null)
-END
---drop procedure getAsientosOcupados
-
-
-go
-
-
-create procedure getAsientosDesocupados
-	@idVuelo int	
-AS
-BEGIN		
-select
-	asiento
-from Asientos join Vuelos on Asientos.idAvion = Vuelos.avion
-where
-	Vuelos.id = @idVuelo
-	and asiento not in (select asiento from Reservaciones where asiento is not null)
-END
---drop procedure getAsientosDesocupados
-
-
-go
-
-
-create procedure getCantidadAsientos
-	@idAvion int
+create procedure proc_bestoTiempoPruebaHabilidad
+	 @correoAtleta varchar(30)
 AS
 BEGIN
-	select count(asiento) as cantidadAsientos from Asientos where idAvion = @idAvion
+	select min(tiempoPruebaHabilidad) from Entrenamientos where correoAtleta = @correoAtleta
+	--select max(tiempoPruebaHabilidad) from Entrenamientos where correoAtleta = 'correo4@algo.com'
 END
+--drop procedure proc_AVGcalificacionPartidos
 
 
 go
 
 
-create trigger trgUpdateMillas
-on Reservaciones
-after insert
+create procedure proc_getCantJuegosPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
 AS
 BEGIN
-	update Estudiantes set puntos = puntos+10 where userName = (select usuario FROM INSERTED)
+	select count(*) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada
+	--select count(*) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
 END
---drop trigger trgUpdateMillas
+--drop procedure proc_getCantPartidos
 
 
 go
 
 
-create procedure resetPuntos
+create procedure proc_getCantJuegosGanadosPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
 AS
 BEGIN
-	update Estudiantes set puntos = 0
+	select count(*) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada and idEstado = 2
+	--select count(*) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
 END
---drop procedure trgUpdateMillas
+--drop procedure proc_getCantPartidos
 
 
 go
 
 
-create view VuelosView
-as
-select
-	 id
-	,nombre as inicio
-	,(select nombre from Aeropuertos where codigoIATA = aeropuertoFin) as fin
-from Vuelos join Aeropuertos on Vuelos.aeropuertoIni = Aeropuertos.codigoIATA
---drop view VuelosView
-GO
-
---select * from VuelosView
+create procedure proc_getCantJuegosPerdidosPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select count(*) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada and idEstado = 0
+	--select count(*) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
+END
+--drop procedure proc_getCantPartidos
 
 
+go
+
+
+create procedure proc_getCantJuegosEmpatadosPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select count(*) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada and idEstado = 1
+	--select count(*) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
+END
+--drop procedure proc_getCantPartidos
+
+
+go
+
+
+create procedure proc_getCantGolesPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select sum(cantidadGoles) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada
+	--select sum(cantidadGoles) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+	
+END
+--drop procedure proc_getCantPartidos
+
+
+go
+
+
+create procedure proc_getCantAsistenciasPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select sum(cantidadAsistencias) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada
+	--select sum(cantidadAsistencias) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+	
+END
+--drop procedure proc_getCantPartidos
+
+
+go
+
+
+create procedure proc_getBalonesRecuperadosPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select sum(balonesRecuperados) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada
+	--select sum(balonesRecuperados) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+	
+END
+--drop procedure proc_getCantPartidos
+
+
+go
+
+
+create procedure proc_getAVGbalonesRecuperadosPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select avg(balonesRecuperados) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada
+	--select avg(balonesRecuperados) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+	
+END
+--drop procedure proc_getCantPartidos
+
+
+go
 
 
 
---exec getAsientosOcupados @idVuelo = 0
---exec actualizarAsiento @userName = 'MajinLoop', @idVuelo = 0, @asiento = '2A'
---exec actualizarAsiento @userName = 'ollirum', @idVuelo = 0, @asiento = '2A'
---select * from Reservaciones
---select * from Vuelos
---update Reservaciones set asiento = null where usuario = 'MajinLoop' and idVuelo = 0
---update Reservaciones set asiento = null where usuario = 'ollirum' and idVuelo = 0
---exec getCantidadAsientos @idAvion = 4
---select Vuelos.id as idVuelo, nombre as sal, aeropuertoIni as iataSal, aeropuertoFin as iataDes, (select nombre from Aeropuertos where codigoIATA = aeropuertoFin) as des, avion from Vuelos join Aeropuertos on Vuelos.aeropuertoIni = Aeropuertos.codigoIATA join Aviones on Aviones.id = Vuelos.avion where Vuelos.id = 0
-
-/*
---Cual es mas eficiente?
-select
-inicio,final
-from
-	(select id,nombre as inicio from Vuelos join Aeropuertos on Vuelos.aeropuertoIni = Aeropuertos.codigoIATA) as A
-	join
-	(select id,nombre as final from Vuelos join Aeropuertos on Vuelos.aeropuertoFin = Aeropuertos.codigoIATA) as B
-		on A.id = B.id
---vs
-
-select
-	 nombre as inicio
-	,(select nombre from Aeropuertos where codigoIATA = aeropuertoFin) as final
-from Vuelos join Aeropuertos on Vuelos.aeropuertoIni = Aeropuertos.codigoIATA
-*/
+create procedure proc_getTotalPasesTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada) + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+END
+--drop procedure proc_getTotalPasesTemporada
 
 
-*/
+go
+
+
+create procedure proc_getPorcentajePasesExitososPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select
+	convert
+	(
+			numeric(5,2)
+		,(
+			convert(numeric(5,2), (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada))
+			*
+			100
+			/
+			convert
+			(
+				numeric(5,2),
+				(
+					(select sum(cantidadPasesFallidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+					+
+					(select sum(cantidadPasesExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+				)
+			)
+		)
+	)
+	/*
+	select
+		convert
+		(
+			 numeric(5,2)
+			,(
+				convert(numeric(5,2), (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'))
+				*
+				100
+				/
+				convert
+				(
+					numeric(5,2),
+					(
+						(select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+						+
+						(select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+					)
+				)
+			)
+		)
+	*/
+	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+END
+--drop procedure proc_getPorcentajePasesExitososPorTemporada
+
+
+go
+
+
+create procedure proc_getTotalCentrosTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select (select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada) + (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select (select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+END
+--drop procedure proc_getTotalPasesTemporada
+
+
+go
+
+
+create procedure proc_getPorcentajeCentrosExitososPorTemporada
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+AS
+BEGIN
+	select
+	convert
+	(
+			numeric(5,2)
+		,(
+			convert(numeric(5,2), (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada))
+			*
+			100
+			/
+			convert
+			(
+				numeric(5,2),
+				(
+					(select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+					+
+					(select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+				)
+			)
+		)
+	)
+	/*
+	select
+		convert
+		(
+			 numeric(5,2)
+			,(
+				convert(numeric(5,2), (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'))
+				*
+				100
+				/
+				convert
+				(
+					numeric(5,2),
+					(
+						(select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+						+
+						(select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+					)
+				)
+			)
+		)
+	*/
+	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+END
+--drop procedure proc_getPorcentajePasesExitososPorTemporada
