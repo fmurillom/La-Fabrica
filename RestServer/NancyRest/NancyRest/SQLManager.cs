@@ -250,17 +250,37 @@ namespace NancyRest
 
 
         public static bool evaluarAtlEntr(float calificacion, float tiempoDC, float tiempoDL, float salto, float tiempoPH, float pase,
-                                            float pruebaHR, float altura)
+                                            float pruebaHR, string correo)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             SqlDataReader sqlReader;
             bool ok = false;
+            int ultimoIdEntr = 0;
+
             try
             {
-                sqlInjection("exec crearReservacion @userName = '" );
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Reservaciones where usuario = '", connection);
+                command = new SqlCommand("select max(idEntrenamiento) as id from Entrenamientos where correoAtleta = '" + correo + "'", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        ultimoIdEntr = int.Parse(sqlReader["id"].ToString());
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+
+                ultimoIdEntr = ultimoIdEntr + 1;
+
+                sqlInjection("insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamiento,tiempoPruebaDistanciaCorta,tiempoPruebaDistanciaLarga,salto,tiempoPruebaHabilidad,pruebaFisicaPace,pruebaFisicaHR) values(" + ultimoIdEntr + ",'" + correo + "'," +  calificacion + "," + tiempoDC + "," + tiempoDL + "," + salto + "," + tiempoPH + "," + pase + "," + pruebaHR + ")");
+                connection.Open();
+                string com = "select count(*) as exist from Entrenamientos where idEntrenamiento = " + ultimoIdEntr + " and correoAtleta = '" + correo + "'";
+                command = new SqlCommand(com, connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
@@ -288,17 +308,36 @@ namespace NancyRest
 
 
         public static bool evaluarAtlPart(string estadoP, int goles, int asistencias, int balonesR, int pasesExit, int pases, int centros, int centrosExit, int tarjetasAmar,
-                                            int tarjetasRoj, int penales, int rematesSalv, int golesRecib)
+                                            int tarjetasRoj, int penales, int rematesSalv, int golesRecib, string correo, string temporada, float calificacion)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             SqlDataReader sqlReader;
             bool ok = false;
+            int ultimoIdEntr = 0;
             try
             {
-                sqlInjection("exec crearReservacion @userName = '" );
+
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Reservaciones where usuario = '" , connection);
+                command = new SqlCommand("select max(idPartido) as id from Partidos where correoAtleta = '" + correo + "'", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        ultimoIdEntr = int.Parse(sqlReader["id"].ToString());
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+
+                ultimoIdEntr = ultimoIdEntr + 1;
+
+                sqlInjection("insert into Partidos(idPartido,correoAtleta,temporada,calificacionPartido,idEstado,cantidadGoles,cantidadAsistencias,balonesRecuperados,cantidadPasesFallidos,cantidadPasesExitosos,cantidadCentrosFallidos,cantidadCentrosExitosos,cantidadTarjetasAmarillas,cantidadTarjetasRojas,cantidadPenales,cantidadRematesSalvados,cantidadGolesRecibidos) values(" + ultimoIdEntr + ",'" + correo + "','" + temporada + "'," + calificacion + "," + estadoP + "," + goles + "," + asistencias +"," + balonesR + "," + pases + "," + pasesExit + "," + centros + "," + centrosExit + "," + tarjetasAmar + "," + tarjetasRoj + "," + penales + "," + rematesSalv + "," + golesRecib +")" );
+                connection.Open();
+                command = new SqlCommand("select count(*) as exist from Partidos where idPartido = " + ultimoIdEntr + " and correoAtleta = '" + correo + "'" , connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
@@ -1238,7 +1277,86 @@ namespace NancyRest
             plan["planes"] = ejercicios;
             return plan;
         }
+
+
+        public static JObject getProvincias(string nombrePais)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            string query = "select * from Provincias where nombrePais = '" + nombrePais + "'";
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            string res = null;
+            JObject provincias = new JObject();
+            JArray prov = new JArray();
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        prov.Add(sqlReader["nombreProvincia"]);
+                    }
+                    sqlReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            provincias["provincias"] = prov;
+            return provincias;
+        }
+
+        public static JObject getDeportes()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            string query = "select * from Deportes";
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            string res = null;
+            JObject deportes = new JObject();
+            JArray depor = new JArray();
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        depor.Add(sqlReader["nombreDeporte"]);
+                    }
+                    sqlReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            deportes["deportes"] = depor;
+            return deportes;
+        }
     }
+
+
 
 
 }

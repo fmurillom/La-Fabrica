@@ -14,10 +14,14 @@ namespace NancyRest
     {
         public Server() : base("/")
         {
-            After.AddItemToEndOfPipeline((ctx) => ctx.Response
-            .WithHeader("Access-Control-Allow-Origin", "*")
-            .WithHeader("Access-Control-Allow-Methods", "GET, POST")
-            .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type"));
+
+            /*
+            this.After.AddItemToEndOfPipeline((ctx) =>
+            {
+                ctx.Response.WithHeader("Access-Control-Allow-Origin", "*")
+                    .WithHeader("Access-Control-Allow-Methods", "POST,GET")
+                    .WithHeader("Access-Control-Allow-Headers", "Accept, Origin, Content-type");
+            });*/
 
             Get("/paises", _ => {
                 string response = SQLManager.getPaises().ToString();
@@ -54,6 +58,17 @@ namespace NancyRest
                 };
             });
 
+            Get("/deportes", _ => {
+                string response = SQLManager.getDeportes().ToString();
+                Console.WriteLine("Response:\n" + response);
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
             Get("/", _ => {
                 return "Za Warudo from Server!";
             });
@@ -69,6 +84,26 @@ namespace NancyRest
                 string nombreDeporte = data["nombreDeporte"].ToString();
 
                 string response = SQLManager.getPocisiones(nombreDeporte).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+            Post("/provincias", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string nombreProvincia = data["nombrePais"].ToString();
+
+                string response = SQLManager.getProvincias(nombreProvincia).ToString();
                 Console.WriteLine("Response:\n" + response);
 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -190,6 +225,8 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
+                string correoAtleta = data["correo"].ToString();
+
                 float calificacion = float.Parse(data["calificacion"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 float tiempoDC = float.Parse(data["tiempoDC"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 float tiempoDL = float.Parse(data["tiempoDL"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
@@ -197,10 +234,9 @@ namespace NancyRest
                 float tiempoPH = float.Parse(data["tiempoPH"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 float pase = float.Parse(data["pase"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 float pruebaHR = float.Parse(data["pruebaHR"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
-                float altura = float.Parse(data["altura"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
 
-                string response = SQLManager.evaluarAtlEntr(calificacion, tiempoDC, tiempoDL, salto, tiempoPH, pase, pruebaHR, altura).ToString();
+                string response = SQLManager.evaluarAtlEntr(calificacion, tiempoDC, tiempoDL, salto, tiempoPH, pase, pruebaHR, correoAtleta).ToString();
                 Console.WriteLine("Response:\n" + response);
 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -219,6 +255,11 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
+                string correo = data["correo"].ToString();
+                string temporada = data["temporada"].ToString();
+                float calificacion = float.Parse(data["calificacion"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
+
+
                 string estadoP = data["estadoP"].ToString();
                 int goles = int.Parse(data["goles"].ToString());
                 int asistencias = int.Parse(data["asistencias"].ToString());
@@ -234,7 +275,7 @@ namespace NancyRest
                 int golesRecib = int.Parse(data["golesRecib"].ToString());
 
                 string response = SQLManager.evaluarAtlPart(estadoP, goles, asistencias, balonesR, pasesExit, pases, centros, centrosExit, tarjetasAmar, tarjetasRoj,
-                                                                penales, rematesSalv, golesRecib).ToString();
+                                                                penales, rematesSalv, golesRecib, correo, temporada, calificacion).ToString();
                 Console.WriteLine("Response:\n" + response);
 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
