@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NancyRest", "NancyRest\NancyRest.csproj", "{749DC3CD-C2F6-4B82-9B3B-93097FDBF67F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestRestServer", "..\UnitTestRestServer\UnitTestRestServer.csproj", "{6DE465D5-9B27-4F19-B8E3-046CDA3D39F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,11 +17,15 @@ Global
 		{749DC3CD-C2F6-4B82-9B3B-93097FDBF67F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{749DC3CD-C2F6-4B82-9B3B-93097FDBF67F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{749DC3CD-C2F6-4B82-9B3B-93097FDBF67F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE465D5-9B27-4F19-B8E3-046CDA3D39F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE465D5-9B27-4F19-B8E3-046CDA3D39F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE465D5-9B27-4F19-B8E3-046CDA3D39F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE465D5-9B27-4F19-B8E3-046CDA3D39F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {205A522C-F96C-44A1-A7EF-C40FDA66D0C3}
+		SolutionGuid = {0A60E86A-8E23-4AF5-A76E-CD8AA53299A0}
 	EndGlobalSection
 EndGlobal
