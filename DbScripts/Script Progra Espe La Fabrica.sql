@@ -155,7 +155,7 @@ create table Atletas
 	,universidad varchar(40) not null--FK
 	,password varchar(max) not null
 	,deporte varchar(40) not null
-	,altura numeric(4,2) not null
+	,altura numeric(5,2) not null
 	,peso numeric(5,2) not null
 	,posicion int not null--FK
 	,posicionSecundaria int --FK
@@ -262,7 +262,7 @@ create table Partidos
 	,cantidadTarjetasAmarillas int not null
 	,cantidadTarjetasRojas int not null
 
-	--Weas de porteror--
+	--Weas de portero--
 	,cantidadPenales int not null	
 	,cantidadRematesSalvados int not null
 	,cantidadGolesRecibidos int not null
@@ -933,3 +933,67 @@ BEGIN
 	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
 END
 --drop procedure proc_getPorcentajePasesExitososPorTemporada
+
+
+go
+
+
+create procedure proc_logInAtleta
+	 @correo varchar(30)
+	,@password varchar(8)
+AS
+BEGIN
+	if (select password from Atletas where correo1 = @correo) = (SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', @password) ,2))
+	begin
+		select 1
+	end
+	else
+	begin		
+		select 0
+	end
+END
+--drop procedure proc_logInAtleta
+
+
+go
+
+
+create procedure proc_logInEntrenador
+	 @correo varchar(30)
+	,@password varchar(8)
+AS
+BEGIN
+	if (select password from Entrenadores where correo = @correo) = (SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', @password) ,2))
+	begin
+		select 1
+	end
+	else
+	begin		
+		select 0
+	end
+END
+--drop procedure proc_logInEntrenador
+
+
+go
+
+
+create procedure proc_logInTrabajador
+	 @correo varchar(30)
+	,@password varchar(8)
+AS
+BEGIN
+	if (select password from Trabajadores where correo = @correo) = (SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', @password) ,2))
+	begin
+		select 1
+	end
+	else
+	begin		
+		select 0
+	end
+END
+--drop procedure proc_logInTrabajador
+
+
+--SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', 'Doom') ,2)
+
