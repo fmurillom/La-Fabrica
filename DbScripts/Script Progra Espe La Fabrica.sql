@@ -429,7 +429,7 @@ create procedure proc_registrarAtleta
 	,@universidad varchar(40)
 	,@password varchar(8)
 	,@deporte varchar(40)
-	,@altura numeric(4,2)
+	,@altura numeric(5,2)
 	,@peso numeric(5,2)
 	,@posicion int
 	,@posicionSecundaria int
@@ -945,11 +945,11 @@ AS
 BEGIN
 	if (select password from Atletas where correo1 = @correo) = (SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', @password) ,2))
 	begin
-		select 1
+		select 1 as success
 	end
 	else
 	begin		
-		select 0
+		select 0 as success
 	end
 END
 --drop procedure proc_logInAtleta
@@ -965,11 +965,11 @@ AS
 BEGIN
 	if (select password from Entrenadores where correo = @correo) = (SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', @password) ,2))
 	begin
-		select 1
+		select 1 as success
 	end
 	else
 	begin		
-		select 0
+		select 0 as success
 	end
 END
 --drop procedure proc_logInEntrenador
@@ -985,11 +985,11 @@ AS
 BEGIN
 	if (select password from Trabajadores where correo = @correo) = (SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', @password) ,2))
 	begin
-		select 1
+		select 1 as success
 	end
 	else
 	begin		
-		select 0
+		select 0 as success
 	end
 END
 --drop procedure proc_logInTrabajador
