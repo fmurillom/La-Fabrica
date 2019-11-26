@@ -113,6 +113,42 @@ namespace NancyRest
             return ok;
         }
 
+        public static bool insertLesion(string correo, string fechaInicio, string fechaFinal, string gravedad)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            SqlDataReader sqlReader;
+            bool ok = false;
+            try
+            {
+                sqlInjection("EXEC proc_registrarEntrenador @nombre = '" + nombreC + "', @apellido = '" + apellidoC + "', @correo = '" + email + "', @password = '" + password + "', @pais = '" + pais + "', @universidad = '" + universidad + "'");
+                connection.Open();
+                command = new SqlCommand("select count(*) as exist from Entrenadores where correo = '" + email + "'", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        if (sqlReader["exist"].ToString().Equals("1"))
+                        {
+                            ok = true;
+                        }
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            return ok;
+        }
+
         public static JObject getAtletasUniversidad(string universidad)
         {
             SqlConnection connection = new SqlConnection(connectionString);

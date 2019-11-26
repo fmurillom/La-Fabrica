@@ -271,6 +271,34 @@ namespace NancyRest
                 };
             });
 
+            Post("/crearLesion", x =>
+            {
+                Console.WriteLine("post: /crearEnt");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string correo = data["correo"].ToString();
+                string fechaInicio = data["fechaInicio"].ToString();
+                string fechaFinal = data["fechaFinal"].ToString();
+                int gravedad = int.Parse(data["gravedad"].ToString());
+
+                bool response = SQLManager.insertEntr(correo, fechaInicio, fechaFinal, gravedad);
+
+                return response;
+
+                Console.WriteLine("Response:\n" + response);
+                /*
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };*/
+            });
+
+
+
 
             Post("/crearEnt", x =>
             {
