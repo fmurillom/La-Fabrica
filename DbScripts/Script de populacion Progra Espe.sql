@@ -123,7 +123,7 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido A'
 	,@cedula = 111111111
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '01/01/2000'
+	,@fechaNacimiento = '1/1/2000'
 	,@correo1 = 'correo1@algo.com'
 	,@correo2 = null
 	,@telefono = 11112222
@@ -142,7 +142,7 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido B'
 	,@cedula = 111111112
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '02/01/2000'
+	,@fechaNacimiento = '2/1/2000'
 	,@correo1 = 'correo2@algo.com'
 	,@correo2 = null
 	,@telefono = 22223333
@@ -161,7 +161,7 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido C'
 	,@cedula = 111111113
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '03/01/2000'
+	,@fechaNacimiento = '3/1/2000'
 	,@correo1 = 'correo3@algo.com'
 	,@correo2 = null
 	,@telefono = 33334444
@@ -180,7 +180,7 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido D'
 	,@cedula = 111111114
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '04/01/2000'
+	,@fechaNacimiento = '4/1/2000'
 	,@correo1 = 'correo4@algo.com'
 	,@correo2 = null
 	,@telefono = 44445555
@@ -321,6 +321,9 @@ exec proc_logInTrabajador
 	 @correo = 'admin1@algo.com'
 	,@password = 'uwu'
 
+exec proc_logInTrabajador
+	 @correo = 'admin1@algo.com'
+	,@password = '7w7'
 
 
 delete PlanesEjercicios
