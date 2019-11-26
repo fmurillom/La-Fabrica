@@ -520,6 +520,118 @@ namespace NancyRest
             return temporada;
         }
 
+        public static JObject login(string emailCuenta, string password)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            SqlDataReader sqlReader;
+            JObject login = new JObject();
+            bool ok = false;
+            try
+            {
+                connection.Open();
+                command = new SqlCommand("exec proc_logInAtleta @correo = '" + emailCuenta + "', @password = '" + password + "'", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        if (sqlReader["success"].ToString().Equals("1"))
+                        {
+                            login["success"] = 1;
+                            login["rol"] = "Atl";
+                            ok = true;
+                        }
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+
+                if (!ok)
+                {
+                    connection.Open();
+                    command = new SqlCommand("exec proc_logInEntrenador @correo = '" + emailCuenta + "', @password = '" + password + "'", connection);
+                    sqlReader = command.ExecuteReader();
+                    try
+                    {
+                        while (sqlReader.Read())
+                        {
+                            if (sqlReader["success"].ToString().Equals("1"))
+                            {
+                                login["success"] = 1;
+                                login["rol"] = "Ent";
+                                ok = true;
+                            }
+                        }
+                    }
+                    catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                    sqlReader.Close();
+                    command.Dispose();
+                    connection.Close();
+                }
+
+                if (!ok)
+                {
+                    connection.Open();
+                    command = new SqlCommand("exec proc_logInTrabajador @correo = '" + emailCuenta + "', @password = '" + password + "'", connection);
+                    sqlReader = command.ExecuteReader();
+                    try
+                    {
+                        while (sqlReader.Read())
+                        {
+                            if (sqlReader["success"].ToString().Equals("1"))
+                            {
+                                login["success"] = 1;
+                                login["rol"] = "Sct";
+                                ok = true;
+                            }
+                        }
+                    }
+                    catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                    sqlReader.Close();
+                    command.Dispose();
+                    connection.Close();
+
+                    if (ok)
+                    {
+                        connection.Open();
+                        command = new SqlCommand("select count(*) as exist from Trabajadores where rol = 0 and correo = '" + emailCuenta + "'", connection);
+                        sqlReader = command.ExecuteReader();
+                        try
+                        {
+                            while (sqlReader.Read())
+                            {
+                                if (sqlReader["exist"].ToString().Equals("1"))
+                                {
+                                    login["success"] = 1;
+                                    login["rol"] = "Admn";
+                                    ok = true;
+                                }
+                            }
+                        }
+                        catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                        sqlReader.Close();
+                        command.Dispose();
+                        connection.Close();
+                    }
+
+                }
+                if (!ok)
+                {
+                    login["success"] = 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            return login;
+        }
+
         public static JObject getUniversidades(string nombrepais)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -1205,7 +1317,7 @@ namespace NancyRest
 
                 sqlInjection("insert into Posiciones(nombreDeporte,idPosicion,nombrePosicion) values('"+ deporte + "'," + ultimoidPosicion + ", '"+ nombrePosicion + "')" );
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Posiciones where nombrePosicion = '" + nombrePosicion + "'", connection);
+                command = new SqlCommand("select count(*) as exist from Posiciones where nombrePosicion = '" + nombrePosicion + "' and idPosicion = " + ultimoidPosicion, connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
