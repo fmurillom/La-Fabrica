@@ -142,6 +142,7 @@ create table Atletas
 (
 	 nombre varchar(30) not null
 	,apellido varchar(30) not null
+	,carne int unique not null
 	,cedula int unique not null
 	,provincia varchar(40) not null--FK
 	,fechaNacimiento date not null
@@ -481,6 +482,7 @@ go
 create procedure proc_registrarAtleta
 	 @nombre varchar(30)
 	,@apellido varchar(30)
+	,@carne int
 	,@cedula int
 	,@provincia varchar(40)
 	,@fechaNacimiento date
@@ -498,11 +500,12 @@ create procedure proc_registrarAtleta
 	,@posicionSecundaria int
 AS
 BEGIN
-	insert into Atletas(nombre,apellido,cedula,provincia,fechaNacimiento,activo,correo1,correo2,telefono,foto,fechaInscripcion,pais,universidad,password,deporte,altura,peso,posicion,posicionSecundaria,notaXSport,nombreEquipo)
+	insert into Atletas(nombre,apellido,carne,cedula,provincia,fechaNacimiento,activo,correo1,correo2,telefono,foto,fechaInscripcion,pais,universidad,password,deporte,altura,peso,posicion,posicionSecundaria,notaXSport,nombreEquipo)
 		values
 		(
 			 @nombre
 			,@apellido
+			,@carne
 			,@cedula
 			,@provincia
 			,@fechaNacimiento

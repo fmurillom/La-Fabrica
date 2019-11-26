@@ -121,6 +121,7 @@ insert into EquiposTemporadas(nombreEquipo,nombreTemporada) values('Equipo 3','T
 EXEC proc_registrarAtleta
 	 @nombre = 'Atleta A'
 	,@apellido = 'Apellido A'
+	,@carne = 2015035779
 	,@cedula = 111111111
 	,@provincia = 'Cartago'
 	,@fechaNacimiento = '1/1/2000'
@@ -140,6 +141,7 @@ EXEC proc_registrarAtleta
 EXEC proc_registrarAtleta
 	 @nombre = 'Atleta B'
 	,@apellido = 'Apellido B'
+	,@carne = 2015035780
 	,@cedula = 111111112
 	,@provincia = 'Cartago'
 	,@fechaNacimiento = '2/1/2000'
@@ -159,6 +161,7 @@ EXEC proc_registrarAtleta
 EXEC proc_registrarAtleta
 	 @nombre = 'Atleta C'
 	,@apellido = 'Apellido C'
+	,@carne = 2015035781
 	,@cedula = 111111113
 	,@provincia = 'Cartago'
 	,@fechaNacimiento = '3/1/2000'
@@ -178,6 +181,7 @@ EXEC proc_registrarAtleta
 EXEC proc_registrarAtleta
 	 @nombre = 'Atleta D'
 	,@apellido = 'Apellido D'
+	,@carne = 2015035782
 	,@cedula = 111111114
 	,@provincia = 'Cartago'
 	,@fechaNacimiento = '4/1/2000'
