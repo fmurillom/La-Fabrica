@@ -6,7 +6,7 @@ DBCC USEROPTIONS;
 SET DATEFORMAT dmy;
 
 
-SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', 'clave') ,2)
+SELECT CONVERT(varchar(max), HASHBYTES ('SHA2_512', 'Doom') ,2)
 */
 
 
@@ -123,14 +123,14 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido A'
 	,@cedula = 111111111
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '01/01/2000'
+	,@fechaNacimiento = '1/1/2000'
 	,@correo1 = 'correo1@algo.com'
 	,@correo2 = null
 	,@telefono = 11112222
 	,@foto = 'Foto1'
 	,@pais = 'Costa Rica'
 	,@universidad = 'Instituto Tecnologico de Costa Rica'
-	,@password = 'password1'
+	,@password = 'pass1'
 	,@deporte = 'Futbol'
 	,@altura = 1.8
 	,@peso = 70
@@ -142,14 +142,14 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido B'
 	,@cedula = 111111112
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '02/01/2000'
+	,@fechaNacimiento = '2/1/2000'
 	,@correo1 = 'correo2@algo.com'
 	,@correo2 = null
 	,@telefono = 22223333
 	,@foto = 'Foto2'
 	,@pais = 'Costa Rica'
 	,@universidad = 'Instituto Tecnologico de Costa Rica'
-	,@password = 'password2'
+	,@password = 'pass2'
 	,@deporte = 'Futbol'
 	,@altura = 1.7
 	,@peso = 60
@@ -161,14 +161,14 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido C'
 	,@cedula = 111111113
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '03/01/2000'
+	,@fechaNacimiento = '3/1/2000'
 	,@correo1 = 'correo3@algo.com'
 	,@correo2 = null
 	,@telefono = 33334444
 	,@foto = 'Foto3'
 	,@pais = 'Costa Rica'
 	,@universidad = 'Instituto Tecnologico de Costa Rica'
-	,@password = 'password3'
+	,@password = 'pass3'
 	,@deporte = 'Futbol'
 	,@altura = 1.75
 	,@peso = 75
@@ -180,14 +180,14 @@ EXEC proc_registrarAtleta
 	,@apellido = 'Apellido D'
 	,@cedula = 111111114
 	,@provincia = 'Cartago'
-	,@fechaNacimiento = '04/01/2000'
+	,@fechaNacimiento = '4/1/2000'
 	,@correo1 = 'correo4@algo.com'
 	,@correo2 = null
 	,@telefono = 44445555
 	,@foto = 'Foto4'
 	,@pais = 'Costa Rica'
 	,@universidad = 'Instituto Tecnologico de Costa Rica'
-	,@password = 'password4'
+	,@password = 'pass4'
 	,@deporte = 'Futbol'
 	,@altura = 1.85
 	,@peso = 90
@@ -232,21 +232,21 @@ exec proc_registrarTrabajador
 	 @nombre = 'Admin 1'
 	,@apellido = 'Apellido de Admin 1'
 	,@correo = 'admin1@algo.com'
-	,@password = 'passwordAdmin1'
+	,@password = 'uwu'
 	,@rol = 0
 
 exec proc_registrarTrabajador
 	 @nombre = 'Admin 2'
 	,@apellido = 'Apellido de Admin 2'
 	,@correo = 'admin2@algo.com'
-	,@password = 'passwordAdmin2'
+	,@password = 'owo'
 	,@rol = 0
 
 exec proc_registrarTrabajador
 	 @nombre = 'Scout 1'
 	,@apellido = 'Apellido de Scout 1'
 	,@correo = 'scout1@algo.com'
-	,@password = 'passwordScout1'
+	,@password = 'ewe'
 	,@rol = 1
 
 exec proc_registrarTrabajador
@@ -296,14 +296,36 @@ insert into Entrenamientos(idEntrenamiento,correoAtleta,calificacionEntrenamient
 
 /*
 exec proc_AVGcalificacionEntrenamientos @correoAtleta = 'correo4@algo.com'
+exec 
 
+exec proc_getPorcentajeCentrosExitososPorTemporada
+	 @correoAtleta = 'correo1@algo.com'
+	,@temporada = 'Temporada 1'
 
 */
 
 
 
 
+
 /*
+exec proc_logInAtleta
+	 @correo = 'correo1@algo.com'
+	,@password = 'pass1'
+
+exec proc_logInEntrenador
+	 @correo = 'aaaa'
+	,@password = '123'
+
+exec proc_logInTrabajador
+	 @correo = 'admin1@algo.com'
+	,@password = 'uwu'
+
+exec proc_logInTrabajador
+	 @correo = 'admin1@algo.com'
+	,@password = '7w7'
+
+
 delete PlanesEjercicios
 
 
@@ -330,11 +352,4 @@ select * from Entrenamientos
 
 delete Atletas
 delete Universidades
-
-{"nombre":'Yo',"apellido":'Soy yo',"cedula":123456789,"provincia":'Cartago',"fechaNacimiento":'02/01/2000',"correo1":'yosoyyo@algo.com',"correo2":"null","telefono":22223333,"foto":'FotoYo',"pais":'Costa Rica',"universidad":'Instituto Tecnologico de Costa Rica',"password":'password2',"deporte":'Futbol',"altura":1.7,"peso":60,"posicion":1,"posicionSecundaria":2}
-
 */
-
-
-
-
