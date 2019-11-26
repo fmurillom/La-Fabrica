@@ -94,7 +94,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/crearAtl", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"nombre\":'TestInser',\"apellido\":'TestInser',\"cedula\":123456789,\"provincia\":'Cartago',\"fechaNacimiento\":'02/01/2000',\"correo1\":'TestInser@algo.com',\"correo2\":\"null\",\"telefono\":22223333,\"foto\":'FotoYo',\"pais\":'Costa Rica',\"universidad\":'Instituto Tecnologico de Costa Rica',\"password\":'password2',\"deporte\":'Futbol',\"altura\":1.7,\"peso\":60,\"posicion\":1,\"posicionSecundaria\":2}");
+                with.Body("{\"nombre\":'TestInser',\"carne\": 2015000000, \"apellido\":'TestInser',\"cedula\":123456789,\"provincia\":'Cartago',\"fechaNacimiento\":'02/01/2000',\"correo1\":'TestInser@algo.com',\"correo2\":\"null\",\"telefono\":22223333,\"foto\":'FotoYo',\"pais\":'Costa Rica',\"universidad\":'Instituto Tecnologico de Costa Rica',\"password\":'password2',\"deporte\":'Futbol',\"altura\":1.7,\"peso\":60,\"posicion\":1,\"posicionSecundaria\":2}");
             });
 
             Assert.Equal("True", response.Result.Body.AsString());
@@ -262,7 +262,7 @@ namespace UnitTestRestServer
 
             var res = response.Result.Body.AsString();
 
-            Assert.Equal("True", response.Result.Body.AsString());
+            Assert.Equal("True",response.Result.Body.ToString());
         }
 
         [Fact]

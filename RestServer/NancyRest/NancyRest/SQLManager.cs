@@ -40,16 +40,16 @@ namespace NancyRest
 
 
         public static bool insertAtleta(string nombreC, int cedula, string apellidoC, string provincia, string email1, string email2, int telefonoM, string foto, string pais,
-                                        string universidad, string password, string deporte, float altura, float peso, string fechaNacimiento, int posicion, int posicionSecundaria)
+                                        string universidad, string password, string deporte, float altura, float peso, string fechaNacimiento, int posicion, int posicionSecundaria, int carne)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
             SqlDataReader sqlReader;
             bool ok = false;
-            Console.WriteLine("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '" + email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
+            Console.WriteLine("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '" + email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
             try
             {
-                sqlInjection("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '"+ email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
+                sqlInjection("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '"+ email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
                 connection.Open();
                 command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + email1 + "'", connection);
                 sqlReader = command.ExecuteReader();
@@ -111,6 +111,47 @@ namespace NancyRest
                 Console.WriteLine("Descripcion: " + err.Message);
             }
             return ok;
+        }
+
+        public static JObject getAtletasUniversidad(string universidad)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            JObject atleta = new JObject();
+            JArray atletas = new JArray();
+            JObject atl;
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand("select * from Atletas where universidad = '" + universidad + "' and nombreEquipo is null", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        atl = new JObject();
+                        atl["nombre"] = sqlReader["nombre"].ToString();
+                        atl["apellido"] = sqlReader["apellido"].ToString();
+                        atl["correo"] = sqlReader["correo1"].ToString();
+                        atletas.Add(atl);
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            atleta["atletas"] = atletas;
+            return atleta;
         }
 
 
@@ -401,6 +442,44 @@ namespace NancyRest
             return paises;
         }
 
+        public static JObject getTemporadas()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            string query = "select * from Temporadas";
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            string res = null;
+            JObject temporadas = new JObject();
+            JArray temp = new JArray();
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        temp.Add(sqlReader["nombreTemporada"].ToString());
+                    }
+                    sqlReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            temporadas["temporadas"] = temp;
+            return temporadas;
+        }
+
         public static JObject getPocisiones(string nombreDeporte)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -443,6 +522,56 @@ namespace NancyRest
             return posiciones;
         }
 
+        public static JObject getInfoEntrenador(string correo)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            string query = "select * from Entrenadores where correo = '" + correo + "'";
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            string res = null;
+            JObject entrenador = new JObject();
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        entrenador["correo"] = sqlReader["correo"].ToString();
+                        entrenador["nombre"] = sqlReader["nombre"].ToString();
+                        entrenador["apellido"] = sqlReader["apellido"].ToString();
+                        entrenador["fechaInscripcion"] = sqlReader["fechaInscripcion"].ToString();
+                        entrenador["pais"] = sqlReader["pais"].ToString();
+                        entrenador["universidad"] = sqlReader["universidad"].ToString();
+                        if(sqlReader["activo"].ToString() == "True")
+                        {
+                            entrenador["activo"] = 1;
+                        }
+                        else
+                        {
+                            entrenador["activo"] = 0;
+
+                        }
+                    }
+                    sqlReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            return entrenador;
+        }
+
 
         public static JObject getEquipos(string idEntrenador)
         {
@@ -464,7 +593,7 @@ namespace NancyRest
                 {
                     while (sqlReader.Read())
                     {
-                        equip.Add(sqlReader["nombreEquipo"]);
+                        equip.Add(sqlReader["nombreEquipo"].ToString());
                     }
                     sqlReader.Close();
                     command.Dispose();
@@ -675,12 +804,13 @@ namespace NancyRest
         public static JObject getMiembrosEquipo(string nombrEquipo)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select correo1 from Atletas where nombreEquipo = '" + nombrEquipo + "'";
+            string query = "select nombre, apellido, correo1 from Atletas where nombreEquipo = '" + nombrEquipo + "'";
             SqlCommand command;
             SqlDataReader sqlReader;
 
             string res = null;
             JObject equipo = new JObject();
+            JObject inte;
             JArray integrantes  = new JArray();
 
             try
@@ -692,7 +822,11 @@ namespace NancyRest
                 {
                     while (sqlReader.Read())
                     {
-                        integrantes.Add(sqlReader["correo1"]);
+                        inte = new JObject();
+                        inte["nombre"] = sqlReader["nombre"].ToString();
+                        inte["apellido"] = sqlReader["apellido"].ToString();
+                        inte["correo"] = sqlReader["correo1"].ToString();
+                        integrantes.Add(inte);
                     }
                     sqlReader.Close();
                     command.Dispose();
@@ -829,7 +963,7 @@ namespace NancyRest
         public static JObject getInfoAtleta(string emailCuenta)
         {
             SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select * from atletas where correo1 = '" + emailCuenta + "'";
+            string query = "select nombre,apellido,carne,cedula,provincia,fechaNacimiento,activo,correo1,correo2,telefono,foto,fechaInscripcion,pais,universidad,password,deporte,altura,peso,(select P.nombrePosicion from Posiciones as P where P.idPosicion = A.posicion) as posicion,(select P.nombrePosicion from Posiciones as P where P.idPosicion = A.posicionSecundaria) as posicionSecundaria ,notaXSport,nombreEquipo from Atletas as A join Posiciones as P on A.posicion = P.idPosicion where correo1 = '" + emailCuenta + "'";
             SqlCommand command;
             SqlDataReader sqlReader;
 
@@ -863,7 +997,7 @@ namespace NancyRest
                         atleta["altura"] = float.Parse(sqlReader["altura"].ToString());
                         atleta["peso"] = float.Parse(sqlReader["peso"].ToString());
                         atleta["posicion"] = sqlReader["posicion"].ToString();
-                        //atleta["carne"] = int.Parse(sqlReader["carne"].ToString());
+                        atleta["carne"] = int.Parse(sqlReader["carne"].ToString());
                         atleta["posicionSecundaria"] = sqlReader["posicionSecundaria"].ToString();
                     }
                     sqlReader.Close();
@@ -1151,7 +1285,7 @@ namespace NancyRest
             return vuelo;
         }
 
-        public static bool asignarPP(string idAtleta, JArray ejecicios, int semana)
+        public static bool asignarPP(string idAtleta, int semana, int ejercicio, int dia, int cantidad)
         {
             SqlConnection connection = new SqlConnection(connectionString);
             SqlCommand command;
@@ -1161,21 +1295,16 @@ namespace NancyRest
 
 
             sqlInjection("insert into Planes(semana,correoAtleta) values(" + semana + ",'" + idAtleta +"')");
-
-
-            for (int i = 0; i < ejecicios.Count; i++)
+            try
             {
-                try
-                {
-                    sqlInjection("insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(" + semana + ",'" + idAtleta + "'," + int.Parse(ejecicios[i]["dia"].ToString()) + "," + int.Parse(ejecicios[i]["idEjercicio"].ToString()) + "," + int.Parse(ejecicios[i]["cantidad"].ToString()) + ")");
-                    ok = true;
-                }
-                catch (SqlException ex)
-                {
-                    SqlError err = ex.Errors[0];
-                    Console.WriteLine("Codigo de error: " + err.Number);
-                    Console.WriteLine("Descripcion: " + err.Message);
-                }
+                sqlInjection("insert into PlanesEjercicios(semana,correoAtleta,dia,idEjercicio,cantidad) values(" + semana + ",'" + idAtleta + "'," + dia + "," + ejercicio + "," + cantidad + ")");
+                ok = true;
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
             }
             return ok;
         }

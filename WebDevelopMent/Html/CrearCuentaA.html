@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LaFabrica-Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Css/HomeTECAirlines.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head> 
+    <body>
+        <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
+            <h1 style="color:#caaa1b"><span style="color: #a51109; font-weight: bold;">La Fábrica</span>X-Sport</h1>
+        </div>
+        <header>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 col-sm-12 col-md-12">
+                    <a class="nav-link dropdown-toggle navbar-brand" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" style="color: #196a00;" aria-expanded="true">
+                        Crear Cuenta</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="CrearCuentaA.html">Atleta</a>
+                            <a class="dropdown-item" href="CrearCuentaE.html">Entrenador</a>
+                            <a class="dropdown-item" href="CrearCuenta.html">Scout</a>
+                            <a class="dropdown-item" href="CrearCuenta.html">Administrador</a>
+                        </div>
+                </nav>
+            </header>
+       <div class="container" style="margin-top:20px">
+           <div class="row">
+               <div class="col-sm-8">
+                       <form>
+                           <div class="form-group">
+                                   <label for="fname">Nombre:</label>
+                                   <input type="text" class="form-control" id="fname" ng-model = "client.CLIENT_FNAME" required>
+                           </div>
+                           <div class="form-group">
+                                       <label for="lname">Apellido:</label>
+                                       <input type="text" class="form-control" id="lname" ng-model = "client.CLIENT_LNAME" required>
+                           </div>
+                           <div class="form-group">
+                                   <label for="id">Universidad:</label>
+                                   <select class="form-control" id="sel1">
+                                       <option value="Instituto Tecnológico de Costa Rica">Instituto Tecnológico de Costa Rica</option>
+                                       <option value="Universidad de Costa Rica">Universidad de Costa Rica</option>
+                                        <option value="Universidad Nacional">Universidad Nacional</option>
+                                </select>
+                           </div>   
+                           <div class="form-group">
+                                   <label for="pnumber">Teléfono móvil:</label>
+                                   <input type="number" class="form-control" id="pnumber" ng-model = "client.CLIENT_PHONENO" pattern="[0-9]{8}" placeholder="8888 8888" required>
+                           </div>
+                           <div class="form-group">
+                               <label for="sel1">País:</label>
+                               <select class="form-control" id="sel1">
+                                   <option value="">Costa Rica</option>
+                               </select>
+                           </div> 
+                           <div class="form-group">
+                                <label for="id">Provincia:</label>
+                                <select class="form-control" id="sel1">
+                                    <option value="Instituto Tecnológico de Costa Rica">San Jose</option>
+                                    <option value="Universidad de Costa Rica">Alajuela</option>
+                                     <option value="Universidad Nacional">Cartago</option>
+                                     <option value="">Heredia</option>
+                                     <option value="">Guanacaste</option>
+                                     <option value="">Puntarenas</option>
+                                     <option value="">Limón</option>
+                             </select>
+                           <div class="form-group">
+                                   <label for="uid">Carné:</label>
+                                   <input type="number" class="form-control" ng-model = "client.UNIVERSITY_ID" id="uid" pattern="[0-9]{4} ?[0-9]{10}" placeholder=" xxxxxxxxxx" required>
+                           </div>    
+                           <div class="form-group">
+                               <label for="email">Email1:</label>
+                               <input type="email" class="form-control" id="email" placeholder="example@email.com" ng-model = "client.CLIENT_EMAIL" required>
+                           </div>
+                           <div class="form-group">
+                            <label for="email">Email2:</label>
+                            <input type="email" class="form-control" id="email" placeholder="example@email.com">
+                            </div>
+                           <div class="form-group">
+                               <label for="pwd">Contraseña:</label>
+                               <input type="password" class="form-control" id="pwd" ng-model = "client.CLIENT_PASSWRD" required>
+                           </div>
+                           <div class="form-group">
+                                <label for="sel1">Deporte:</label>
+                                <select class="form-control" id="sel1">
+                                    <option value="">Futbol</option>
+                                </select>
+                            </div> 
+                            <div class="form-group">
+                                <label for="">Altura:</label>
+                                <input type="number" class="form-control" id="" placeholder="170 (En centimetros)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Peso:</label>
+                                <input type="number" class="form-control" placeholder="80 (En kilogramos)" id=""required>
+                            </div>
+                           <button type="button" class="btn btn-primary" onclick="window.location.href = 'HomePageLA.html'" style="background-color: #196A00; border-color: #3bab17">Crear Cuenta</button>
+                           <button type="button" class="btn btn-primary" onclick="window.location.href = 'HomePage.html'" style="background-color: #196A00; border-color: #3bab17">Volver</button>
+                       </form> 
+               </div>
+           </div>
+       </div>
+    </body>
+   
+   
