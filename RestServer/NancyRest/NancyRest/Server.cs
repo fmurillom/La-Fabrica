@@ -559,7 +559,7 @@ namespace NancyRest
                 };
             });
 
-            Post("/planesEmail", x =>
+            Post("/planesEmailSem", x =>
             {
                 Console.WriteLine("post: /universidades");
                 string json = this.Request.Body.AsString();
@@ -568,7 +568,29 @@ namespace NancyRest
 
                 string emailCuenta = data["correo"].ToString();
 
-                string response = SQLManager.getPlanesAtleta(emailCuenta).ToString();
+                int semana = int.Parse(data["semana"].ToString());
+
+                string response = SQLManager.getPlanesAtleta(emailCuenta, semana).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+            Post("/semanasPlanes", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string emailCuenta = data["correo"].ToString();
+
+                string response = SQLManager.getSemanasPAtleta(emailCuenta).ToString();
                 Console.WriteLine("Response:\n" + response);
 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
