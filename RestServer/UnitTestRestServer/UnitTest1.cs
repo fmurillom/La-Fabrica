@@ -19,6 +19,26 @@ namespace UnitTestRestServer
         }
 
         [Fact]
+        public void getTemporadasTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Get("/temporadas");
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void getEstadosPartidosTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Get("/estadosPart");
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
         public void getEjerciciosTest()
         {
             var browser = new Browser(with => with.Module(new Server()));
@@ -39,6 +59,27 @@ namespace UnitTestRestServer
         }
 
         [Fact]
+        public void getEstadoLesionTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Get("/estadoLesion");
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void getDeportesLesionTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Get("/deportes");
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+
+        [Fact]
         public void postPosicionesTest()
         {
             var browser = new Browser(with => with.Module(new Server()));
@@ -54,6 +95,39 @@ namespace UnitTestRestServer
             Assert.Equal("application/json", response.Result.ContentType);
         }
 
+
+        [Fact]
+        public void postInfoEntrenadorTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/infoEntrenador", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestEntrenador@algo.com\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postProvinciasTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/provincias", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombrePais\": \"Costa Rica\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
         [Fact]
         public void postEquiposTest()
         {
@@ -62,7 +136,39 @@ namespace UnitTestRestServer
             var response = browser.Post("/equipos", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"idEntrenador\": \"aaaa\"}");
+                with.Body("{\"correo\": \"TestEntrenador@algo.com\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postEquiposTemporadasTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/equiposTemporadas", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestEntrenador@algo.com\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postLoginTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/login", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestEntrenador@algo.com\", \"password\": \"456\"}");
             });
 
             var res = response.Result.Body.AsString();
@@ -101,6 +207,38 @@ namespace UnitTestRestServer
         }
 
         [Fact]
+        public void postAtletasxUniversidadesTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/atletasXuniversidad", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"universidad\": \"Instituto Tecnologico de Costa Rica\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postCrearLesionTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/crearLesion", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\", \"fechaInicio\": \"12/12/2010\", \"fechaFinal\": \"13/12/2010\", \"gravedad\": 0, \"descripcion\": \"Se cayo\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
         public void postCrearEntrenadorTest()
         {
             var browser = new Browser(with => with.Module(new Server()));
@@ -109,6 +247,34 @@ namespace UnitTestRestServer
             {
                 with.Header("Content-Type", "application/json");
                 with.Body("{\"nombre\": \"TestEntrenador\", \"apellido\": \"TestEntrenador\",\"correo\": \"TestEntrenador@algo.com\",\"password\": \"456\",\"pais\": \"Costa Rica\",\"universidad\": \"Instituto Tecnologico de Costa Rica\"}");
+            });
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postEvaluarAtlEntrenamientoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/evaluarAtlEntr", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\", \"calificacion\": 10 ,\"tiempoDC\": 10.1 ,\"tiempoDL\": 4.6,\"salto\": 10,\"tiempoPH\": 10, \"pase\": 10, \"pruebaHR\": 10.1}");
+            });
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postEvaluarAtlPartidoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/evaluarAtlPart", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\", \"temporada\": \"TestTemporada\" ,\"calificacion\": 10.1 ,\"estadoP\": 0, \"goles\": 10,\"asistencias\": 10, \"balonesR\": 10, \"pasesExit\": 10, \"pases\": 10, \"centros\": 10, \"centrosExit\": 10, \"tarjetasAmar\": 2, \"tarjetasRoj\": 1, \"penales\": 12, \"rematesSalv\": 11, \"golesRecib\": 15}");
             });
 
             Assert.Equal("True", response.Result.Body.AsString());
@@ -165,7 +331,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/crearEquip", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"correoEntrenador\": \"TestEntrenador@algo.com\", \"nombreTemporada\": \"TestTemporada\"}");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"correoEntrenador\": \"TestEntrenador@algo.com\", \"temporada\": \"TestTemporada\"}");
             });
 
             Assert.Equal("True", response.Result.Body.AsString());
@@ -179,7 +345,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/insertEquip", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"jugador\": \"TestInser@algo.com\"}");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"correo\": \"TestInser@algo.com\"}");
             });
 
             Assert.Equal("True", response.Result.Body.AsString());
@@ -286,7 +452,23 @@ namespace UnitTestRestServer
         {
             var browser = new Browser(with => with.Module(new Server()));
 
-            var response = browser.Post("/planesEmail", with =>
+            var response = browser.Post("/planesEmailSem", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"correo\": \"TestInser@algo.com\", \"semana\": 1}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
+
+        [Fact]
+        public void postGetSemanasPlanesTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/semanasPlanes", with =>
             {
                 with.Header("Content-Type", "application/json");
                 with.Body("{\"correo\": \"TestInser@algo.com\"}");
@@ -297,8 +479,21 @@ namespace UnitTestRestServer
             Assert.Equal("application/json", response.Result.ContentType);
         }
 
-        //TODO Unit Test Reporte Rango
+        [Fact]
+        public void postReporteRangoTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
 
+            var response = browser.Post("/reporteRango", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"filtros\": [{\"filtro\":\"pais\",\"valor\":\"Costa Rica\"}]}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("application/json", response.Result.ContentType);
+        }
         [Fact]
         public void postGetTemporadasEquipoTest()
         {
@@ -348,6 +543,22 @@ namespace UnitTestRestServer
         }
 
         [Fact]
+        public void postDeleteUniversidadTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/delUniversidad", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombreUniversidad\": \"TestUniversidad\", \"nombrePais\": \"Costa Rica\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
         public void postAgregarPosicionTest()
         {
             var browser = new Browser(with => with.Module(new Server()));
@@ -364,6 +575,120 @@ namespace UnitTestRestServer
         }
 
         [Fact]
+        public void postDeletePosicionTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/nuevaPosicion", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"nombrePosicion\": \"TestPosicion\", \"deporte\": \"Futbol\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postAgregarPaisTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/nuevoPais", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"pais\": \"TestPais\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postAgregarDeporteTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/nuevoDeporte", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"deporte\": \"TestDeporte\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postDeleteDeporteTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/delDeporte", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"deporte\": \"TestDeporte\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postAgregarIdiomaTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/nuevoIdioma", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"idioma\": \"TestIdioma\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+        [Fact]
+        public void postEliminarIdiomaTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/eliminarIdioma", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"idioma\": \"TestIdioma\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+
+        [Fact]
+        public void postEliminarPaisTest()
+        {
+            var browser = new Browser(with => with.Module(new Server()));
+
+            var response = browser.Post("/delPais", with =>
+            {
+                with.Header("Content-Type", "application/json");
+                with.Body("{\"pais\": \"TestPais\"}");
+            });
+
+            var res = response.Result.Body.AsString();
+
+            Assert.Equal("True", response.Result.Body.AsString());
+        }
+
+
+        [Fact]
         public void postAsignarPPTest()
         {
             var browser = new Browser(with => with.Module(new Server()));
@@ -371,7 +696,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/asignarPP", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"idAtleta\": \"TestInser@algo.com\", \"semana\": 1, \"ejercicios\": [{\"dia\": 1, \"idEjercicio\": 0, \"cantidad\": 10}, {\"dia\": 2, \"idEjercicio\": 1, \"cantidad\": 2}, {\"dia\": 3, \"idEjercicio\": 2, \"cantidad\": 3}]}");
+                with.Body("{\"correo\": \"TestInser@algo.com\", \"semana\": 1, \"dia\": 1, \"idEjercicio\": 0, \"cantidad\": 10}");
             });
 
             var res = response.Result.Body.AsString();

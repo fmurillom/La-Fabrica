@@ -3,16 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Crear Plan Personalizado</title>
+    <title>LaFabrica-Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="../Css/HomeTECAirlines.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" src="../Js/controller.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head>
-    <body>
+</head> 
+    <body ng-app="myApp" ng-controller = "myCtrl">
         <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
             <h1><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</h1>
         </div>
-        <header>
+        <header ng-init = "getEjercicios()">
             <nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 col-sm-12 col-md-12">
                 <a class="navbar-brand" href="HomePageLE.html" style="font-variant-caps: small-caps; color: #00372B;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,41 +30,31 @@
             </nav>
         </header>
         <div class="container col-sm-12 col-md-12 col-lg-12">
-            <select class="form-control" name="" id="ejercicio">
-                <option value="hola">Hola</option>
-                <option value="adios">adios</option>
-            </select><br><br>
-            <div style="text-align: center;">
-                <button class="btn btn-primary" style="background-color: #144900;border-color: #144900; position: absolute; top: 50%;" id="btn_guardar" onclick="guardar()">Guardar</button><br><br>
+            <select class="form-control col" name="" id="ejercicio" ng-model = "plan.idEjercicio" ng-options="item.nombreEjercicio for item in ejercicios.ejercicios"></select><br><br>
+            <div class="col">
+                <label for="">Cantidad</label>
+                <input type="number" class="form-control" ng-model="plan.cantidad" required>
+            </div>
+            <div class="col">
+                <label for="">Semana</label>
+                <input class="form-control" type="number" ng-model="plan.semana" name="" id="" required>
+            </div>
+            <div class="col">
+                <label for="">Dia</label>
+                <select ng-model = "plan.dia" class="form-control">
+                    <option value="1">Lunes</option>
+                    <option value="2">Martes</option>
+                    <option value="3">Miercoles</option>
+                    <option value="4">Jueves</option>
+                    <option value="5">Viernes</option>
+                    <option value="6">Sabado</option>
+                    <option value="7">Domingo</option>
+                </select>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" style="background-color: #144900;border-color: #144900; position: absolute; top: 50%;" id="btn_guardar" ng-click="guardar(plan)">Guardar</button><br><br>
             </div>
         </div>
-        <div class="container col-sm-12 col-md-12 col-lg-12">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ejercicio</th>
-                        <th>Repeticiones</th>
-                        <th>Semana</th>
-                    </tr>
-                </thead>
-                <tbody id="Ejercicios">
-                </tbody>
-            </table><br><br>
-            <button class="btn btn-primary" style="background-color: #144900; border-color: #144900;" onclick="window.location.href = 'HomePageLE.html'">Crear Plan</button>
-
-        </div>
-        <script type="text/javascript">
-            function guardar(){
-           
-                var _nom = document.getElementById("ejercicio").value;
-        
-                var fila="<tr><td>"+_nom+"</td><td>"+'<input class="form-control" type="number">' +"</td><td>"+'<input class="form-control" type="number">' +"</td></tr>";
-        
-                var btn = document.createElement("TR");
-                    btn.innerHTML=fila;
-                document.getElementById("Ejercicios").appendChild(btn);
-                }
-        </script>
            <footer>
                     <span>&copy;La Fábrica X-Sport</span>
                 </footer>

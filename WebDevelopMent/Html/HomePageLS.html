@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>LaFabrica-Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Css/HomeTECAirlines.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" src="../Js/controller.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head> 
+    <body ng-app="myApp" ng-controller = "myCtrl">
+        <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
+            <h1><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</h1>
+        </div>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 col-sm-12 col-md-12">
+                <a class="navbar-brand" href="HomePageLS.html" style="font-variant-caps: small-caps; color: #00372B;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                </div>
+                <a href="Perfil.html" onclick="window.location.href= 'Perfil.html'"><i class="fas fa-user-circle fa-2x"></i></a>
+                <a class="navbar-brand" style="color: #6ea498">|</a>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <a class="navbar-brand" onclick="window.location.href='HomePage.html'" style="color: #00372B">Salir</a>
+                </div>
+            </nav>
+
+        </header>
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <div class="column side" style="text-align: center;">
+            <h2 style="color: #a51109; font-weight: bold;">Filtros</h2>
+            <div class="col">
+                <label for="">Pais:</label>
+                <select class="form-control" ng-model="universidad.nombrePais"name="" ng-change="selectPaisU()" id="" ng-options = "item for item in paises.pais"></select>
+            </div>
+            <div class="col">
+                <label for="">Universidad:</label>
+                <select class="form-control" ng-model="universidad.nombreUniversidad" name="" id="" ng-options="item for item in universidades.uni"></select><br>
+            </div><br>
+            <div class="col">
+                <label for="">Altura mayor a(cm):</label>
+                <input type="number" min="0" step="0.01" class="form-control" ng-model = "universidad.altura">
+            </div><br>
+            <div class="col">
+                <label for="">Peso mayor a (kg):</label>
+                <input type="number" min="0" step="0.01" class="form-control" ng-model = "universidad.peso">
+            </div><br>
+            <div class="col">
+                <label for="">Posición Secundaria:<span style="color: #a51109;">*</span></label>
+                <select class="form-control" ng-model="universidad.nombrePosicion" id="sel2" ng-options = "item.nombrePosicion for item in posiciones.pos"></select>
+            </div>
+            <div class="col">
+                <label for="">Valor de nota XSport:</label>
+                <input type="number" min="0" max="100" step="0.01" class="form-control" ng-model = "universidad.xsport">
+            </div><br>
+            <div class="col">
+                <button class="btn btn-primary" ng-click="filtrar(universidad)">Filtrar</button>
+            </div>    
+        </div>
+        <div class="column middle">
+            <table>
+                <tr>
+                    <th>Posición</th>
+                    <th>Carnet</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>País</th>
+                    <th>Universidad</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Posición Alterna</th>
+                    <th>Peso</th>
+                    <th>Altura</th>
+                    <th>Email1</th>
+                    <th>Promedio Tiempo Prueba Distancia Corta</th>
+                    <th>Promedio Tiempo Prueba Distancia Larga</th>
+                    <th>Mejor Tiempo Prueba Distancia Corta</th>
+                    <th>Mejor Tiempo Prueba Distancia Larga</th>
+                    <th>Mejor Salto</th>
+                    <th>Promedio de Calificación Partidos</th>
+                    <th>Tiempo Promedio de Prueba de Habilidad</th>
+                    <th>Nota X-Sport</th>
+                    <th>% Pases Completados</th>
+                    <th>% De Centros</th>
+                </tr>
+                <tr ng-repeat="x in atletas.atletas">
+                        <th>{{x.posicion}}</th>
+                        <th>{{x.carne}}</th>
+                        <th>{{x.nombre}}</th>
+                        <th>{{x.apellido}}</th>
+                        <th>{{x.pais}}</th>
+                        <th>{{x.universidad}}</th>
+                        <th>{{x.fechaNacimiento}}</th>
+                        <th>{{x.posicionSecundaria}}</th>
+                        <th>{{x.peso}}</th>
+                        <th>{{x.altura}}</th>
+                        <th>{{x.correo1}}</th>
+                        <th>{{x.promedioDC}}</th>
+                        <th>{{x.promedioDL}}</th>
+                        <th>{{x.mejorDC}}</th>
+                        <th>{{x.mejorDL}}</th>
+                        <th>{{x.mejorSalto}}</th>
+                        <th>{{x.promedioCP}}</th>
+                        <th>{{x.promedioPH}}</th>
+                        <th>{{x.xSport}}</th>
+                        <th>{{x.pPasesC}}</th>
+                        <th>{{x.pCentros}}</th>
+                </tr>
+            </table>
+        </div>
+            <footer>
+                <span>&copy;La Fábrica X-Sport</span>
+            </footer>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>        
+   
+    </body>
+</html>

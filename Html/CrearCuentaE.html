@@ -6,9 +6,13 @@
     <title>LaFabrica-Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="../Css/HomeTECAirlines.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" src="../Js/controller.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head> 
-    <body>
+    <body ng-app="myApp" ng-controller = "myCtrl">
         <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
             <h1 style="color:#caaa1b"><span style="color: #a51109; font-weight: bold;">La Fábrica</span>X-Sport</h1>
         </div>
@@ -19,8 +23,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="CrearCuentaA.html">Atleta</a>
                             <a class="dropdown-item" href="CrearCuentaE.html">Entrenador</a>
-                            <a class="dropdown-item" href="CrearCuenta.html">Scout</a>
-                            <a class="dropdown-item" href="CrearCuenta.html">Administrador</a>
+                            <a class="dropdown-item" href="CrearCuentaS.html">Scout</a>
+                            <a class="dropdown-item" href="CrearCuentaAd.html">Administrador</a>
                         </div>
                 </nav>
             </header>
@@ -30,35 +34,29 @@
                        <form>
                            <div class="form-group">
                                    <label for="fname">Nombre Contacto:</label>
-                                   <input type="text" class="form-control" id="fname" ng-model = "client.CLIENT_FNAME" required>
+                                   <input type="text" class="form-control" ng-model="entrenador.nombre" id="fname" required>
                            </div>
                            <div class="form-group">
                                        <label for="lname">Apellido Contacto:</label>
-                                       <input type="text" class="form-control" id="lname" ng-model = "client.CLIENT_LNAME" required>
-                           </div>
-                           <div class="form-group">
-                                   <label for="id">Universidad:</label>
-                                   <select class="form-control" id="sel1">
-                                       <option value="Instituto Tecnológico de Costa Rica">Instituto Tecnológico de Costa Rica</option>
-                                       <option value="Universidad de Costa Rica">Universidad de Costa Rica</option>
-                                        <option value="Universidad Nacional">Universidad Nacional</option>
-                                </select>
+                                       <input type="text" class="form-control" id="lname" ng-model = "entrenador.apellido" required>
                            </div>   
                            <div class="form-group">
                                <label for="sel1">País:</label>
-                               <select class="form-control" id="sel1">
-                                   <option value="">Costa Rica</option>
-                               </select>
-                           </div>   
+                               <select name="pais" ng-change="selectPaisE()"  ng-model="entrenador.pais"  class="form-control" ng-options="option for option in paises.pais" required></select>
+                           </div> 
+                           <div class="form-group">
+                                   <label for="id">Universidad:</label>
+                                   <select class="form-control" id="sel1" ng-model="entrenador.universidad" ng-options="item for item in universidades.uni"></select>
+                           </div>  
                            <div class="form-group">
                                <label for="email">Email:</label>
-                               <input type="email" class="form-control" id="email" placeholder="example@email.com" ng-model = "client.CLIENT_EMAIL" required>
+                               <input type="email" class="form-control" id="email" placeholder="example@email.com" ng-model = "entrenador.correo" required>
                            </div>
                            <div class="form-group">
                                <label for="pwd">Contraseña:</label>
-                               <input type="password" class="form-control" id="pwd" ng-model = "client.CLIENT_PASSWRD" required>
+                               <input type="password" class="form-control" id="pwd" ng-model = "entrenador.password" required>
                            </div>
-                           <button type="button" class="btn btn-primary" onclick="window.location.href = 'HomePageLE.html'" style="background-color: #196A00; border-color: #3bab17">Crear Cuenta</button>
+                           <button type="button" class="btn btn-primary" ng-click = "crearEnt(entrenador)" style="background-color: #196A00; border-color: #3bab17">Crear Cuenta</button>
                            <button type="button" class="btn btn-primary" onclick="window.location.href = 'HomePage.html'" style="background-color: #196A00; border-color: #3bab17">Volver</button>
                        </form> 
                </div>
