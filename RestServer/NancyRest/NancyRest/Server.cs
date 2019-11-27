@@ -735,7 +735,7 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                JArray filtros = data["campos"] as JArray;
+                JArray filtros = data["filtros"] as JArray;
 
                 string response = SQLManager.getReporteAtleta(filtros).ToString();
                 Console.WriteLine("Response:\n" + response);
@@ -918,11 +918,10 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                string nombrePosicion = data["nombrePosicion"].ToString();
+                string pais = data["pais"].ToString();
 
-                string deporte = data["deporte"].ToString();
 
-                bool response = SQLManager.agregarPais(nombrePosicion);
+                bool response = SQLManager.agregarPais(pais);
                 Console.WriteLine("Response:\n" + response);
                 return response;
 
@@ -980,6 +979,50 @@ namespace NancyRest
             });
 
 
+            Post("/nuevoIdioma", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string idioma = data["idioma"].ToString();
+
+                bool response = SQLManager.agregarIdioma(idioma);
+                Console.WriteLine("Response:\n" + response);
+                return response;
+
+                /*
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };*/
+            });
+
+            Post("/eliminarIdioma", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string idioma = data["idioma"].ToString();
+
+                bool response = SQLManager.eliminarIdioma(idioma);
+                Console.WriteLine("Response:\n" + response);
+                return response;
+
+                /*
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };*/
+            });
+
 
             Post("/delPais", x =>
             {
@@ -988,7 +1031,7 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                string pais = data["nombrePais"].ToString();
+                string pais = data["pais"].ToString();
 
                 bool response = SQLManager.eliminarPais(pais);
                 Console.WriteLine("Response:\n" + response);

@@ -46,6 +46,18 @@ namespace NancyRest
             });
 
 
+            Get("/estadosPart", _ => {
+                string response = SQLManager.getEstadosPart().ToString();
+                Console.WriteLine("Response:\n" + response);
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+
             Get("/ejercicios", _ => {
                 string response = SQLManager.getEjercicios().ToString();
                 Console.WriteLine("Response:\n" + response);
@@ -177,6 +189,26 @@ namespace NancyRest
                 };
             });
 
+            Post("/equiposTemporadas", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string idEntrenador = data["correo"].ToString();
+
+                string response = SQLManager.getEquiposTemporadas(idEntrenador).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
             Post("/login", x =>
             {
                 Console.WriteLine("post: /universidades");
@@ -250,7 +282,7 @@ namespace NancyRest
                 string response = SQLManager.insertAtleta(nombreC, cedula, apellidoC, provincia, email1, email2, telefonoM, foto, pais, universidad, password, deporte, altura, peso, fechaNacimiento, posicion, posicionSecundaria, carne).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
                 return new Response
@@ -297,7 +329,7 @@ namespace NancyRest
 
                 string response = SQLManager.insertLesion(correo, fechaInicio, fechaFinal, gravedad, descripcion).ToString();
 
-                
+
 
                 Console.WriteLine("Response:\n" + response);
                 
@@ -328,7 +360,7 @@ namespace NancyRest
 
                 string response = SQLManager.insertEntr(nombreC, apellidoC, email, pais, universidad, password).ToString();
 
-                
+
 
                 Console.WriteLine("Response:\n" + response);
                 
@@ -362,7 +394,7 @@ namespace NancyRest
                 string response = SQLManager.evaluarAtlEntr(calificacion, tiempoDC, tiempoDL, salto, tiempoPH, pase, pruebaHR, correoAtleta).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
 
                 
 
@@ -387,7 +419,7 @@ namespace NancyRest
                 float calificacion = float.Parse(data["calificacion"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
 
-                string estadoP = data["estadoP"].ToString();
+                int estadoP = int.Parse(data["estadoP"].ToString());
                 int goles = int.Parse(data["goles"].ToString());
                 int asistencias = int.Parse(data["asistencias"].ToString());
                 int balonesR = int.Parse(data["balonesR"].ToString());
@@ -405,7 +437,7 @@ namespace NancyRest
                                                                 penales, rematesSalv, golesRecib, correo, temporada, calificacion).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
 
@@ -437,7 +469,7 @@ namespace NancyRest
                 string response = SQLManager.insertTrab(nombreC, apellidoC, email, password, 1).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -464,7 +496,7 @@ namespace NancyRest
 
                 Console.WriteLine("Response:\n" + response);
 
-                
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -489,7 +521,7 @@ namespace NancyRest
                 string response = SQLManager.insertEquip(nombreEquip, jugador).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -514,7 +546,7 @@ namespace NancyRest
                 string response = SQLManager.crearEquip(nombreEquip, idEntrenador, temporada).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -599,7 +631,7 @@ namespace NancyRest
                 string response = SQLManager.desactivarCuenta(emailCuenta).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -622,7 +654,7 @@ namespace NancyRest
                 string response = SQLManager.activarCuenta(emailCuenta).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
                 
 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -703,7 +735,7 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                JArray filtros = data["campos"] as JArray;
+                JArray filtros = data["filtros"] as JArray;
 
                 string response = SQLManager.getReporteAtleta(filtros).ToString();
                 Console.WriteLine("Response:\n" + response);
@@ -749,7 +781,7 @@ namespace NancyRest
                 string response = SQLManager.crearTemporada(nombreTemporada).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
                 return new Response
@@ -772,7 +804,7 @@ namespace NancyRest
                 string response = SQLManager.agregarEjercicio(nombreEjercicio).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
                 return new Response
@@ -795,7 +827,32 @@ namespace NancyRest
 
                 string response = SQLManager.agregarUniversidad(nombreUniversidad, nombrePais).ToString();
                 Console.WriteLine("Response:\n" + response);
+
+
                 
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+
+            Post("/delUniversidad", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string nombreUniversidad = data["nombreUniversidad"].ToString();
+
+                string nombrePais = data["nombrePais"].ToString();
+
+                string response = SQLManager.deleteUniversidad(nombreUniversidad, nombrePais).ToString();
+                Console.WriteLine("Response:\n" + response);
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -819,7 +876,166 @@ namespace NancyRest
 
                 string response = SQLManager.agregarPosicion(nombrePosicion, deporte).ToString();
                 Console.WriteLine("Response:\n" + response);
+
+
                 
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+            Post("/delPosicion", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string nombrePosicion = data["nombrePosicion"].ToString();
+
+                string deporte = data["deporte"].ToString();
+
+                string response = SQLManager.eliminarPosicion(nombrePosicion, deporte).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+
+                
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+            Post("/nuevoPais", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string pais = data["pais"].ToString();
+
+
+                string response = SQLManager.agregarPais(pais).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+
+                
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+            Post("/nuevoDeporte", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string deporte = data["deporte"].ToString();
+
+                string response = SQLManager.agregarDeporte(deporte).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+
+                
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+            Post("/delDeporte", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string deporte = data["deporte"].ToString();
+
+                string response = SQLManager.eliminarDeporte(deporte).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+
+                
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+
+            Post("/nuevoIdioma", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string idioma = data["idioma"].ToString();
+
+                string response = SQLManager.agregarIdioma(idioma).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+
+                
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+            Post("/eliminarIdioma", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string idioma = data["idioma"].ToString();
+
+                string response = SQLManager.eliminarIdioma(idioma).ToString();
+                Console.WriteLine("Response:\n" + response);
+
+
+                
+                var jsonBytes = Encoding.UTF8.GetBytes(response);
+                return new Response
+                {
+                    ContentType = "application/json",
+                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
+                };
+            });
+
+
+            Post("/delPais", x =>
+            {
+                Console.WriteLine("post: /universidades");
+                string json = this.Request.Body.AsString();
+                JObject data = JObject.Parse(json);
+                Console.WriteLine("Request:\n" + data);
+
+                string pais = data["pais"].ToString();
+
+                string response = SQLManager.eliminarPais(pais).ToString();
+                Console.WriteLine("Response:\n" + response);
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -850,7 +1066,7 @@ namespace NancyRest
                 string response = SQLManager.asignarPP(idAtleta, semana, ejercico, dia, cantidad).ToString();
                 Console.WriteLine("Response:\n" + response);
 
-                
+
 
                 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);

@@ -110,6 +110,8 @@
     <Compile Include="SQLManager.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\NancyRest - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">

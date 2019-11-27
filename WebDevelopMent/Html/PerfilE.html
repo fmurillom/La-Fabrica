@@ -16,17 +16,17 @@
         <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
             <h1><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</h1>
         </div>
-        <header ng-init = "getClientData()">
+        <header ng-init = "entrenadorInfo()">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 col-sm-12 col-md-12">
-                    <a class="navbar-brand" href="HomePageLA.html" style="color: #00372B; font-variant-caps: small-caps;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
+                    <a class="navbar-brand" href="HomePage.html" style="color: #00372B; font-variant-caps: small-caps;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <a class="navbar-brand" style="color: #6ea498">|</a>
-                        <a class="navbar-brand" style="color: #00372B" href="PlanPersonalizado.html">Planes Personalizados</a>
+                        <a class="navbar-brand" style="color: #00372B" href="Actualizar.html">Actualizar Perfil</a>
                         <a class="navbar-brand" style="color: #6ea498">|</a>
-                        <a class="navbar-brand" style="color: #00372B" href="HomePage.html">Salir</a>
+                        <a class="navbar-brand" style="color: #00372B" href="PlanPersonalizado.html">Planes Personalizados</a>
                     </div>
                     <a href="Perfil.html"><i class="fas fa-user-circle fa-2x"></i></a>
                 </nav>
@@ -36,71 +36,40 @@
                         <div class="form-group col-md-6">
                             <label class="col-md-12">
                                 Nombre
-                                <input type="text" class="form-control" id="outputFirstName" ng-model="client.nombre" placeholder="Charlie" disabled />
+                                <input type="text" class="form-control" id="outputFirstName" ng-model="client.nombre" disabled />
                             </label>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-md-12">
                                 Apellido
-                                <input type="text" class="form-control" id="outputLastName" ng-model="client.apellido" placeholder="Alvarado" disabled />
+                                <input type="text" class="form-control" id="outputLastName" ng-model="client.apellido" disabled />
                             </label>
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-6">
-                                Cédula
-                                <input type="text" class="form-control" id="outputPersonalID" ng-model="client.cedula" placeholder="12301230" disabled />
-                            </label>
+                        <div class="col">
+                            <label for="">Pais</label>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-6">
-                                Número de móvil
-                                <input type="tel" class="form-control" id="outputPhoneNumber" ng-model = "client.telefono" disabled />
-                            </label>
+                        <div class="col">
+                            <input type="text" class="form-control" ng-model = "client.pais" disabled>
                         </div>
-                    </div>
+                        </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="col-md-6">
-                                Peso
-                                <input type="text" class="form-control" id="outputPersonalID" ng-model = "client.peso" disabled/>
+                            <label class="col-md-12">
+                                Universidad
+                                <input type="text" class="form-control" id="outputUniversityName" ng-model = "client.universidad" disabled />
                             </label>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="col-md-6">
-                                Altura
-                                <input type="tel" class="form-control" id="outputPhoneNumber" ng-model = "client.altura" disabled/>
+                            <label class="col-md-12">
+                                Email1
+                                <input type="email" class="form-control" id="outputEmailAddress" ng-model = "client.correo" disabled/>
                             </label>
                         </div>
                     </div>
-                    <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-12">
-                            Universidad
-                            <input type="text" class="form-control" id="outputUniversityName" ng-model = "client.universidad" disabled />
-                        </label>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-12">
-                            Carné
-                            <input type="text" class="form-control" ng-model = "client.carne" id="outputUniversityID" disabled />
-                        </label>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-12">
-                            Email1
-                            <input type="email" class="form-control" id="outputEmailAddress" ng-model = "client.correo1" disabled/>
-                        </label>
-                    </div>
-                    <div class="form-group col-md-6">
-                            <label class="col-md-12">Email2
-                            <input type="email" class="form-control" id="" ng-model = "client.correo2" disabled/>
-                        </label>
-                    </div>
-                </div>
-            <button class="btn btn-primary" ng-show="desactivar" ng-click="desactivar()" style="background-color: #144900; border-color: #144900;">Desactivar</button>
-            <button class="btn btn-primary" ng-show="activar" ng-click="activar()" style="background-color: #144900; border-color: #144900;">Activar</button>
+                    <button class="btn btn-primary" ng-show="desactivar" ng-click="desactivar()" style="background-color: #144900; border-color: #144900;">Desactivar</button>
+                    <button class="btn btn-primary" ng-show="activar" ng-click="activar()" style="background-color: #144900; border-color: #144900;">Activar</button>
     </form>
     <footer>
         <span>&copy;La Fábrica X-Sport</span>

@@ -123,7 +123,7 @@ namespace NancyRest
             {
                 sqlInjection("insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion) values('" + correo + "', '" + fechaInicio + "','" + fechaFinal + "','" + descripcion +"'," + gravedad + ")");
                 connection.Open();
-                command = new SqlCommand("select count(*) as exist from Lesiones where correAtleta = '" + correo + "'", connection);
+                command = new SqlCommand("select count(*) as exist from Lesiones where correoAtleta = '" + correo + "'", connection);
                 sqlReader = command.ExecuteReader();
                 try
                 {
@@ -787,7 +787,7 @@ namespace NancyRest
                 {
                     while (sqlReader.Read())
                     {
-                        if (sqlReader["success"].ToString().Equals("1"))
+                        if (sqlReader["Success"].ToString().Equals("1"))
                         {
                             login["success"] = 1;
                             login["rol"] = "Atl";
@@ -809,7 +809,7 @@ namespace NancyRest
                     {
                         while (sqlReader.Read())
                         {
-                            if (sqlReader["success"].ToString().Equals("1"))
+                            if (sqlReader["Success"].ToString().Equals("1"))
                             {
                                 login["success"] = 1;
                                 login["rol"] = "Ent";
@@ -832,7 +832,7 @@ namespace NancyRest
                     {
                         while (sqlReader.Read())
                         {
-                            if (sqlReader["success"].ToString().Equals("1"))
+                            if (sqlReader["Success"].ToString().Equals("1"))
                             {
                                 login["success"] = 1;
                                 login["rol"] = "Sct";
@@ -1019,6 +1019,9 @@ namespace NancyRest
             try
             {
                 sqlInjection("update Atletas set activo = 0 where correo1 = '" + emailCuenta + "'");
+                sqlInjection("update Trabajadores set activo = 0 where correo = '" + emailCuenta + "'");
+                sqlInjection("update Entrenadores set activo = 0 where correo = '" + emailCuenta + "'");
+
                 connection.Open();
                 command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + emailCuenta + "' and activo = 0", connection);
                 sqlReader = command.ExecuteReader();
@@ -1055,6 +1058,9 @@ namespace NancyRest
             try
             {
                 sqlInjection("update Atletas set activo = 1 where correo1 = '" + emailCuenta + "'");
+                sqlInjection("update Trabajadores set activo = 1 where correo = '" + emailCuenta + "'");
+                sqlInjection("update Entrenadores set activo = 1 where correo = '" + emailCuenta + "'");
+
                 connection.Open();
                 command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + emailCuenta + "' and activo = 1", connection);
                 sqlReader = command.ExecuteReader();
@@ -1248,14 +1254,19 @@ namespace NancyRest
 
         public static JObject getReporteAtleta(JArray filtros)
         {
+            string query = "select * from Atletas as A join Posiciones as P on A.posicionSecundaria = P.idPosicion";
+
             SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select id,aeropuertoIni as iataSal,nombre as sal,aeropuertoFin as iataDes,(select nombre from Aeropuertos where codigoIATA = aeropuertoFin) as des, fecha from Vuelos join Aeropuertos on Vuelos.aeropuertoIni = Aeropuertos.codigoIATA where abierto = 1 and id = ";
             SqlCommand command;
             SqlDataReader sqlReader;
 
             JObject atleta;
             JObject atletas = new JObject();
             JArray atletasAux = new JArray();
+
+            JObject atletaEscogido;
+
+            JArray atletasFiltrados = new JArray();
 
             try
             {
@@ -1267,25 +1278,16 @@ namespace NancyRest
                     while (sqlReader.Read())
                     {
                         atleta = new JObject();
-                        atleta["nombre"] = sqlReader["nombre"].ToString();
-                        atleta["cedula"] = int.Parse(sqlReader["cedula"].ToString());
-                        atleta["apellido"] = sqlReader["apellido"].ToString();
-                        atleta["provincia"] = sqlReader["provincia"].ToString();
-                        atleta["fechaNacimiento"] = sqlReader["fechaNacimiento"].ToString();
-                        atleta["activo"] = sqlReader["activo"].ToString();
                         atleta["correo1"] = sqlReader["correo1"].ToString();
-                        atleta["correo2"] = sqlReader["correo2"].ToString();
-                        atleta["telefono"] = sqlReader["telefono"].ToString();
-                        atleta["foto"] = sqlReader["foto"].ToString();
-                        atleta["fechaInscripcion"] = sqlReader["fechaInscripcion"].ToString();
                         atleta["pais"] = sqlReader["pais"].ToString();
                         atleta["universidad"] = sqlReader["universidad"].ToString();
-                        atleta["password"] = sqlReader["password"].ToString();
-                        atleta["deporte"] = sqlReader["deporte"].ToString();
                         atleta["altura"] = float.Parse(sqlReader["altura"].ToString());
                         atleta["peso"] = float.Parse(sqlReader["peso"].ToString());
-                        atleta["posicion"] = sqlReader["posicion"].ToString();
-                        atleta["posicionSecundaria"] = sqlReader["posicionSecundaria"].ToString();
+                        atleta["posicion"] = int.Parse(sqlReader["posicion"].ToString());
+                        atleta["posicionSecundaria"] = sqlReader["nombrePosicion"].ToString();
+                        atleta["fechaNacimiento"] = sqlReader["fechaNacimiento"].ToString();
+                        atleta["carne"] = int.Parse(sqlReader["carne"].ToString());
+                        atleta["pais"] = sqlReader["pais"].ToString();
                         atletasAux.Add(atleta);
                     }
                     sqlReader.Close();
@@ -1293,6 +1295,321 @@ namespace NancyRest
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
                 connection.Close();
+
+                if(filtros.Count > 1)
+                {
+                    for(int i = 0; i < atletasAux.Count; i++)
+                    {
+                        if(atletasAux[i]["pais"].ToString() == filtros[0]["valor"].ToString() && atletasAux[i]["universidad"].ToString() == filtros[1]["valor"].ToString() && float.Parse(atletasAux[i]["peso"].ToString()) > float.Parse(filtros[2]["valor"].ToString()) && float.Parse(atletasAux[i]["altura"].ToString()) > float.Parse(filtros[3]["valor"].ToString()) && atletasAux[i]["posicionSecundaria"].ToString() == filtros[4]["valor"].ToString())
+                        {
+                            atletasFiltrados.Add(atletasAux[i]);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < atletasAux.Count; i++)
+                    {
+                        if (atletasAux[i]["pais"].ToString() == filtros[0]["valor"].ToString())
+                        {
+                            atletasFiltrados.Add(atletasAux[i]);
+                        }
+                    }
+                }
+
+                for(int i = 0; i < atletasFiltrados.Count(); i++)
+                {
+                    connection.Open();
+                    query = "select dbo.func_AVGtiempoPruebaDistanciaCorta('" + atletasFiltrados[i]["correo1"].ToString() + "') as promedioDC ,dbo.func_AVGtiempoPruebaDistanciaLarga('" + atletasFiltrados[i]["correo1"].ToString() + "') as promedioDL,dbo.func_bestoTiempoPruebaDistanciaCorta('" + atletasFiltrados[i]["correo1"].ToString() + "') as mejorDC,dbo.func_bestoTiempoPruebaDistanciaLarga('" + atletasFiltrados[i]["correo1"].ToString() + "') as mejorDL,dbo.func_bestoSalto('" + atletasFiltrados[i]["correo1"].ToString() + "') as mejorSalto,dbo.func_AVGcalificacionPartidos('" + atletasFiltrados[i]["correo1"].ToString() + "') as promedioCP,dbo.func_AVGtiempoPruebaHabilidad('" + atletasFiltrados[i]["correo1"].ToString() + "') as promedioPH,dbo.func_getPorcentajePasesExitosos('" + atletasFiltrados[i]["correo1"].ToString() + "') as pPasesC,dbo.func_getPorcentajeCentrosExitosos('" + atletasFiltrados[i]["correo1"].ToString() + "') as pCentros,dbo.func_AVGcalificacionEntrenamientos('" + atletasFiltrados[i]["correo1"].ToString() + "') as promCalificacionEntrenamientos,dbo.func_getCantJuegosGanados('" + atletasFiltrados[i]["correo1"].ToString() + "') as cantG";
+                    command = new SqlCommand(query, connection);
+                    sqlReader = command.ExecuteReader();
+                    float notaEntrenamientos;
+                    float notaPartidos;
+                    float tiempoDistanciaCorta;
+                    float tiempoDistanciaLarga;
+                    float saltos;
+                    float centros;
+                    float pases;
+                    float victorias;
+                    float nEporcent = 1;
+                    float nPporcent = 1;
+                    float tcPorcent = 1;
+                    float tlPorcent = 1;
+                    float saltosPorcent = 1;
+                    float cnetrosPorcent = 1;
+                    float pasesPorcent = 1;
+                    float vicPorcent = 1;
+
+
+                    try
+                    {
+                        while (sqlReader.Read())
+                        {
+                            atleta = atletasFiltrados[i] as JObject;
+                            atleta["promedioDC"] = float.Parse(sqlReader["promedioDC"].ToString());
+                            atleta["promedioDL"] = float.Parse(sqlReader["promedioDL"].ToString());
+                            atleta["mejorDC"] = float.Parse(sqlReader["mejorDC"].ToString());
+                            tiempoDistanciaCorta = float.Parse(sqlReader["mejorDC"].ToString());
+                            atleta["mejorDL"] = float.Parse(sqlReader["mejorDL"].ToString());
+                            tiempoDistanciaLarga = float.Parse(sqlReader["mejorDL"].ToString());
+                            atleta["mejorSalto"] = float.Parse(sqlReader["mejorSalto"].ToString());
+                            saltos = float.Parse(sqlReader["mejorSalto"].ToString());
+                            atleta["promedioCP"] = float.Parse(sqlReader["promedioCP"].ToString());
+                            notaPartidos = float.Parse(sqlReader["promedioCP"].ToString());
+                            atleta["promedioPH"] = float.Parse(sqlReader["promedioPH"].ToString());
+                            atleta["pPasesC"] = float.Parse(sqlReader["pPasesC"].ToString());
+                            pases = float.Parse(sqlReader["pPasesC"].ToString());
+                            atleta["pCentros"] = float.Parse(sqlReader["pCentros"].ToString());
+                            centros = float.Parse(sqlReader["pCentros"].ToString());
+                            atleta["promCalificacionEntrenamientos"] = float.Parse(sqlReader["promCalificacionEntrenamientos"].ToString());
+                            notaEntrenamientos = float.Parse(sqlReader["promCalificacionEntrenamientos"].ToString());
+                            atleta["cantG"] = float.Parse(sqlReader["cantG"].ToString());
+                            victorias = float.Parse(sqlReader["cantG"].ToString());
+
+                            nEporcent = notaEntrenamientos / 100 * 15;
+                            nPporcent = notaPartidos / 100 * 15;
+
+                            cnetrosPorcent = centros / 100 * 10;
+                            pasesPorcent = pases / 100 * 10;
+                            vicPorcent = victorias / 100 * 5;
+
+                            if(13.20 < tiempoDistanciaCorta)
+                            {
+                                tcPorcent = 1;
+                            }
+                            else if (12.80 < tiempoDistanciaCorta && tiempoDistanciaCorta < 13)
+                            {
+                                tcPorcent = 2;
+                            }
+                            else if (12.60 < tiempoDistanciaCorta && tiempoDistanciaCorta < 12.80)
+                            {
+                                tcPorcent = 3;
+                            }
+                            else if (12.40 < tiempoDistanciaCorta && tiempoDistanciaCorta < 12.60)
+                            {
+                                tcPorcent = 4;
+                            }
+                            else if (12.20 < tiempoDistanciaCorta && tiempoDistanciaCorta < 12.40)
+                            {
+                                tcPorcent = 5;
+                            }
+                            else if (12.0 < tiempoDistanciaCorta && tiempoDistanciaCorta < 12.20)
+                            {
+                                tcPorcent = 6;
+                            }
+                            else if (11.75 < tiempoDistanciaCorta && tiempoDistanciaCorta < 12.0)
+                            {
+                                tcPorcent = 7;
+                            }
+                            else if (11.50 < tiempoDistanciaCorta && tiempoDistanciaCorta < 11.75)
+                            {
+                                tcPorcent = 8;
+                            }
+                            else if (11.25 < tiempoDistanciaCorta && tiempoDistanciaCorta < 11.50)
+                            {
+                                tcPorcent = 9;
+                            }
+                            else if (11.0 < tiempoDistanciaCorta && tiempoDistanciaCorta < 11.25)
+                            {
+                                tcPorcent = 10;
+                            }
+                            else if (10.75 < tiempoDistanciaCorta && tiempoDistanciaCorta < 11.0)
+                            {
+                                tcPorcent = 11;
+                            }
+                            else if (10.50 < tiempoDistanciaCorta && tiempoDistanciaCorta < 10.75)
+                            {
+                                tcPorcent = 12;
+                            }
+                            else if (10.25 < tiempoDistanciaCorta && tiempoDistanciaCorta < 10.50)
+                            {
+                                tcPorcent = 13;
+                            }
+                            else if (10.0 < tiempoDistanciaCorta && tiempoDistanciaCorta < 10.25)
+                            {
+                                tcPorcent = 14;
+                            }
+                            else if (tiempoDistanciaCorta <= 10.0)
+                            {
+                                tcPorcent = 15;
+                            }
+
+
+                            if (6 < tiempoDistanciaLarga)
+                            {
+                                tlPorcent = 1;
+                            }
+                            else if (5.40 < tiempoDistanciaLarga && tiempoDistanciaLarga < 5.50)
+                            {
+                                tlPorcent = 2;
+                            }
+                            else if (5.30 < tiempoDistanciaLarga && tiempoDistanciaLarga < 5.40)
+                            {
+                                tlPorcent = 3;
+                            }
+                            else if (5.20 < tiempoDistanciaCorta && tiempoDistanciaCorta < 5.30)
+                            {
+                                tlPorcent = 4;
+                            }
+                            else if (5.10 < tiempoDistanciaCorta && tiempoDistanciaCorta < 5.20)
+                            {
+                                tlPorcent = 5;
+                            }
+                            else if (5 < tiempoDistanciaCorta && tiempoDistanciaCorta < 5.10)
+                            {
+                                tlPorcent = 6;
+                            }
+                            else if (4.5 < tiempoDistanciaCorta && tiempoDistanciaCorta < 5.0)
+                            {
+                                tlPorcent = 7;
+                            }
+                            else if (4.4 < tiempoDistanciaCorta && tiempoDistanciaCorta < 4.5)
+                            {
+                                tlPorcent = 8;
+                            }
+                            else if (4.3 < tiempoDistanciaCorta && tiempoDistanciaCorta < 4.4)
+                            {
+                                tlPorcent = 9;
+                            }
+                            else if (4.2 < tiempoDistanciaCorta && tiempoDistanciaCorta < 4.3)
+                            {
+                                tlPorcent = 10;
+                            }
+                            else if (4.1 < tiempoDistanciaCorta && tiempoDistanciaCorta < 4.2)
+                            {
+                                tlPorcent = 11;
+                            }
+                            else if (4.0 < tiempoDistanciaCorta && tiempoDistanciaCorta < 4.1)
+                            {
+                                tlPorcent = 12;
+                            }
+                            else if (3.45 < tiempoDistanciaCorta && tiempoDistanciaCorta < 4.0)
+                            {
+                                tlPorcent = 13;
+                            }
+                            else if (3.30 < tiempoDistanciaCorta && tiempoDistanciaCorta < 3.45)
+                            {
+                                tlPorcent = 14;
+                            }
+                            else if (tiempoDistanciaCorta <= 3.30)
+                            {
+                                tlPorcent = 15;
+                            }
+
+                            if (saltos <= 25)
+                            {
+                                saltosPorcent = 1;
+                            }
+                            else if (25 < saltos && saltos < 30)
+                            {
+                                saltosPorcent = 2;
+                            }
+                            else if (30 < saltos && saltos < 32.5)
+                            {
+                                saltosPorcent = 3;
+                            }
+                            else if (32.5 < saltos && saltos < 35)
+                            {
+                                saltosPorcent = 4;
+                            }
+                            else if (35 < saltos && saltos < 37.5)
+                            {
+                                saltosPorcent = 5;
+                            }
+                            else if (37.5 < saltos && saltos < 40)
+                            {
+                                saltosPorcent = 6;
+                            }
+                            else if (40 < saltos && saltos < 45)
+                            {
+                                saltosPorcent = 7;
+                            }
+                            else if (50 < saltos && saltos < 55)
+                            {
+                                saltosPorcent = 8;
+                            }
+                            else if (55 < saltos && saltos < 60)
+                            {
+                                saltosPorcent = 9;
+                            }
+                            else if (60 < saltos && saltos < 65)
+                            {
+                                saltosPorcent = 10;
+                            }
+                            else if (65 < saltos && saltos < 70)
+                            {
+                                saltosPorcent = 11;
+                            }
+                            else if (70 < saltos && saltos < 72.5)
+                            {
+                                saltosPorcent = 12;
+                            }
+                            else if (72.5 < saltos && saltos < 75)
+                            {
+                                saltosPorcent = 13;
+                            }
+                            else if (75 <= saltos)
+                            {
+                                saltosPorcent = 15;
+                            }
+
+                            if(10 <= victorias)
+                            {
+                                vicPorcent = 1;
+                            }
+                            else if (20 < victorias  && victorias < 30)
+                            {
+                                vicPorcent = 2;
+                            }
+                            else if (30 < victorias && victorias < 40)
+                            {
+                                vicPorcent = 2;
+                            }
+                            else if (40 < victorias && victorias < 50)
+                            {
+                                vicPorcent = 3;
+                            }
+                            else if (50 <= victorias)
+                            {
+                                vicPorcent = 5;
+                            }
+
+                            atleta["xSport"] = nEporcent + nPporcent + tcPorcent + tlPorcent + saltosPorcent + cnetrosPorcent + pasesPorcent + vicPorcent;
+
+                        }
+                        sqlReader.Close();
+                        command.Dispose();
+                        connection.Close();
+
+                        connection.Open();
+                        query = "select * from posiciones where idPosicion = " + int.Parse(atletasFiltrados[i]["posicion"].ToString());
+                        command = new SqlCommand(query, connection);
+                        sqlReader = command.ExecuteReader();
+                        try
+                        {
+                            while (sqlReader.Read())
+                            {
+                                atletasFiltrados[i]["posicion"] = sqlReader["nombrePosicion"].ToString();
+                            }
+                            sqlReader.Close();
+                            command.Dispose();
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.Message); }
+                        connection.Close();
+                        
+
+
+
+                    }
+                    catch (Exception ex) { Console.WriteLine(ex.Message); }
+                    connection.Close();
+
+
+
+                }
+
+
+
             }
             catch (SqlException ex)
             {
@@ -1300,7 +1617,7 @@ namespace NancyRest
                 Console.WriteLine("Codigo de error: " + err.Number);
                 Console.WriteLine("Descripcion: " + err.Message);
             }
-            atletas["atletas"] = atletasAux;
+            atletas["atletas"] = atletasFiltrados;
             return atletas;
         }
 
@@ -1756,7 +2073,7 @@ namespace NancyRest
             try
             {
 
-                sqlInjection("insert into Deportes(nombre) values('" + deporte + "')");
+                sqlInjection("insert into Deportes(nombreDeporte) values('" + deporte + "')");
                 connection.Open();
                 command = new SqlCommand("select count(*) as exist from Deportes where nombreDeporte = '" + deporte + "'", connection);
                 sqlReader = command.ExecuteReader();
@@ -1765,6 +2082,80 @@ namespace NancyRest
                     while (sqlReader.Read())
                     {
                         if (sqlReader["exist"].ToString().Equals("1"))
+                        {
+                            ok = true;
+                        }
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            return ok;
+        }
+
+        public static bool agregarIdioma(string idioma)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            SqlDataReader sqlReader;
+            bool ok = false;
+            try
+            {
+
+                sqlInjection("insert into Idiomas(idioma) values('" + idioma + "')");
+                connection.Open();
+                command = new SqlCommand("select count(*) as exist from Idiomas where idioma = '" + idioma + "'", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        if (sqlReader["exist"].ToString().Equals("1"))
+                        {
+                            ok = true;
+                        }
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            return ok;
+        }
+
+        public static bool eliminarIdioma(string idioma)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            SqlDataReader sqlReader;
+            bool ok = false;
+            try
+            {
+
+                sqlInjection("delete from Idiomas where idioma = '" + idioma + "'");
+                connection.Open();
+                command = new SqlCommand("select count(*) as exist from Idiomas where idioma = '" + idioma + "'", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        if (sqlReader["exist"].ToString().Equals("0"))
                         {
                             ok = true;
                         }

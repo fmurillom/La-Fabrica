@@ -45,3 +45,30 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+button{
+  background-color: #144900;
+  border-color: #144900;
+}
+
+/* Left and right column */
+.column.side {
+  width: 15%;
+}
+
+/* Middle column */
+.column.middle {
+  width: 85%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

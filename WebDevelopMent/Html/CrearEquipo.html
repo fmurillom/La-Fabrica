@@ -16,7 +16,7 @@
         <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
             <h1><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</h1>
         </div>
-        <header ng-init = "getEquipos()">
+        <header ng-init = "getTemporadas()">
             <nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 col-sm-12 col-md-12">
                 <a class="navbar-brand" href="HomePageLE.html" style="font-variant-caps: small-caps; color: #00372B;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,22 +24,32 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 </div>
-                <a href="PerfilP.html"><i class="fas fa-user-circle fa-2x"></i></a>
+                <a href="Perfil.html"><i class="fas fa-user-circle fa-2x"></i></a>
                 <a class="navbar-brand" style="color: #6ea498">|</a>
                 <a class="navbar-brand" href="HomePage.html" style="color: #00372B">Salir</a>
             </nav>
         </header><br><br>
         <div class="container col-sm-12 col-md-12 col-lg-12">
-            <table >
-                <tr>
-                    <th>Equipo</th>
-                    <th>Acción</th>
-                </tr>
-                <tr ng-repeat = "x in equipos.equipos">
-                    <th>{{x}}</th>
-                    <th><button type="button" style="background-color: #144900 ; border-color: #144900;" ng-click = "lesionE(x)" class="btn btn-primary">Crear</button></th>
-                </tr>
-            </table>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Nombre de quipo:</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" ng-model="equipo.nombreEquipo" required><br><br><br>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Temporada:</label>
+                </div>
+                <div class="col">
+                    <select name="" class="form-control" id="" ng-model = "equipo.temporada" ng-options = "item for item in temporadas.temporadas"></select><br><br><br>
+                </div> 
+            </div>
+            <div style="text-align: center;">
+                <button class="btn btn-primary" ng-click = "agregarEq(equipo)" style="background-color: #144900; border-color: #144900;">Aceptar</button>
+                <button  class="btn btn-primary" onclick="window.location.href = 'HomePageLE.html'" style="background-color: #144900; border-color: #144900;">Cancelar</button>
+            </div>
         </div>
            <footer>
                     <span>&copy;La Fábrica X-Sport</span>

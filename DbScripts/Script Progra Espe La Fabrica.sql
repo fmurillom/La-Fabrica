@@ -12,6 +12,17 @@ go
 use LaFabricaDB;
 
 
+
+create table Idiomas
+(
+   idioma varchar(40) primary key
+)
+/*
+drop table Idiomas
+select * from Idiomas
+*/
+
+
 create table Paises
 (
 	nombre varchar(40) primary key
@@ -601,6 +612,21 @@ END
 go
 
 
+create function func_getCantEntrenamientos---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS int
+AS
+BEGIN
+	return (select count(*) as cantEntrenamientos from Entrenamientos where correoAtleta = @correoAtleta)
+END
+--drop function func_getCantEntrenamientos
+
+
+go
+
+
 create procedure proc_AVGcalificacionEntrenamientos
 	 @correoAtleta varchar(30)
 AS
@@ -608,6 +634,21 @@ BEGIN
 	select convert(numeric(5,2), (select avg(calificacionEntrenamiento) from Entrenamientos where correoAtleta = @correoAtleta))
 END
 --drop procedure proc_getAVGcalificacionEntrenamientos
+
+
+go
+
+
+create function func_AVGcalificacionEntrenamientos---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(5,2) 
+AS
+BEGIN
+	return (select convert(numeric(5,2), (select avg(calificacionEntrenamiento) from Entrenamientos where correoAtleta = @correoAtleta)))
+END
+--drop function func_AVGcalificacionEntrenamientos
 
 
 go
@@ -626,6 +667,22 @@ END
 go
 
 
+create function func_getCantPartidos---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS int
+AS
+BEGIN
+	return (select count(*) as cantPartidos from Partidos where correoAtleta = @correoAtleta)
+	--select count(*) as cantPartidos from Partidos where correoAtleta = 'correo3@algo.com'
+END
+--drop function func_getCantPartidos
+
+
+go
+
+
 create procedure proc_AVGcalificacionPartidos
 	 @correoAtleta varchar(30)
 AS
@@ -634,6 +691,23 @@ BEGIN
 	--select convert(numeric(5,2), (select avg(calificacionPartido) from Partidos where correoAtleta = 'correo1@algo.com')) as promedioCalificacionPartidos
 END
 --drop procedure proc_AVGcalificacionPartidos
+
+
+
+go
+
+
+create function func_AVGcalificacionPartidos---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN
+	return (select convert(numeric(5,2), (select avg(calificacionPartido) from Partidos where correoAtleta = @correoAtleta)) as promedioCalificacionPartidos)
+	--select convert(numeric(5,2), (select avg(calificacionPartido) from Partidos where correoAtleta = 'correo1@algo.com')) as promedioCalificacionPartidos
+END
+--drop function func_AVGcalificacionPartidos
 
 
 go
@@ -648,6 +722,22 @@ BEGIN
 	
 END
 --drop procedure proc_AVGcalificacionPartidos
+
+
+go
+
+create function func_AVGtiempoPruebaDistanciaCorta---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(4,2)
+AS
+BEGIN
+	return (select convert(numeric(4,2), (select avg(tiempoPruebaDistanciaCorta) from Entrenamientos where correoAtleta = @correoAtleta)) as promedioTiempoPruebaDistanciaCorta)
+	--select convert(numeric(5,2), (select avg(tiempoPruebaDistanciaCorta) from Entrenamientos where correoAtleta = 'correo4@algo.com')) as promedioTiempoPruebaDistanciaCorta
+	
+END
+--drop function func_AVGtiempoPruebaDistanciaCorta
 
 
 go
@@ -667,6 +757,22 @@ END
 go
 
 
+create function func_AVGtiempoPruebaDistanciaLarga---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(4,2)
+AS
+BEGIN
+	return (select convert(numeric(4,2), (select avg(tiempoPruebaDistanciaLarga) from Entrenamientos where correoAtleta = @correoAtleta)) as promedioTiempoPruebaDistanciaLarga)
+	--select convert(numeric(5,2), (select avg(tiempoPruebaDistanciaLarga) from Entrenamientos where correoAtleta = 'correo4@algo.com')) as promedioTiempoPruebaDistanciaLarga
+END
+--drop function func_AVGtiempoPruebaDistanciaLarga
+
+
+go
+
+
 create procedure proc_bestoTiempoPruebaDistanciaCorta
 	 @correoAtleta varchar(30)
 AS
@@ -675,6 +781,22 @@ BEGIN
 	--select min(tiempoPruebaDistanciaCorta) as bestoTiempoPruebaDistanciaCorta from Entrenamientos where correoAtleta = 'correo4@algo.com'
 END
 --drop procedure proc_AVGcalificacionPartidos
+
+
+go
+
+
+create function func_bestoTiempoPruebaDistanciaCorta---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN	
+	return (select min(tiempoPruebaDistanciaCorta) as bestoTiempoPruebaDistanciaCorta from Entrenamientos where correoAtleta = @correoAtleta)
+	--select min(tiempoPruebaDistanciaCorta) as bestoTiempoPruebaDistanciaCorta from Entrenamientos where correoAtleta = 'correo4@algo.com'
+END
+--drop function func_bestoTiempoPruebaDistanciaCorta
 
 
 go
@@ -693,6 +815,22 @@ END
 go
 
 
+create function func_bestoTiempoPruebaDistanciaLarga---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN	
+	return (select min(tiempoPruebaDistanciaLarga) as bestoTiempoPruebaDistanciaLarga from Entrenamientos where correoAtleta = @correoAtleta)
+	--select min(tiempoPruebaDistanciaCorta) as bestoTiempoPruebaDistanciaLarga from Entrenamientos where correoAtleta = 'correo4@algo.com'
+END
+--drop function func_bestoTiempoPruebaDistanciaLarga
+
+
+go
+
+
 create procedure proc_AVGsalto
 	 @correoAtleta varchar(30)
 AS
@@ -704,6 +842,20 @@ END
 --drop procedure proc_AVGcalificacionPartidos
 
 
+go
+
+
+create function func_AVGsalto---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(4,2)
+AS
+BEGIN
+	return (select convert(numeric(4,2), (select avg(salto) from Entrenamientos where correoAtleta = @correoAtleta)) as promedioSalto)
+	--select convert(numeric(5,2), (select avg(salto) from Entrenamientos where correoAtleta = 'correo4@algo.com')) as promedioSalto
+END
+--drop function func_AVGsalto
 
 go
 
@@ -714,10 +866,24 @@ AS
 BEGIN
 	select max(salto) as bestoSalto from Entrenamientos where correoAtleta = @correoAtleta
 	--select max(salto) as bestoSalto from Entrenamientos where correoAtleta = 'correo4@algo.com'
-	
-	
 END
 --drop procedure proc_AVGcalificacionPartidos
+
+
+go
+
+
+create function func_bestoSalto---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN
+	return (select max(salto) as bestoSalto from Entrenamientos where correoAtleta = @correoAtleta)
+	--select max(salto) as bestoSalto from Entrenamientos where correoAtleta = 'correo4@algo.com'
+END
+--drop function func_bestoSalto
 
 
 go
@@ -737,6 +903,22 @@ END
 go
 
 
+create function func_AVGtiempoPruebaHabilidad---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(4,2)
+AS
+BEGIN
+	return (select convert(numeric(4,2), (select avg(tiempoPruebaHabilidad) from Entrenamientos where correoAtleta = @correoAtleta)) as promedioTiempoPruebaHabilidad)
+	--select convert(numeric(5,2), (select avg(tiempoPruebaHabilidad) from Entrenamientos where correoAtleta = 'correo4@algo.com')) as promedioTiempoPruebaHabilidad
+END
+--drop function func_AVGtiempoPruebaHabilidad
+
+
+go
+
+
 create procedure proc_bestoTiempoPruebaHabilidad
 	 @correoAtleta varchar(30)
 AS
@@ -745,6 +927,22 @@ BEGIN
 	--select max(tiempoPruebaHabilidad) as bestoTiempoPruebaHabilidad from Entrenamientos where correoAtleta = 'correo4@algo.com'
 END
 --drop procedure proc_AVGcalificacionPartidos
+
+
+go
+
+
+create function func_bestoTiempoPruebaHabilidad---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN
+	return (select min(tiempoPruebaHabilidad) as bestoTiempoPruebaHabilidad from Entrenamientos where correoAtleta = @correoAtleta)
+	--select max(tiempoPruebaHabilidad) as bestoTiempoPruebaHabilidad from Entrenamientos where correoAtleta = 'correo4@algo.com'
+END
+--drop function func_bestoTiempoPruebaHabilidad
 
 
 go
@@ -764,6 +962,23 @@ END
 go
 
 
+create function func_getCantJuegosPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select count(*) as cantJuegosPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select count(*) as cantJuegosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+END
+--drop function func_getCantJuegosPorTemporada
+
+
+go
+
+
 create procedure proc_getCantJuegosGanadosPorTemporada
 	 @correoAtleta varchar(30)
 	,@temporada varchar(40)
@@ -773,6 +988,22 @@ BEGIN
 	--select count(*) as cantJuegosGanadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
 END
 --drop procedure proc_getCantPartidos
+
+
+go
+
+
+create function func_getCantJuegosGanados---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+)
+RETURNS int
+AS
+BEGIN
+	return (select count(*) as cantJuegosGanadosPorTemporada from Partidos where correoAtleta = @correoAtleta and idEstado = 2)
+	--select count(*) as cantJuegosGanadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
+END
+--drop function func_getCantJuegosGanadosPorTemporada
 
 
 go
@@ -792,6 +1023,23 @@ END
 go
 
 
+create function func_getCantJuegosPerdidosPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select count(*) as cantJuegosPerdidosPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada and idEstado = 0)
+	--select count(*) as cantJuegosPerdidosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
+END
+--drop function func_getCantJuegosPerdidosPorTemporada
+
+
+go
+
+
 create procedure proc_getCantJuegosEmpatadosPorTemporada
 	 @correoAtleta varchar(30)
 	,@temporada varchar(40)
@@ -801,6 +1049,23 @@ BEGIN
 	--select count(*) as cantJuegosEmpatadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
 END
 --drop procedure proc_getCantPartidos
+
+
+go
+
+
+create function func_getCantJuegosEmpatadosPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select count(*) as cantJuegosEmpatadosPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada and idEstado = 1)
+	--select count(*) as cantJuegosEmpatadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1' and idEstado = 0
+END
+--drop function func_getCantJuegosEmpatadosPorTemporada
 
 
 go
@@ -821,6 +1086,23 @@ END
 go
 
 
+create function func_getCantGolesPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select sum(cantidadGoles) as cantGolesPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select sum(cantidadGoles) as cantGolesPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'	
+END
+--drop function func_getCantGolesPorTemporada
+
+
+go
+
+
 create procedure proc_getCantAsistenciasPorTemporada
 	 @correoAtleta varchar(30)
 	,@temporada varchar(40)
@@ -831,6 +1113,24 @@ BEGIN
 	
 END
 --drop procedure proc_getCantPartidos
+
+
+
+go
+
+
+create function func_getCantAsistenciasPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select sum(cantidadAsistencias) as cantAsistenciasPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select sum(cantidadAsistencias) as cantAsistenciasPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+END
+--drop function func_getCantAsistenciasPorTemporada
 
 
 go
@@ -851,6 +1151,23 @@ END
 go
 
 
+create function func_getBalonesRecuperadosPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select sum(balonesRecuperados) as cantBalonesRecuperadosPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select sum(balonesRecuperados) as cantBalonesRecuperadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'	
+END
+--drop function func_getBalonesRecuperadosPorTemporada
+
+
+go
+
+
 create procedure proc_getAVGbalonesRecuperadosPorTemporada
 	 @correoAtleta varchar(30)
 	,@temporada varchar(40)
@@ -866,6 +1183,22 @@ END
 go
 
 
+create function func_getAVGbalonesRecuperadosPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN
+	return (select avg(balonesRecuperados) as promedioBalonesRecuperadosPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select avg(balonesRecuperados) as promedioBalonesRecuperadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'	
+END
+--drop function func_getAVGbalonesRecuperadosPorTemporada
+
+
+go
+
 
 create procedure proc_getTotalPasesTemporada
 	 @correoAtleta varchar(30)
@@ -876,6 +1209,23 @@ BEGIN
 	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') as totalPasesPorTemporada
 END
 --drop procedure proc_getTotalPasesTemporada
+
+
+go
+
+
+create function func_getTotalPasesTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada) + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada) as totalPasesPorTemporada)
+	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') as totalPasesPorTemporada
+END
+--drop function func_getTotalPasesTemporada
 
 
 go
@@ -918,32 +1268,58 @@ BEGIN
 	begin
 		select 0.00 as porcentajePasesExitososPorTemporada
 	end
-	/*
-	select
-		convert
+END
+--drop procedure proc_getPorcentajePasesExitososPorTemporada
+
+
+go
+
+
+create function func_getPorcentajePasesExitosos--*************************************************************************
+(
+	 @correoAtleta varchar(30)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN
+	IF	(select sum(cantidadPasesFallidos) from Partidos where correoAtleta = @correoAtleta)
+		+
+		(select sum(cantidadPasesExitosos) from Partidos where correoAtleta = @correoAtleta)
+		<>
+		0
+	begin
+		return
 		(
-			 numeric(5,2)
-			,(
-				convert(numeric(5,2), (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'))
-				*
-				100
-				/
-				convert
-				(
-					numeric(5,2),
+			select
+			convert
+			(
+				 numeric(5,2)
+				,(
+					convert(numeric(5,2), (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = @correoAtleta))
+					*
+					100
+					/
+					convert
 					(
-						(select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
-						+
-						(select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+						numeric(5,2),
+						(
+							(select sum(cantidadPasesFallidos) from Partidos where correoAtleta = @correoAtleta)
+							+
+							(select sum(cantidadPasesExitosos) from Partidos where correoAtleta = @correoAtleta)
+						)
 					)
 				)
 			)
+			--as porcentajePasesExitososPorTemporada
 		)
-		as porcentajePasesExitososPorTemporada
-	*/
-	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+	end
+	ELSE
+	begin
+		return (select 0.00)
+	end
+	return (select 0.00)
 END
---drop procedure proc_getPorcentajePasesExitososPorTemporada
+--drop function func_getPorcentajePasesExitosos
 
 
 go
@@ -958,6 +1334,23 @@ BEGIN
 	--select (select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') as totalCentrosPorTemporada
 END
 --drop procedure proc_getTotalPasesTemporada
+
+
+go
+
+
+create function func_getTotalCentrosTemporada---------------------------------------------------------------------------
+(
+	@correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select (select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada) + (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada) as totalCentrosPorTemporada)
+	--select (select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') as totalCentrosPorTemporada
+END
+--drop function func_getTotalCentrosTemporada
 
 
 go
@@ -1001,32 +1394,56 @@ BEGIN
 	begin
 		select 0.00 as porcentajeCentrosExitososPorTemporada
 	end
-	/*
-	select
-		convert
+END
+--drop procedure proc_getPorcentajePasesExitososPorTemporada
+
+
+go
+create function func_getPorcentajeCentrosExitosos---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN
+	IF	(select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = @correoAtleta)
+		+
+		(select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = @correoAtleta)
+		<>
+		0
+	begin
+		return
 		(
-			 numeric(5,2)
-			,(
-				convert(numeric(5,2), (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'))
-				*
-				100
-				/
-				convert
-				(
-					numeric(5,2),
+			select
+			convert
+			(
+				 numeric(5,2)
+				,(
+					convert(numeric(5,2), (select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = @correoAtleta))
+					*
+					100
+					/
+					convert
 					(
-						(select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
-						+
-						(select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+						numeric(5,2),
+						(
+							(select sum(cantidadCentrosFallidos) from Partidos where correoAtleta = @correoAtleta)
+							+
+							(select sum(cantidadCentrosExitosos) from Partidos where correoAtleta = @correoAtleta)
+						)
 					)
 				)
 			)
+			--as porcentajeCentrosExitososPorTemporada
 		)
-		as porcentajeCentrosExitososPorTemporada
-	*/
-	--select (select sum(cantidadPasesFallidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1') + (select sum(cantidadPasesExitosos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
+	end
+	ELSE
+	begin
+		return (select 0.00)
+	end
+	return (select 0.00)
 END
---drop procedure proc_getPorcentajePasesExitososPorTemporada
+--drop function func_getPorcentajeCentrosExitosos
 
 
 go
@@ -1047,6 +1464,23 @@ END
 go
 
 
+create function func_getCantTarjetasAmarillasPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select sum(cantidadTarjetasAmarillas) as cantidadTarjetasAmarillas from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select sum(cantidadTarjetasAmarillas) as cantidadTarjetasAmarillas from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'	
+END
+--drop function func_getCantTarjetasAmarillasPorTemporada
+
+
+go
+
+
 create procedure proc_getCantTarjetasRojasPorTemporada
 	 @correoAtleta varchar(30)
 	,@temporada varchar(40)
@@ -1056,6 +1490,23 @@ BEGIN
 	--select sum(cantidadTarjetasRojas) as cantTarjetasRojasPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
 END
 --drop procedure proc_getCantTarjetasRojasPorTemporada
+
+
+go
+
+
+create function func_getCantTarjetasRojasPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select sum(cantidadTarjetasRojas) as cantTarjetasRojasPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select sum(cantidadTarjetasRojas) as cantTarjetasRojasPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+END
+--drop function func_getCantTarjetasRojasPorTemporada
 
 
 go
@@ -1075,6 +1526,23 @@ END
 go
 
 
+create function func_getCantPenalesPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select sum(cantidadPenales) as cantPenalesPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select sum(cantidadTarjetasRojas) as cantPenalesPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+END
+--drop function func_getCantPenalesPorTemporada
+
+
+go
+
+
 create procedure proc_getCantRematesSalvadosPorTemporada
 	 @correoAtleta varchar(30)
 	,@temporada varchar(40)
@@ -1084,6 +1552,23 @@ BEGIN
 	--select sum(cantidadRematesSalvados) as cantRematesSalvadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
 END
 --drop procedure proc_getCantRematesSalvadosPorTemporada
+
+
+go
+
+
+create function func_getCantRematesSalvadosPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS int
+AS
+BEGIN
+	return (select sum(cantidadRematesSalvados) as cantRematesSalvadosPorTemporada from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+	--select sum(cantidadRematesSalvados) as cantRematesSalvadosPorTemporada from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'
+END
+--drop function func_getCantRematesSalvadosPorTemporada
 
 
 go
@@ -1126,44 +1611,59 @@ BEGIN
 	begin
 		select 0.00 as porcentajeRematesSalvadosPorTemporada
 	end
-/*
-	IF	(select sum(cantidadGolesRecibidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
-		+
-		(select sum(cantidadRematesSalvados) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
-		<>
-		0
-	begin
-		select
-		convert
-		(
-			 numeric(5,2)
-			,(
-				convert(numeric(5,2), (select sum(cantidadRematesSalvados) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1'))
-				*
-				100
-				/
-				convert
-				(
-					numeric(5,2),
-					(
-						(select sum(cantidadGolesRecibidos) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
-						+
-						(select sum(cantidadRematesSalvados) from Partidos where correoAtleta = 'correo1@algo.com' and temporada = 'Temporada 1')
-					)
-				)
-			)
-		)
-		as porcentajeRematesSalvadosPorTemporada
-	end
-	ELSE
-	begin
-		select 0.00 as porcentajeRematesSalvadosPorTemporada
-	end
-*/
 END
 --drop procedure proc_getPorcentajeRematesSalvadosPorTemporada
 
 
+go
+
+
+create function func_getPorcentajeRematesSalvadosPorTemporada---------------------------------------------------------------------------
+(
+	 @correoAtleta varchar(30)
+	,@temporada varchar(40)
+)
+RETURNS numeric(5,2)
+AS
+BEGIN
+	IF	(select sum(cantidadGolesRecibidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+		+
+		(select sum(cantidadRematesSalvados) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+		<>
+		0
+	begin
+		return
+		(
+			select
+			convert
+			(
+				 numeric(5,2)
+				,(
+					convert(numeric(5,2), (select sum(cantidadRematesSalvados) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada))
+					*
+					100
+					/
+					convert
+					(
+						numeric(5,2),
+						(
+							(select sum(cantidadGolesRecibidos) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+							+
+							(select sum(cantidadRematesSalvados) from Partidos where correoAtleta = @correoAtleta and temporada = @temporada)
+						)
+					)
+				)
+			)
+			as porcentajeRematesSalvadosPorTemporada
+		)
+	end
+	ELSE
+	begin
+		return (select 0.00 as porcentajeRematesSalvadosPorTemporada)
+	end
+	return (select 0.00 as porcentajeRematesSalvadosPorTemporada)
+END
+--drop function func_getPorcentajeRematesSalvadosPorTemporada
 
 
 

@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ServerBk.cs" />
+    <Compile Remove="SQLManagerBk.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="Nancy.Testing" Version="2.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.7.0" />

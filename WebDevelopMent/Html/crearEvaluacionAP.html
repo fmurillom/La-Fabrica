@@ -24,7 +24,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 </div>
-                <a href="Perfil.html"><i class="fas fa-user-circle fa-2x"></i></a>
+                <a href="PerfilP.html"><i class="fas fa-user-circle fa-2x"></i></a>
                 <a class="navbar-brand" style="color: #6ea498">|</a>
                 <a class="navbar-brand" href="HomePage.html" style="color: #00372B">Salir</a>
             </nav>
@@ -32,63 +32,123 @@
         <div class="container col-sm-12 col-md-12 col-lg-12">
             <div class="form-row">
                 <div class="col">
-                    <label for="">Tiempo Prueba Distancia Corta (s):</label>
+                    <label for="">Estado de Partido (s):</label>
                 </div>
                 <div class="col">
-                    <input type="number" ng-model = "ev.tiempoDC" step="0.1" class="form-control">
+                    <select name="" class="form-control" ng-model = "ev.estadoP" id="">
+                        <option value="0">Perdido</option>
+                        <option value="1">Empatado</option>
+                        <option value="2">Ganado</option>
+                    </select>
                 </div>
             </div><br>
             <div class="form-row">
                 <div class="col">
-                    <label for="">Tiempo Prueba Distancia Larga (s):</label>
+                    <label for="">Goles:</label>
                 </div>
                 <div class="col">
-                    <input type="number" step="0.1" ng-model = "ev.tiempoDL" class="form-control">
+                    <input type="number" step="1" min="0" ng-model = "ev.goles" class="form-control">
                 </div>
             </div><br>
             <div class="form-row">
                 <div class="col">
-                    <label for="">Prueba de Salto (cm):</label>
+                    <label for="">Asistencias:</label>
                 </div>
                 <div class="col">
-                    <input type="number" step="0.1" ng-model = "ev.salto" class="form-control">
+                    <input type="number" step="1" min="0" ng-model = "ev.asistencias" class="form-control">
                 </div>
             </div><br>
             <div class="form-row">
                 <div class="col">
-                    <label for="">Tiempo en Prueba de Habilidad (s):</label>
+                    <label for="">Balones Recuperados:</label>
                 </div>
                 <div class="col">
-                    <input type="number" step="0.1" ng-model = "ev.tiempoPH" class="form-control">
+                    <input type="number" step="1" min="0" ng-model = "ev.balonesR" class="form-control">
                 </div>
             </div><br>
             <div class="form-row">
                 <div class="col">
-                    <label for="">Prueba física pase (puntos):</label>
+                    <label for="">Pases Exitosos:</label>
                 </div>
                 <div class="col">
-                    <input type="number" step="0.1" ng-model = "ev.pase" class="form-control">
+                    <input type="number" step="1" min="0" ng-model = "ev.pasesExit" class="form-control">
                 </div>
             </div><br>
             <div class="form-row">
                 <div class="col">
-                    <label for="">Prueba física HR (BPM):</label>
+                    <label for="">Pases:</label>
                 </div>
                 <div class="col">
-                    <input type="number" step="0.1" ng-model = "ev.pruebaHR" class="form-control">
+                    <input type="number" step="1"  min="0" ng-model = "ev.pases" class="form-control">
                 </div>
             </div><br>
             <div class="form-row">
-                    <div class="col">
-                        <label for="">Calificación:</label>
-                    </div>
-                    <div class="col">
-                        <input type="number" step="0.1" max="100" ng-model = "ev.calificacion" class="form-control">
-                    </div>
-                </div><br>
+                <div class="col">
+                    <label for="">Centros Exitosos:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1"  min="0" ng-model = "ev.centrosExit" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Centros:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1"  min="0" ng-model = "ev.centros" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Tarjetas Amarillas:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1"  min="0" max="2" ng-model = "ev.tarjetasAmar" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Tarjetas Rojas:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1" max="1"  min="0" ng-model = "ev.tarjetasRoj" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Penales:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1"  min="0" ng-model = "ev.penales" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Remates Salvados:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1"  min="0" ng-model = "ev.rematesSalv" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">goles Recibidos:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1"  min="0" ng-model = "ev.golesRecib" class="form-control">
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="col">
+                    <label for="">Calificacion:</label>
+                </div>
+                <div class="col">
+                    <input type="number" step="1" max="100"  min="0" ng-model = "ev.calificacion" class="form-control">
+                </div>
+            </div><br>
             <div style="text-align: center;">
-                <button class="btn btn-primary" ng-click = "agregarEv(ev)" style="background-color: #144900; border-color: #144900;">Aceptar</button>
-                <button  class="btn btn-primary" onclick="window.location.href = 'CrearEVA.html'" style="background-color: #144900; border-color: #144900;">Cancelar</button>
+                <button class="btn btn-primary" ng-click = "agregarEvP(ev)" style="background-color: #144900; border-color: #144900;">Aceptar</button>
+                <button  class="btn btn-primary" onclick="window.location.href = 'HomePageLE.html'" style="background-color: #144900; border-color: #144900;">Cancelar</button>
             </div>
         </div>
            <footer>

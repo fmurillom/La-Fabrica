@@ -5,32 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>LaFabrica-Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Css/HomeTECAirlines.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script type="text/javascript" src="../Js/controller.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-</head> 
+    <link rel="stylesheet" href="../Css/HomeTECAirlines.css">
+</head>
     <body ng-app="myApp" ng-controller = "myCtrl">
         <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
             <h1><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</h1>
         </div>
         <header>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 col-sm-12 col-md-12">
-                    <a class="navbar-brand" href="HomePageLE.html" style="font-variant-caps: small-caps; color: #00372B;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
+                    <a class="navbar-brand" href="HomePageLA.html" style="font-variant-caps: small-caps; color: #00372B;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     </div>
-                    <a href="EquipoPlan.html" class="navbar-brand">| Crear Plan Personalizado  |  </a>
-                    <a href="CrearEvaluacion.html" class="navbar-brand">Crear Evaluación  |</a>
-                    <a href="CrearLesion.html" class="navbar-brand">Crear Lesión  |</a>
-                    <a href="CrearEquipo.html" class="navbar-brand">Crear Equipo  |</a>
-                    <a href="PerfilE.html"><i class="fas fa-user-circle fa-2x"></i></a>
-                    <a class="navbar-brand">|</a>
+                    <a href="Perfil.html"><i class="fas fa-user-circle fa-2x"></i></a>
+                    <a class="navbar-brand" style="color: #6ea498">|</a>
                     <a class="navbar-brand" href="HomePage.html" style="color: #00372B">Salir</a>
                 </nav>
-            </header><br><br><br>
-            <h1 style="text-align: center;">Dashboard en Contrucción</h1>
+            </header><br><br><br><br><br>
+            <div class="container">
+                <div class="row" style="text-align: center;">
+                    <div class="col">
+                        <button class="btn btn-primary" style="background-color: #144900; border-color: #144900;" onclick="window.location.href='editPosicion.html'">Posiciones</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" style="background-color: #144900; border-color: #144900;" onclick="window.location.href='editPais.html'">Países</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" style="background-color: #144900; border-color: #144900;" onclick="window.location.href='editDeporte.html'">Deportes</button>
+                    </div>
+                </div> <br><br><br><br>
+                <div class="row" style="text-align: center;">
+                    <div class="col">
+                        <button class="btn btn-primary" style="background-color: #144900; border-color: #144900;" onclick="window.location.href='editIdioma.html'">Idiomas</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" style="background-color: #144900; border-color: #144900;" onclick="window.location.href='editUniversidades.html'">Universidades</button>
+                    </div>
+                </div>
+            </div>
             <footer>
                 <span>&copy;La Fábrica X-Sport</span>
             </footer>

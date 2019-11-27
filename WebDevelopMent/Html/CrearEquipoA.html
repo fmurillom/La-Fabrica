@@ -16,7 +16,7 @@
         <div class="jumbotron" style="margin-bottom: 0px; border-radius: 0px">
             <h1><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</h1>
         </div>
-        <header ng-init = "getEquipos()">
+        <header ng-init="getAtletasUni()">
             <nav class="navbar navbar-expand-lg navbar-light bg-light col-lg-12 col-sm-12 col-md-12">
                 <a class="navbar-brand" href="HomePageLE.html" style="font-variant-caps: small-caps; color: #00372B;"><span style="color: #144900; font-weight: bold;">La Fábrica</span>X-Sport</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,22 +24,31 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 </div>
-                <a href="PerfilP.html"><i class="fas fa-user-circle fa-2x"></i></a>
+                <a href="Perfil.html"><i class="fas fa-user-circle fa-2x"></i></a>
                 <a class="navbar-brand" style="color: #6ea498">|</a>
                 <a class="navbar-brand" href="HomePage.html" style="color: #00372B">Salir</a>
             </nav>
-        </header><br><br>
+        </header>
         <div class="container col-sm-12 col-md-12 col-lg-12">
             <table >
                 <tr>
-                    <th>Equipo</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
                     <th>Acción</th>
                 </tr>
-                <tr ng-repeat = "x in equipos.equipos">
-                    <th>{{x}}</th>
-                    <th><button type="button" style="background-color: #144900 ; border-color: #144900;" ng-click = "lesionE(x)" class="btn btn-primary">Crear</button></th>
+                <tr ng-repeat = "x in atletas.atletas">
+                    <th>{{x.nombre}}</th>
+                    <th>{{x.apellido}}</th>
+                    <th>{{x.correo}}</th>
+                    <th><button type="button" style="background-color: #144900 ; border-color: #144900;" ng-click = "agregarAtletasEquipo(x)" class="btn btn-primary">Agregar</button></th>
                 </tr>
             </table>
+            <div class="row" style="text-align: center;">
+                <div class="col">
+                    <button style="background-color: #144900; border-color: #144900;" class="btn btn-primary" onclick="window.location.href='verEquipo.html'">Ver Equipo</button>
+                </div>
+            </div>
         </div>
            <footer>
                     <span>&copy;La Fábrica X-Sport</span>
