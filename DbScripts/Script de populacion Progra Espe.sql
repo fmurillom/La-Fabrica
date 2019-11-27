@@ -206,10 +206,14 @@ insert into TiposLesiones(idTipoLesion,tipoLesion) values(3,'Muy fea')
 insert into TiposLesiones(idTipoLesion,tipoLesion) values(4,'F')
 
 
-insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2001','01/01/2002','Explosion de Creeper',3,'En donde no ewe')
-insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2002','01/01/2003','DORIYA',0,'En casi todo')
-insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2003','01/01/2004','Masenko',0,'En el sitio')
-insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2004','01/01/2005','Hiya',4,'Ahi')
+--insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2001','01/01/2002','Explosion de Creeper',3,'En donde no ewe')
+--insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2002','01/01/2003','DORIYA',0,'En casi todo')
+--insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2003','01/01/2004','Masenko',0,'En el sitio')
+--insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion,lugar) values('correo1@algo.com', '01/01/2004','01/01/2005','Hiya',4,'Ahi')
+insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion) values('correo1@algo.com', '01/01/2001','01/01/2002','Explosion de Creeper',3)
+insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion) values('correo1@algo.com', '01/01/2002','01/01/2003','DORIYA',0)
+insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion) values('correo1@algo.com', '01/01/2003','01/01/2004','Masenko',0)
+insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion) values('correo1@algo.com', '01/01/2004','01/01/2005','Hiya',4)
 
 
 insert into EstadosDePartido(idEstado,estado) values(0,'Perdido')
@@ -357,3 +361,17 @@ select * from Entrenamientos
 delete Atletas
 delete Universidades
 */
+
+/*
+select
+	 nombre,apellido,carne,cedula,provincia,fechaNacimiento,activo,correo1,correo2,telefono,foto,fechaInscripcion,pais,universidad,password,deporte,altura,peso
+	,(select P.nombrePosicion from Posiciones as P where  P.idPosicion = A.posicion) as posicion
+	,(select P.nombrePosicion from Posiciones as P where  P.idPosicion = A.posicionSecundaria) as posicionSecundaria
+	,notaXSport,nombreEquipo
+from
+Atletas as A join Posiciones as P
+on A.posicion = P.idPosicion
+*/
+
+
+--insert into Posiciones(nombreDeporte,idPosicion,nombrePosicion) values('Futbol',7, 'Lateral volante')

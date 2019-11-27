@@ -34,17 +34,6 @@ namespace NancyRest
                 };
             });
 
-            Get("/temporadas", _ => {
-                string response = SQLManager.getTemporadas().ToString();
-                Console.WriteLine("Response:\n" + response);
-                var jsonBytes = Encoding.UTF8.GetBytes(response);
-                return new Response
-                {
-                    ContentType = "application/json",
-                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
-                };
-            });
-
 
             Get("/ejercicios", _ => {
                 string response = SQLManager.getEjercicios().ToString();
@@ -105,27 +94,6 @@ namespace NancyRest
                 };
             });
 
-
-            Post("/infoEntrenador", x =>
-            {
-                Console.WriteLine("post: /universidades");
-                string json = this.Request.Body.AsString();
-                JObject data = JObject.Parse(json);
-                Console.WriteLine("Request:\n" + data);
-
-                string correo = data["correo"].ToString();
-
-                string response = SQLManager.getInfoEntrenador(correo).ToString();
-                Console.WriteLine("Response:\n" + response);
-
-                var jsonBytes = Encoding.UTF8.GetBytes(response);
-                return new Response
-                {
-                    ContentType = "application/json",
-                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
-                };
-            });
-
             Post("/provincias", x =>
             {
                 Console.WriteLine("post: /universidades");
@@ -153,7 +121,7 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                string idEntrenador = data["correo"].ToString();
+                string idEntrenador = data["idEntrenador"].ToString();
 
                 string response = SQLManager.getEquipos(idEntrenador).ToString();
                 Console.WriteLine("Response:\n" + response);
@@ -220,7 +188,6 @@ namespace NancyRest
                 string nombreC = data["nombre"].ToString();
                 int cedula = int.Parse(data["cedula"].ToString());
                 string apellidoC = data["apellido"].ToString();
-                int carne = int.Parse(data["carne"].ToString());
                 string provincia = data["provincia"].ToString();
                 string email1 = data["correo1"].ToString();
                 string email2 = data["correo2"].ToString();
@@ -236,7 +203,7 @@ namespace NancyRest
                 float altura = float.Parse(data["altura"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 float peso = float.Parse(data["peso"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
 
-                bool response = SQLManager.insertAtleta(nombreC, cedula, apellidoC, provincia, email1, email2, telefonoM, foto, pais, universidad, password, deporte, altura, peso, fechaNacimiento, posicion, posicionSecundaria, carne);
+                bool response = SQLManager.insertAtleta(nombreC, cedula, apellidoC, provincia, email1, email2, telefonoM, foto, pais, universidad, password, deporte, altura, peso, fechaNacimiento, posicion, posicionSecundaria);
                 Console.WriteLine("Response:\n" + response);
 
                 return response;
@@ -248,56 +215,6 @@ namespace NancyRest
                     Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
                 };*/
             });
-
-            Post("/atletasXuniversidad", x =>
-            {
-                Console.WriteLine("post: /crearEnt");
-                string json = this.Request.Body.AsString();
-                JObject data = JObject.Parse(json);
-                Console.WriteLine("Request:\n" + data);
-
-                string universidad = data["universidad"].ToString();
-                
-
-                string response = SQLManager.getAtletasUniversidad(universidad).ToString();
-
-                Console.WriteLine("Response:\n" + response);
-               
-                var jsonBytes = Encoding.UTF8.GetBytes(response);
-                return new Response
-                {
-                    ContentType = "application/json",
-                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
-                };
-            });
-
-            Post("/crearLesion", x =>
-            {
-                Console.WriteLine("post: /crearEnt");
-                string json = this.Request.Body.AsString();
-                JObject data = JObject.Parse(json);
-                Console.WriteLine("Request:\n" + data);
-
-                string correo = data["correo"].ToString();
-                string fechaInicio = data["fechaInicio"].ToString();
-                string fechaFinal = data["fechaFinal"].ToString();
-                int gravedad = int.Parse(data["gravedad"].ToString());
-
-                bool response = SQLManager.insertEntr(correo, fechaInicio, fechaFinal, gravedad);
-
-                return response;
-
-                Console.WriteLine("Response:\n" + response);
-                /*
-                var jsonBytes = Encoding.UTF8.GetBytes(response);
-                return new Response
-                {
-                    ContentType = "application/json",
-                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
-                };*/
-            });
-
-
 
 
             Post("/crearEnt", x =>
@@ -472,7 +389,7 @@ namespace NancyRest
                 Console.WriteLine("Request:\n" + data);
 
                 string nombreEquip = data["nombreEquipo"].ToString();
-                string jugador = data["correo"].ToString();
+                string jugador = data["jugador"].ToString();
 
                 bool response = SQLManager.insertEquip(nombreEquip, jugador);
                 Console.WriteLine("Response:\n" + response);
@@ -497,7 +414,7 @@ namespace NancyRest
 
                 string nombreEquip = data["nombreEquipo"].ToString();
                 string idEntrenador = data["correoEntrenador"].ToString();
-                string temporada = data["temporada"].ToString();
+                string temporada = data["nombreTemporada"].ToString();
 
                 bool response = SQLManager.crearEquip(nombreEquip, idEntrenador, temporada);
                 Console.WriteLine("Response:\n" + response);
@@ -642,7 +559,7 @@ namespace NancyRest
                 };
             });
 
-            Post("/planesEmailSem", x =>
+            Post("/planesEmail", x =>
             {
                 Console.WriteLine("post: /universidades");
                 string json = this.Request.Body.AsString();
@@ -651,29 +568,7 @@ namespace NancyRest
 
                 string emailCuenta = data["correo"].ToString();
 
-                int semana = int.Parse(data["semana"].ToString());
-
-                string response = SQLManager.getPlanesAtleta(emailCuenta, semana).ToString();
-                Console.WriteLine("Response:\n" + response);
-
-                var jsonBytes = Encoding.UTF8.GetBytes(response);
-                return new Response
-                {
-                    ContentType = "application/json",
-                    Contents = s => s.Write(jsonBytes, 0, jsonBytes.Length)
-                };
-            });
-
-            Post("/semanasPlanes", x =>
-            {
-                Console.WriteLine("post: /universidades");
-                string json = this.Request.Body.AsString();
-                JObject data = JObject.Parse(json);
-                Console.WriteLine("Request:\n" + data);
-
-                string emailCuenta = data["correo"].ToString();
-
-                string response = SQLManager.getSemanasPAtleta(emailCuenta).ToString();
+                string response = SQLManager.getPlanesAtleta(emailCuenta).ToString();
                 Console.WriteLine("Response:\n" + response);
 
                 var jsonBytes = Encoding.UTF8.GetBytes(response);
@@ -825,17 +720,13 @@ namespace NancyRest
                 JObject data = JObject.Parse(json);
                 Console.WriteLine("Request:\n" + data);
 
-                string idAtleta = data["correo"].ToString();
+                string idAtleta = data["idAtleta"].ToString();
 
                 int semana = int.Parse(data["semana"].ToString());
 
-                int ejercico = int.Parse(data["idEjercicio"].ToString());
+                JArray ejecicios = data["ejercicios"] as JArray;
 
-                int dia = int.Parse(data["dia"].ToString());
-
-                int cantidad = int.Parse(data["cantidad"].ToString());
-
-                bool response = SQLManager.asignarPP(idAtleta, semana, ejercico, dia, cantidad);
+                bool response = SQLManager.asignarPP(idAtleta, ejecicios, semana);
                 Console.WriteLine("Response:\n" + response);
 
                 return response;
