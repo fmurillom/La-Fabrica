@@ -218,14 +218,15 @@ select * from TiposLesiones
 
 create table Lesiones
 (
-	 correoAtleta varchar(30)
+	 idLesion int identity(0,1)
+	,correoAtleta varchar(30)
 	,fechaInicio date not null
 	,fechaFinal date not null
 	,descripcion varchar(300) not null
 	,idTipoLesion int not null--FK
-	,lugar varchar(40)--Ubicacion de la lesion en el we
+	--,lugar varchar(40)--Ubicacion de la lesion en el we
 
-	,primary key(correoAtleta, lugar)
+	,primary key(idLesion,correoAtleta)
 
 	,foreign key(idTipoLesion) references TiposLesiones(idTipoLesion) 
 )

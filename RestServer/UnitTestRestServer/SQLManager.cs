@@ -49,7 +49,7 @@ namespace NancyRest
             Console.WriteLine("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '" + email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
             try
             {
-                sqlInjection("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '" + email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
+                sqlInjection("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '"+ email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
                 connection.Open();
                 command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + email1 + "'", connection);
                 sqlReader = command.ExecuteReader();
@@ -111,6 +111,83 @@ namespace NancyRest
                 Console.WriteLine("Descripcion: " + err.Message);
             }
             return ok;
+        }
+
+        public static bool insertLesion(string correo, string fechaInicio, string fechaFinal, int gravedad, string descripcion)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            SqlDataReader sqlReader;
+            bool ok = false;
+            try
+            {
+                sqlInjection("insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion) values('" + correo + "', '" + fechaInicio + "','" + fechaFinal + "','" + descripcion +"'," + gravedad + ")");
+                connection.Open();
+                command = new SqlCommand("select count(*) as exist from Lesiones where correAtleta = '" + correo + "'", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        if (int.Parse(sqlReader["exist"].ToString()) >= 1)
+                        {
+                            ok = true;
+                        }
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            return ok;
+        }
+
+        public static JObject getAtletasUniversidad(string universidad)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            JObject atleta = new JObject();
+            JArray atletas = new JArray();
+            JObject atl;
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand("select * from Atletas where universidad = '" + universidad + "' and nombreEquipo is null", connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        atl = new JObject();
+                        atl["nombre"] = sqlReader["nombre"].ToString();
+                        atl["apellido"] = sqlReader["apellido"].ToString();
+                        atl["correo"] = sqlReader["correo1"].ToString();
+                        atletas.Add(atl);
+                    }
+                }
+                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
+                sqlReader.Close();
+                command.Dispose();
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            atleta["atletas"] = atletas;
+            return atleta;
         }
 
 
@@ -401,6 +478,44 @@ namespace NancyRest
             return paises;
         }
 
+        public static JObject getTemporadas()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            string query = "select * from Temporadas";
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            string res = null;
+            JObject temporadas = new JObject();
+            JArray temp = new JArray();
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        temp.Add(sqlReader["nombreTemporada"].ToString());
+                    }
+                    sqlReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            temporadas["temporadas"] = temp;
+            return temporadas;
+        }
+
         public static JObject getPocisiones(string nombreDeporte)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -441,6 +556,56 @@ namespace NancyRest
             }
             posiciones["pos"] = posicion;
             return posiciones;
+        }
+
+        public static JObject getInfoEntrenador(string correo)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            string query = "select * from Entrenadores where correo = '" + correo + "'";
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            string res = null;
+            JObject entrenador = new JObject();
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        entrenador["correo"] = sqlReader["correo"].ToString();
+                        entrenador["nombre"] = sqlReader["nombre"].ToString();
+                        entrenador["apellido"] = sqlReader["apellido"].ToString();
+                        entrenador["fechaInscripcion"] = sqlReader["fechaInscripcion"].ToString();
+                        entrenador["pais"] = sqlReader["pais"].ToString();
+                        entrenador["universidad"] = sqlReader["universidad"].ToString();
+                        if(sqlReader["activo"].ToString() == "True")
+                        {
+                            entrenador["activo"] = 1;
+                        }
+                        else
+                        {
+                            entrenador["activo"] = 0;
+
+                        }
+                    }
+                    sqlReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            return entrenador;
         }
 
 
@@ -1096,6 +1261,48 @@ namespace NancyRest
             return admins;
         }
 
+
+        public static JObject getEstadoLesion()
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            string query = "select * from TiposLesiones";
+            ;
+            SqlCommand command;
+            SqlDataReader sqlReader;
+
+            JObject tipos = new JObject();
+            JObject tip;
+            JArray tipLesiones = new JArray();
+
+            try
+            {
+                connection.Open();
+                command = new SqlCommand(query, connection);
+                sqlReader = command.ExecuteReader();
+                try
+                {
+                    while (sqlReader.Read())
+                    {
+                        tip = new JObject();
+                        tip["idTipoLesion"] = sqlReader["idTipoLesion"].ToString();
+                        tip["tipoLesion"] = sqlReader["tipoLesion"].ToString();
+                        tipLesiones.Add(tip);
+                    }
+                    sqlReader.Close();
+                    command.Dispose();
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+                connection.Close();
+            }
+            catch (SqlException ex)
+            {
+                SqlError err = ex.Errors[0];
+                Console.WriteLine("Codigo de error: " + err.Number);
+                Console.WriteLine("Descripcion: " + err.Message);
+            }
+            tipos["tipos"] = tipLesiones;
+            return tipos;
+        }
 
 
         public static JObject getVueloConEscalas(string idVuelo)

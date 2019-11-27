@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 namespace NancyRest
 {
-    public class SQLManager
+    public class SQLManagerBK
     {
         private static string connectionString = "Data Source=Chislap;Initial Catalog=LaFabricaDB;Integrated Security=True";
 
@@ -49,7 +49,7 @@ namespace NancyRest
             Console.WriteLine("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '" + email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
             try
             {
-                sqlInjection("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '"+ email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
+                sqlInjection("EXEC proc_registrarAtleta @nombre = '" + nombreC + "',@apellido = '" + apellidoC + "', @carne = " + carne + ", @cedula = " + cedula + ", @provincia = '" + provincia + "', @fechaNacimiento = '" + fechaNacimiento + "', @correo1 = '" + email1 + "', @correo2 = '" + email2 + "', @telefono =" + telefonoM + ", @foto = '" + foto + "', @pais = '" + pais + "', @universidad = '" + universidad + "', @password = '" + password + "', @deporte = '" + deporte + "', @altura =" + altura + ", @peso =" + peso + ", @posicion =" + posicion + ", @posicionSecundaria =" + posicionSecundaria);
                 connection.Open();
                 command = new SqlCommand("select count(*) as exist from Atletas where correo1 = '" + email1 + "'", connection);
                 sqlReader = command.ExecuteReader();
@@ -111,83 +111,6 @@ namespace NancyRest
                 Console.WriteLine("Descripcion: " + err.Message);
             }
             return ok;
-        }
-
-        public static bool insertLesion(string correo, string fechaInicio, string fechaFinal, int gravedad, string descripcion)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-            bool ok = false;
-            try
-            {
-                sqlInjection("insert into Lesiones(correoAtleta,fechaInicio,fechaFinal,descripcion,idTipoLesion) values('" + correo + "', '" + fechaInicio + "','" + fechaFinal + "','" + descripcion +"'," + gravedad + ")");
-                connection.Open();
-                command = new SqlCommand("select count(*) as exist from Lesiones where correAtleta = '" + correo + "'", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        if (int.Parse(sqlReader["exist"].ToString()) >= 1)
-                        {
-                            ok = true;
-                        }
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return ok;
-        }
-
-        public static JObject getAtletasUniversidad(string universidad)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-
-            JObject atleta = new JObject();
-            JArray atletas = new JArray();
-            JObject atl;
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand("select * from Atletas where universidad = '" + universidad + "' and nombreEquipo is null", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        atl = new JObject();
-                        atl["nombre"] = sqlReader["nombre"].ToString();
-                        atl["apellido"] = sqlReader["apellido"].ToString();
-                        atl["correo"] = sqlReader["correo1"].ToString();
-                        atletas.Add(atl);
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            atleta["atletas"] = atletas;
-            return atleta;
         }
 
 
@@ -384,7 +307,7 @@ namespace NancyRest
         }
 
 
-        public static bool evaluarAtlPart(int estadoP, int goles, int asistencias, int balonesR, int pasesExit, int pases, int centros, int centrosExit, int tarjetasAmar,
+        public static bool evaluarAtlPart(string estadoP, int goles, int asistencias, int balonesR, int pasesExit, int pases, int centros, int centrosExit, int tarjetasAmar,
                                             int tarjetasRoj, int penales, int rematesSalv, int golesRecib, string correo, string temporada, float calificacion)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -478,87 +401,6 @@ namespace NancyRest
             return paises;
         }
 
-        public static JObject getTemporadas()
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select * from Temporadas";
-            SqlCommand command;
-            SqlDataReader sqlReader;
-
-            string res = null;
-            JObject temporadas = new JObject();
-            JArray temp = new JArray();
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(query, connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        temp.Add(sqlReader["nombreTemporada"].ToString());
-                    }
-                    sqlReader.Close();
-                    command.Dispose();
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            temporadas["temporadas"] = temp;
-            return temporadas;
-        }
-
-        public static JObject getEstadosPart()
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select * from EstadosDePartido";
-            SqlCommand command;
-            SqlDataReader sqlReader;
-
-            string res = null;
-            JObject estados = new JObject();
-            JArray estad = new JArray();
-            JObject estadAux;
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(query, connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        estadAux = new JObject();
-                        estadAux["idEstado"] = int.Parse(sqlReader["idEstado"].ToString());
-                        estadAux["estado"] = sqlReader["estado"].ToString();
-                        estad.Add(estadAux);
-
-                    }
-                    sqlReader.Close();
-                    command.Dispose();
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            estados["estados"] = estad;
-            return estados;
-        }
-
         public static JObject getPocisiones(string nombreDeporte)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -601,56 +443,6 @@ namespace NancyRest
             return posiciones;
         }
 
-        public static JObject getInfoEntrenador(string correo)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select * from Entrenadores where correo = '" + correo + "'";
-            SqlCommand command;
-            SqlDataReader sqlReader;
-
-            string res = null;
-            JObject entrenador = new JObject();
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(query, connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        entrenador["correo"] = sqlReader["correo"].ToString();
-                        entrenador["nombre"] = sqlReader["nombre"].ToString();
-                        entrenador["apellido"] = sqlReader["apellido"].ToString();
-                        entrenador["fechaInscripcion"] = sqlReader["fechaInscripcion"].ToString();
-                        entrenador["pais"] = sqlReader["pais"].ToString();
-                        entrenador["universidad"] = sqlReader["universidad"].ToString();
-                        if(sqlReader["activo"].ToString() == "True")
-                        {
-                            entrenador["activo"] = 1;
-                        }
-                        else
-                        {
-                            entrenador["activo"] = 0;
-
-                        }
-                    }
-                    sqlReader.Close();
-                    command.Dispose();
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return entrenador;
-        }
-
 
         public static JObject getEquipos(string idEntrenador)
         {
@@ -673,49 +465,6 @@ namespace NancyRest
                     while (sqlReader.Read())
                     {
                         equip.Add(sqlReader["nombreEquipo"].ToString());
-                    }
-                    sqlReader.Close();
-                    command.Dispose();
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            equipos["equipos"] = equip;
-            return equipos;
-        }
-
-        public static JObject getEquiposTemporadas(string idEntrenador)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select * from Equipos where correoEntrenador = '" + idEntrenador + "'";
-            SqlCommand command;
-            SqlDataReader sqlReader;
-
-            string res = null;
-            JObject equipos = new JObject();
-            JObject equipo;
-            JArray equip = new JArray();
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(query, connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        equipo = new JObject();
-                        equipo["temporadas"] = getTemporadasEquipo(sqlReader["nombreEquipo"].ToString())["nombreTemporada"];
-                        equipo["nombre"] = sqlReader["nombreEquipo"].ToString();
-                        equip.Add(equipo);
-
                     }
                     sqlReader.Close();
                     command.Dispose();
@@ -1348,48 +1097,6 @@ namespace NancyRest
         }
 
 
-        public static JObject getEstadoLesion()
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            string query = "select * from TiposLesiones";
-            ;
-            SqlCommand command;
-            SqlDataReader sqlReader;
-
-            JObject tipos = new JObject();
-            JObject tip;
-            JArray tipLesiones = new JArray();
-
-            try
-            {
-                connection.Open();
-                command = new SqlCommand(query, connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        tip = new JObject();
-                        tip["idTipoLesion"] = sqlReader["idTipoLesion"].ToString();
-                        tip["tipoLesion"] = sqlReader["tipoLesion"].ToString();
-                        tipLesiones.Add(tip);
-                    }
-                    sqlReader.Close();
-                    command.Dispose();
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            tipos["tipos"] = tipLesiones;
-            return tipos;
-        }
-
 
         public static JObject getVueloConEscalas(string idVuelo)
         {
@@ -1583,42 +1290,6 @@ namespace NancyRest
             return ok;
         }
 
-        public static bool deleteUniversidad(string nombreUniversidad, string nombrePais)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-            bool ok = false;
-            try
-            {
-                sqlInjection("delete from Universidades where nombreUniversidad = '"+ nombreUniversidad + "' and nombrePais = '" + nombrePais + "'");
-                connection.Open();
-                command = new SqlCommand("select count(*) as exist from Universidades where nombreUniversidad = '" + nombreUniversidad + "' and nombrePais= '" + nombrePais + "'", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        if (sqlReader["exist"].ToString().Equals("0"))
-                        {
-                            ok = true;
-                        }
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return ok;
-        }
-
         public static bool agregarPosicion(string nombrePosicion, string deporte)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -1654,192 +1325,6 @@ namespace NancyRest
                     while (sqlReader.Read())
                     {
                         if (sqlReader["exist"].ToString().Equals("1"))
-                        {
-                            ok = true;
-                        }
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return ok;
-        }
-
-        public static bool eliminarPosicion(string nombrePosicion, string deporte)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-            bool ok = false;
-            try
-            {
-                sqlInjection("delete from Posiciones where nombreDeporte = '" + deporte + "' and nombrePosicion = '" + nombrePosicion + "'");
-                connection.Open();
-                command = new SqlCommand("select count(*) as exist from Posiciones where nombrePosicion = '" + nombrePosicion + "'", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        if (sqlReader["exist"].ToString().Equals("0"))
-                        {
-                            ok = true;
-                        }
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return ok;
-        }
-
-        public static bool agregarPais(string nombrePais)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-            bool ok = false;
-            try
-            {
-               
-                sqlInjection("insert into Paises(nombre) values('" + nombrePais + "')");
-                connection.Open();
-                command = new SqlCommand("select count(*) as exist from Paises where nombre = '" + nombrePais + "'", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        if (sqlReader["exist"].ToString().Equals("1"))
-                        {
-                            ok = true;
-                        }
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return ok;
-        }
-
-
-        public static bool agregarDeporte(string deporte)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-            bool ok = false;
-            try
-            {
-
-                sqlInjection("insert into Deportes(nombre) values('" + deporte + "')");
-                connection.Open();
-                command = new SqlCommand("select count(*) as exist from Deportes where nombreDeporte = '" + deporte + "'", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        if (sqlReader["exist"].ToString().Equals("1"))
-                        {
-                            ok = true;
-                        }
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return ok;
-        }
-
-        public static bool eliminarDeporte(string deporte)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-            bool ok = false;
-            try
-            {
-
-                sqlInjection("delete from Deportes where nombreDeporte= '" + deporte + "'");
-                connection.Open();
-                command = new SqlCommand("select count(*) as exist from Deportes where nombreDeporte = '" + deporte + "'", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        if (sqlReader["exist"].ToString().Equals("0"))
-                        {
-                            ok = true;
-                        }
-                    }
-                }
-                catch (Exception ex2) { Console.WriteLine(ex2.Message); }
-                sqlReader.Close();
-                command.Dispose();
-                connection.Close();
-            }
-            catch (SqlException ex)
-            {
-                SqlError err = ex.Errors[0];
-                Console.WriteLine("Codigo de error: " + err.Number);
-                Console.WriteLine("Descripcion: " + err.Message);
-            }
-            return ok;
-        }
-
-
-        public static bool eliminarPais(string nombrePais)
-        {
-            SqlConnection connection = new SqlConnection(connectionString);
-            SqlCommand command;
-            SqlDataReader sqlReader;
-            bool ok = false;
-            try
-            {
-
-                sqlInjection("delete from Paises where nombre = '" + nombrePais + "'");
-                connection.Open();
-                command = new SqlCommand("select count(*) as exist from Paises where nombre = '" + nombrePais + "'", connection);
-                sqlReader = command.ExecuteReader();
-                try
-                {
-                    while (sqlReader.Read())
-                    {
-                        if (sqlReader["exist"].ToString().Equals("0"))
                         {
                             ok = true;
                         }

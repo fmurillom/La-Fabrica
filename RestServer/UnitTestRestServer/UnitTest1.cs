@@ -62,7 +62,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/equipos", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"idEntrenador\": \"aaaa\"}");
+                with.Body("{\"correo\": \"aaaa\"}");
             });
 
             var res = response.Result.Body.AsString();
@@ -165,7 +165,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/crearEquip", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"correoEntrenador\": \"TestEntrenador@algo.com\", \"nombreTemporada\": \"TestTemporada\"}");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"correoEntrenador\": \"TestEntrenador@algo.com\", \"temporada\": \"TestTemporada\"}");
             });
 
             Assert.Equal("True", response.Result.Body.AsString());
@@ -179,7 +179,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/insertEquip", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"jugador\": \"TestInser@algo.com\"}");
+                with.Body("{\"nombreEquipo\": \"TestEquipo\", \"correo\": \"TestInser@algo.com\"}");
             });
 
             Assert.Equal("True", response.Result.Body.AsString());
@@ -262,7 +262,7 @@ namespace UnitTestRestServer
 
             var res = response.Result.Body.AsString();
 
-            Assert.Equal("True",response.Result.Body.ToString());
+            Assert.Equal("True",response.Result.Body.AsString());
         }
 
         [Fact]
@@ -286,10 +286,10 @@ namespace UnitTestRestServer
         {
             var browser = new Browser(with => with.Module(new Server()));
 
-            var response = browser.Post("/planesEmail", with =>
+            var response = browser.Post("/planesEmailSem", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"correo\": \"TestInser@algo.com\"}");
+                with.Body("{\"correo\": \"TestInser@algo.com\", \"semana\": 1}");
             });
 
             var res = response.Result.Body.AsString();
@@ -371,7 +371,7 @@ namespace UnitTestRestServer
             var response = browser.Post("/asignarPP", with =>
             {
                 with.Header("Content-Type", "application/json");
-                with.Body("{\"idAtleta\": \"TestInser@algo.com\", \"semana\": 1, \"ejercicios\": [{\"dia\": 1, \"idEjercicio\": 0, \"cantidad\": 10}, {\"dia\": 2, \"idEjercicio\": 1, \"cantidad\": 2}, {\"dia\": 3, \"idEjercicio\": 2, \"cantidad\": 3}]}");
+                with.Body("{\"correo\": \"TestInser@algo.com\", \"semana\": 1, \"dia\": 1, \"idEjercicio\": 0, \"cantidad\": 10}");
             });
 
             var res = response.Result.Body.AsString();
